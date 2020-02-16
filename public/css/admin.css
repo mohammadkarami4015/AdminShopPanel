@@ -1,0 +1,79 @@
+.adminProfile {
+    height:100px;
+    width:100px;
+    background-size:cover;
+    border-radius: 100px;
+    background-position: center;
+}
+.plusIcon {
+    width: 50px;
+    position: absolute;
+    bottom: -8px;
+    right: 28px;
+}
+.adminProfileDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.pagination {
+    direction: ltr !important;
+}
+#map {
+    width: 50vw;
+    height: 50vh;
+}
+.editProfileDiv {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.logOutForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0px 6px 0px;
+    width: 100%;
+}
+.logoutBtn {
+    width: 70%;
+}
+.searchForm {
+    min-width: 265px;
+}
+.searchInput {
+    border: solid 1px #1ab394;
+    height: 33px;margin-top: 12px;
+    border-radius: 3px;
+    text-align: center;
+}
+.searchBtn {
+    margin-top: 12px;
+    height: 31px;
+}
+.searchItemDiv {
+    display: flex;
+    justify-content: space-between;
+}
+.floatRight {
+    float: right;
+}
+.searchListBtn {
+    margin-right: 5px;
+    height: 33px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+.searchListInput {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-right: 5px;
+}
+.searchListDiv {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    background-color: white;
+}

@@ -1,0 +1,933 @@
+*{
+    box-sizing: border-box;
+    direction: rtl;
+}
+
+@font-face {
+    font-family: Vazirnormal;
+    src: url('../fonts/Vazir.eot');
+    src: url('../fonts/Vazir.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Vazir.woff2') format('woff2'),
+    url('../fonts/Vazir.woff') format('woff'),
+    url('../fonts/Vazir.ttf') format('truetype');
+    font-weight: normal;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Vazirnormal !important;
+    transition: background-color .5s;
+    background-color: #cacaca;
+}
+
+.container-fluid{
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.row{
+    width: 100%;
+    margin: 0 !important;
+}
+
+/*-----------------------------------------------START HEADER1----------------------------------------------*/
+.w-header1{
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    height: 60px;
+    background-color: #6a60a9;
+    display: flex;
+    align-items: center;
+}
+
+.serviceRequest{
+    text-decoration: none !important;
+    color: #fff !important;
+    background-color: #ff9500;
+    width: 165px;
+    border-radius: 5px;
+    line-height: 27px;
+    font-size: 13px;
+    padding: 1% 6%;
+    display: inline-block;
+    font-family: Vazirnormal;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.sabt2{
+    width: 135px;
+    line-height: 23px;
+    color: white !important;
+    text-decoration: none !important;
+    font-size: 13px;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    padding: 1% 6%;
+    display: inline-block;
+    font-family: Vazirnormal;
+    text-align: center;
+}
+
+.w-header1 a:hover{
+    cursor: pointer;
+    color: white;
+}
+
+.h1-logoPic{
+    float: right;
+    width: 50px;
+    min-width: 25px;
+    animation: spin alternate 4s infinite;
+}
+
+.h1-logo{
+    float: right;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.h1-logo p{
+    float: right;
+    font-size: 1.5vw;
+    font-weight: bold;
+    color: white;
+    font-family: Vazirnormal;
+    margin: 0 !important;
+}
+
+.logo-pic{
+    animation: spin alternate 4s infinite;
+}
+
+.h1-left{
+    display: flex;
+    float: left;
+}
+
+#signUpBtn{
+    border: 2px solid #6a60a9 !important;
+    display: inline-block !important;
+    width: 75px;
+}
+
+@keyframes spin {
+    from {transform: rotate(0deg)}
+    to {transform: rotate(360deg)}
+}
+/*-----------------------------------------------END HEADER1----------------------------------------------*/
+
+/*-----------------------------------------------START HEADER2----------------------------------------------*/
+.w-header2{
+    width: 100%;
+    height: 165px;
+    background-color: #e3e3e3;
+}
+
+.where-searching-part{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    font-family: Vazirnormal;
+    font-size: 13px;
+}
+
+.filtering{
+    display: flex;
+    align-items: center;
+    direction: rtl;
+    text-align: right;
+}
+
+.filterPartDouble{
+    display: flex;
+}
+
+.filterPartition{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filterPartition label{
+    width: 105px !important;
+    text-align: center;
+}
+
+.filterPartition select, .filterPartition input{
+    width: 150px;
+    display: block;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+#priceFrom, #priceUntil{
+    width: 80px;
+}
+
+.buttonsStyle{
+    background-color: #6a60a9 !important;
+    outline: none !important;
+    border: none !important;
+    border-radius: .25rem !important;
+    font-size: 13px !important;
+    color: #fff !important;
+    padding: 0.39rem .75rem !important;
+    cursor: pointer;
+    font-family: Vazirnormal;
+    text-decoration: none !important;
+}
+
+#searchForFilter{
+    margin-right: 30px;
+}
+
+.h2-SearchIcon{
+    height: 2.7vw;
+    background-color: #6a60a9;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 35px;
+    font-size: 1.5vw;
+    padding: 0 1vw;
+}
+
+.h2-around{
+    width: 20vw;
+    height: 2.7vw;
+    background-color: #ffffff;
+    border-radius: 5px;
+    direction: rtl;
+    display: flex;
+    margin-left: 4px;
+}
+
+.h2-secAround{
+    width: 4vw;
+    height: 100%;
+    border-left: 1px solid #fcfcfc;
+    text-align: center;
+    padding-top: 3.5%;
+    font-family: Vazirnormal;
+}
+
+.h2-secAround h5{
+    font-size: 0.97vw;
+    font-family: Vazirnormal;
+    margin-top: 1px;
+}
+
+.h2-search{
+    width: 20vw;
+    height: 2.7vw;
+    background-color: #ffffff;
+    border-radius: 5px;
+    direction: rtl;
+    display: flex;
+    margin-left: 4px;
+}
+
+.h2-inpSearch{
+    width: 14vw;
+    height: 100%;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    direction: rtl;
+    padding-right: 5px;
+    font-size: 0.7vw;
+    font-family: Vazirnormal;
+}
+
+
+/*-----------------------------------------------END HEADER2----------------------------------------------*/
+
+/*-----------------------------------------------START NEWS ITEM----------------------------------------------*/
+
+.news-item{
+    width: 259px;
+    height: 400px;
+    background-color: #e7e7e7;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 30px;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 10px #cacaca;
+    transition: box-shadow 900ms;
+}
+
+.news-item:hover{
+    box-shadow: 0 1px 20px #cacaca;
+}
+
+.over-img{
+    overflow: hidden;
+    width: 100%;
+    height: 200px;
+}
+
+.news-item-pic{
+    height: 100%;
+    border-radius: 10px 10px 0 0;
+    transition: transform 900ms;
+}
+.news-item-pic1{
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    transition: transform 900ms;
+}
+
+.news-item:hover .over-img .news-item-pic{
+    transform: scale(1.1,1.1);
+}
+
+.detail-content{
+    direction: rtl;
+    text-align: right;
+    padding: 15px;
+    font-size: 12px;
+    overflow: hidden;
+    font-family: Vazirnormal;
+}
+
+.more{
+    width: fit-content;
+    padding: 5px 10px;
+    background-color: #6a60a9;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0 auto;
+    font-size: 12px;
+}
+
+.more a{
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+.titrOfItemInHomePage{
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.mahale , .price{
+    margin-bottom: 15px;
+}
+
+.sideNav1{
+    margin-top: 15px;
+    text-align: right;
+}
+
+.sideNavLink{
+    color: #6a60a9 !important;
+}
+
+.sideNavLink.active{
+    background-color: #6a60a9 !important;
+    color: #fff !important;
+}
+
+.paneFlexing{
+    display: flex !important;
+    flex-wrap: wrap;
+}
+
+/*-----------------------------------------------END NEWS ITEM----------------------------------------------*/
+
+/*-----------------------------------------------Start Create New Advertising----------------------------------------------*/
+
+#createNewAdvPart{
+    margin-top: 100px;
+    font-family: Vazirnormal;
+}
+
+#titrOfNewAdv{
+    text-align: center;
+    color: #7e7e7e;
+    padding-bottom: 1px;
+    border-bottom: 2px solid #cacaca;
+    margin-bottom: 40px;
+}
+
+.labelsOfNewAdv, #exampleFormControlFile1{color: #666666}
+
+.sabtBtnPartOfNew{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.resultsOfAdv{
+    text-align: right;
+    color: #434343;
+}
+
+/*-----------------------------------------------End Create New Advertising----------------------------------------------*/
+
+/*-----------------------------------------------Start SignUp----------------------------------------------*/
+.modalSignUp{
+    font-family: Vazirnormal;
+    text-align: center !important;
+}
+
+.modalSignUp.show{
+    padding-right: 0 !important;
+}
+
+.taeedPhone{
+    background-color: #6a60a9 !important;
+    border: none !important;
+    margin: 0 auto;
+}
+
+.inpNum{
+    display: flex;
+    border: 1px solid #c8c9cc;
+    padding: 0 10px;
+    width: 230px;
+    margin: 0 auto;
+    margin-top: 30px;
+    border-radius: 2px;
+    background-color: #fff;
+    direction: ltr;
+}
+
+.inpNum span{
+    color: #929499;
+    line-height: 38px;
+}
+
+.inpNum i {
+    font-size: 20px;
+    color: #c7c8cb;
+    line-height: 38px;
+}
+
+.inpNum input, .inpNumF input {
+    border: none;
+    font-size: 16px;
+    width: 195px;
+    height: 37px;
+    color: #929499;
+    outline: none;
+    text-align: left;
+    padding-left: 3px;
+}
+
+.inpNumF{
+    border: 1px solid #c8c9cc;
+    padding: 0 10px;
+    width: 230px;
+    margin: 10px auto;
+    border-radius: 2px;
+    background-color: #fff;
+    direction: ltr;
+}
+
+.taeedNum{margin: 15px 0}
+
+#insertNumberForSignUp{display: none}
+#getVerification{display: none}
+#insertFullName{display: none}
+#insertNumberForSignIn{display: none}
+#getVerifyCodeForLogin{display: none}
+
+.show{display: block !important}
+
+/*-----------------------------------------------End SignUp----------------------------------------------*/
+
+
+/*-----------------------------------------------Start Hamburger Menu----------------------------------------------*/
+
+.parentOfBurgerPart{
+    width: 47px;
+    height: 41px;
+    margin: 10px 10px 5px 0;
+}
+
+.burgerPart{
+    height: fit-content;
+    width: fit-content;
+    border: 1px solid #6a60a9;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px #848484;
+    display: none;
+}
+
+.burgerLines , .burgerLines::before , .burgerLines::after{
+    background-color: #6a60a9 !important;
+    width: 25px !important;
+}
+
+.burgerDiv{
+    outline: none !important;
+    padding: 7px 7px 0 0 !important;
+}
+
+.burgerBox{
+    width: 33px !important;
+}
+/*-----------------------------------------------End Hamburger Menu----------------------------------------------*/
+
+
+/*-----------------------------------------------Start Side Bar----------------------------------------------*/
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 60px;
+    right: 0;
+    background-color: #413a68;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 54px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none!important;
+    font-size: 15px;
+    color: #fff !important;
+    display: block;
+    transition: 0.3s;
+}
+
+/*.sidenav a:nth-child(2){*/
+    /*margin-top: 35px;*/
+/*}*/
+
+.closebtn:hover {
+    background-color: #413a68 !important;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+    background-color: #8a7ddb !important;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    padding: 0!important;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #8a7ddb !important;
+}
+
+/*-----------------------------------------------End Side Bar----------------------------------------------*/
+
+/*-----------------------------------------------Start Footer----------------------------------------------*/
+
+footer{
+    background-color: #262626;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+}
+
+#footPartRight, #footPartLeft{
+    text-align: center !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+#footPartRight a, #footPartLeft a{
+    display: inline-block;
+    color: #cacaca !important;
+    text-decoration: none !important;
+    transition: color .5s;
+    line-height: 60px;
+}
+
+#footPartRight a:hover, #footPartRight a:hover span{
+    color: #009c29 !important;
+}
+
+#footPartLeft a:hover, #footPartLeft a:hover span{
+    color: #ff9500 !important;
+}
+
+#footPartRight a span, #footPartLeft a span{
+    color: #cacaca;
+    margin-left: 10px;
+    transition: color .5s;
+}
+
+
+
+
+/*-----------------------------------------------End Footer----------------------------------------------*/
+
+/*-----------------------------------------------Start AdvDetails----------------------------------------------*/
+
+   /*the styles of pictures part and modal are in "light-box.css"*/
+
+.show{display: block !important;}
+
+.itemProfile{
+    display: flex;
+    justify-content: space-between;
+}
+
+.picPart{
+    min-width: 100px;
+    border-radius: 5px;
+    height: fit-content;
+    background-color: #dfdfdf;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    direction: ltr;
+}
+
+.lightBoxImageDiv{
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.lightBoxImageDiv img{
+    height: 100%;
+}
+
+.detailInfoPart{
+    text-align: right;
+}
+
+.getNumber{
+    margin-top: 35px;
+}
+
+.numberList{
+    display: none;
+    width: 320px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #9b9b9b;
+}
+
+.telNumber{
+    margin-bottom: 7px;
+}
+
+.copyBtn{
+    background-color: #fff;
+    border: 1px solid #00991f;
+    color: #00991f;
+    border-radius: 5px;
+    margin-left: 40px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.infoFields, .skillsCategories{
+    padding-top: 10px;
+}
+
+.infoItem{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #9b9b9b;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    width: 320px;
+}
+
+.infoItemResult{
+    color: #404040;
+}
+
+.Description{
+    max-width: 500px;
+    margin-bottom: 50px;
+}
+
+/*-----------------------------------------------End AdvDetails----------------------------------------------*/
+
+
+/*-----------------------------------------------Start Worker----------------------------------------------*/
+
+.listOfWorkers{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    width: 93%;
+    margin: 10px auto;
+}
+
+.picOfWorker{
+    width: 290px;
+    height: 290px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.picOfWorker img{
+    height: 100%;
+}
+
+.ageOfWorker{
+    margin-top: 20px;
+    font-size: 17px;
+}
+
+.sexOfWorker{font-size: 17px}
+
+.skills{margin-top: 50px}
+
+.skills p{
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.skillItem{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #9b9b9b;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    width: 360px;
+}
+
+.skillItemTitr{
+    color: #7a7a7a;
+    width: 35%;
+}
+
+.skillItemResults{width: 60%}
+
+
+
+/*-----------------------------------------------End Worker----------------------------------------------*/
+
+
+@media screen and (max-width: 1200px){
+    .filtering{
+        display: block !important;
+    }
+    .filterPartDouble {
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .w-header2{
+        height: 260px !important;
+    }
+    #priceFilter{
+        text-align: left !important;
+        width: 95px !important;
+    }
+    #searchForFilter {
+        margin-right: 0;
+        width: 150px;
+    }
+    .partOfSearchBtn{
+        justify-content: center !important;
+    }
+}
+
+
+@media screen and (max-width: 991px){
+    .labelsOfNewAdv , .resultsOfAdv{font-size: 15px !important;}
+    .itemProfile{
+        flex-wrap: wrap-reverse;
+        justify-content: center;
+    }
+    .detailInfoPart{width: 100%}
+    .picPart{
+        width: 100% !important;
+    }
+    .picOfWorker{margin: 0 auto}
+    .infoItem, .skillItem, .numberList{width: 100%}
+    .titr {
+        margin-top: 40px;
+        text-align: center;
+    }
+    .titr h5{
+        font-size: 18px !important;
+    }
+    .getNumber{
+        display: flex;
+        justify-content: center;
+    }
+    #flexing{
+        display: flex;
+        justify-content: center;
+    }
+    .skills {
+         margin-top: 0 !important;
+    }
+}
+
+@media screen and (max-width: 975px){
+
+    .h1-logo p {font-size: 17px}
+    .sabt2, #signUpBtn, .serviceRequest {font-size: 12px !important;}
+}
+
+@media screen and (max-width: 767px){
+    #searchForFilter {
+        margin-right: 0 !important;
+        width: 100% !important;
+    }
+    #searchBtnFilterPartition{
+        width: 31%;
+    }
+    .parentOfSideNav1{display: none !important;}
+    .burgerPart{display: block !important;}
+    .paneFlexing{justify-content: space-between}
+    .news-item{margin-right: 0}
+    .titrOfItemInHomePage h5{font-size: 17px}
+    .grandparent{justify-content: center !important;}
+    .labelsOfNewAdv , .resultsOfAdv{
+        font-size: 14px !important;
+        text-align: right;
+    }
+    .infoItemTitr, .skillItemTitr, .infoItemResult, .skillItemResults, .Description, .getNumber, .copyBtn{font-size: 14px !important;}
+}
+
+@media screen and (max-width: 670px){
+    .news-item {width: 265px}
+    .paneFlexing{justify-content: center}
+    .h1-logo p {font-size: 15px}
+    .serviceRequest{
+        font-size: 10px !important;
+        width: 120px;
+        padding: 1% 5%;
+    }
+    .sabt2{
+        width: 110px;
+        font-size: 10px !important
+    }
+    #signUpBtn{
+        width: 50px;
+        padding: 0.39rem .1rem !important;
+        margin-right: 3px;
+        font-size: 10px !important
+    }
+}
+
+@media screen and (max-width: 575px){
+    .control-label{
+        text-align: right;
+    }
+    .filterPartDouble {
+        flex-direction: column;
+        justify-content: space-between;
+        height: 90px;
+    }
+    .w-header2 {
+        height: 400px !important;
+    }
+    .where-searching-part{margin-top: 90px}
+    .filterPartition {
+        justify-content: space-between !important;
+    }
+    #categoryFilter1, #locationFilter1, #categoryFilter2, #professionalFilter{
+        text-align: right !important;
+    }
+    #searchBtnFilterPartition{
+        width: 100% !important;
+    }
+    #footPartRight a, #footPartLeft a{
+        font-size: 13px;
+        line-height: 0;
+    }
+    #footPartRight{padding-bottom: 2px !important;}
+    #footPartLeft{padding-top: 2px !important;}
+    .labelsOfFilter, #priceFilter{
+        text-align: right !important;
+    }
+}
+@media screen and (max-width: 550px){
+    .where-searching-part{
+        top: 9vw;
+    }
+}
+
+@media screen and (max-width: 530px){
+    .h1-logo{display: none}
+}
+
+@media screen and (max-width: 450px){
+    .where-searching-part{
+        top: 10vw;
+    }
+    .modal-title{font-size: 15px !important;}
+    .modal-body{font-size: 13px !important;}
+    .h1-logo p {font-size: 13px}
+    .sabt2 {
+        border: none;
+        width: 80px;
+        padding: 0 1%;
+        font-size: 9px !important;
+        line-height: 27px;
+    }
+    #signUpBtn {
+        font-size: 9px !important;
+        border: none !important;
+        width: 40px;
+        margin-right: 0;
+    }
+    .serviceRequest{
+        font-size: 9px !important;
+        width: 100px;
+        height: fit-content;
+        margin-left: 0;
+        padding: 0 1%;
+    }
+    .titrOfItemInHomePage h5{
+        font-size: 16px;
+    }
+    .titr h5{
+        font-size: 16px !important;
+    }
+    .ageOfWorker, .sexOfWorker{font-size: 15px}
+    .getNumber button{font-size: 12px !important;}
+    .infoItemTitr, .skillItemTitr, .infoItemResult, .skillItemResults, .Description, .getNumber, .copyBtn{font-size: 13px !important;}
+    #footPartRight a, #footPartLeft a{
+        font-size: 12px;
+    }
+    .skills p {font-size: 15px}
+}
+
+
+@media screen and (max-width: 375px){
+    .h1-logo p {font-size: 12px}
+    .filtering{
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
