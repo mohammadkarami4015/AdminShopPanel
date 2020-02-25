@@ -19,7 +19,7 @@ class ArticlesController extends Controller
     public function activate($id,$value)
     {
         $article=Article::find($id);
-        $article->status=$value=='on'?$value:null;
+        $article->status=$value=='on'?$value:'off';
         $article->save();
         return $article->status;
     }

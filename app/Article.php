@@ -4,10 +4,12 @@ namespace App;
 
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Article extends Model
 {
     protected $guarded = [];
+    use SoftDeletes;
 
 
     public static function createNew(ArticleRequest $request)

@@ -23,7 +23,7 @@ class QuestionsController extends Controller
     public function activate($id,$value)
     {
         $question=Question::find($id);
-        $question->status=$value=='on'?$value:null;
+        $question->status=$value=='on'?$value:"off";
         $question->save();
         return $question->status;
     }

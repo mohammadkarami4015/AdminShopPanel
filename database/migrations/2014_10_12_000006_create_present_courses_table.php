@@ -15,9 +15,10 @@ class CreatePresentCoursesTable extends Migration
     {
         Schema::create('present_courses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('desc');
-            $table->longText('times');
+            $table->text('desc');
+            $table->string('times');
             $table->string('submit_date');
+            $table->string('start_date');
             $table->string('capacity');
             $table->string('address');
             $table->string('cost')->nullable();

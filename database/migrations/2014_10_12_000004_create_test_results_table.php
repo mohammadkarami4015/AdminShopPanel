@@ -18,7 +18,7 @@ class CreateTestResultsTable extends Migration
             $table->string('title');
             $table->longText('value');
             $table->string('tip');
-            $table->string('status')->default('off');
+            $table->string('status')->default('off')->nullable();
             $table->bigInteger('test_id')->unsigned();
             $table->softDeletes();
             $table->timestamps();

@@ -16,7 +16,7 @@ class CreateCourseSubmitsTable extends Migration
         Schema::create('course_submits', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->longText('times');
-            $table->string('payment');
+            $table->string('payment')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('present_course_id')->unsigned();
             $table->softDeletes();

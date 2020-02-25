@@ -16,9 +16,10 @@ class CreateTeacherPaymentsTable extends Migration
         Schema::create('teacher_payments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('amount');
-            $table->string('date');
             $table->string('type');
-            $table->string('status');
+            $table->string('card_number')->nullable();
+            $table->string('sheba')->nullable();
+            $table->string('status')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('payment_request_id')->unsigned();
             $table->softDeletes();

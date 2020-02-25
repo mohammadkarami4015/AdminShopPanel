@@ -111,3 +111,6 @@ function namedFile($name){
     return time().'_'.$name;
 }
 
+function jalaliFormat($date){
+    return \Morilog\Jalali\Jalalian::forge($date)->format('Y-m-d H:i:s');
+}

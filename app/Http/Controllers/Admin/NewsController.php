@@ -21,7 +21,7 @@ class NewsController extends Controller
     public function activate($id,$value)
     {
         $news=News::find($id);
-        $news->status=$value=='on'?$value:null;
+        $news->status=$value=='on'?$value:"off";
         $news->save();
         return $news->status;
     }

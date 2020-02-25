@@ -21,7 +21,7 @@ class TestsController extends Controller
     public function activate($id,$value)
     {
         $test=Test::find($id);
-        $test->status=$value=='on'?$value:null;
+        $test->status=$value=='on'?$value:"off";
         $test->save();
         return $test->status;
     }

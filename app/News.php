@@ -4,9 +4,13 @@ namespace App;
 
 use App\Http\Requests\NewsRequest;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class News extends Model
 {
+    use SoftDeletes;
+
+
     protected $guarded = [];
     protected $table = "articles";
 

@@ -17,12 +17,12 @@ class CreatePaymentsTable extends Migration
             $table->bigIncrements('id');
             $table->longText('amount');
             $table->string('paid_amount');
-            $table->string('discount_code');
-            $table->string('ref_code');
-            $table->string('status');
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('test_id')->unsigned();
-            $table->bigInteger('present_course_id')->unsigned();
+            $table->string('discount_code')->nullable();
+            $table->string('ref_code')->nullable();
+            $table->string('status')->nullable();
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->bigInteger('test_id')->unsigned()->nullable();
+            $table->bigInteger('present_course_id')->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();
 

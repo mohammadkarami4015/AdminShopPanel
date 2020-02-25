@@ -3,18 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Article;
+use App\Clearing;
 use App\Course;
 use App\Http\Requests\ArticleRequest;
 use App\Message;
 use App\News;
+use App\Payment;
 use App\Post;
+use App\PresentCourse;
 use App\Question;
+use App\Result;
 use App\Suggestion;
 use App\Test;
 use App\User;
 use App\UserPost;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class SearchController extends Controller
 {
@@ -116,6 +121,68 @@ class SearchController extends Controller
         $messages=Message::where('name','LIKE','%'.$request->value."%")->get();
         $flag=true;
         return view('messages.searchInMessages',compact('messages','flag'));
+    }
+
+    public function searchInPresents(Request $request)
+    {
+        $p_ces=PresentCourse::orWhereHas('course',function ($query) use ($request) {
+            $query->where('title', 'LIKE','%'.$request->value."%");
+        })->orWhereHas('user',function ($query) use ($request) {
+            $query->orWhere('name', 'LIKE','%'.$request->value."%");
+            $query->orWhere('national_id', 'LIKE','%'.$request->value."%");
+        })
+        ->get();
+        if (Gate::check('teacher')){
+            $p_ces=PresentCourse::whereIn('id',$p_ces->pluck('id'))->where('user_id',auth()->user()->id)->orderBy('id','desc')->paginate(20);
+        }
+        $flag=true;
+        return view('present.searchTable',compact('p_ces','flag'));
+    }
+
+    public function searchInPayments(Request $request)
+    {
+        $payments=Payment::orWhereHas('presentCourse.course',function ($query) use ($request) {
+            $query->where('title', 'LIKE','%'.$request->value."%");
+        })->orWhereHas('user',function ($query) use ($request) {
+            $query->orWhere('name', 'LIKE','%'.$request->value."%");
+            $query->orWhere('national_id', 'LIKE','%'.$request->value."%");
+        })->orWhereHas('test',function ($query) use ($request) {
+            $query->where('title', 'LIKE','%'.$request->value."%");
+        })
+        ->orWhere('status', 'LIKE','%'.$request->value."%")
+        ->orWhere('amount', 'LIKE','%'.$request->value."%")
+        ->orWhere('paid_amount', 'LIKE','%'.$request->value."%")
+        ->get();
+        $flag=true;
+        return view('payment.searchTable',compact('payments','flag'));
+    }
+
+    public function searchInClearing(Request $request)
+    {
+        $clearings=Clearing::orWhereHas('financial.user',function ($query) use ($request) {
+            $query->orWhere('national_id', 'LIKE','%'.$request->value."%");
+            $query->orWhere('name', 'LIKE','%'.$request->value."%");
+        })->orWhereHas('user',function ($query) use ($request) {
+            $query->where('name', 'LIKE','%'.$request->value."%");
+        })
+        ->orWhere('card_number', 'LIKE','%'.$request->value."%")
+        ->orWhere('amount', 'LIKE','%'.$request->value."%")
+        ->orWhere('sheba', 'LIKE','%'.$request->value."%")
+        ->get();
+        $flag=true;
+        return view('clearing.searchTable',compact('clearings','flag'));
+    }
+
+    public function searchInResults(Request $request)
+    {
+        $results=Result::orWhereHas('test',function ($query) use ($request) {
+            $query->where('title', 'LIKE','%'.$request->value."%");
+        })
+        ->orWhere('title', 'LIKE','%'.$request->value."%")
+        ->orWhere('tip', 'LIKE','%'.$request->value."%")
+        ->get();
+        $flag=true;
+        return view('result.searchTable',compact('results','flag'));
     }
 
 }

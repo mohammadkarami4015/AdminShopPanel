@@ -19,7 +19,7 @@ class CoursesController extends Controller
     public function activate($id,$value)
     {
         $course=Course::find($id);
-        $course->status=$value=='on'?$value:null;
+        $course->status=$value=='on'?$value:"off";
         $course->save();
         return $course->status;
     }

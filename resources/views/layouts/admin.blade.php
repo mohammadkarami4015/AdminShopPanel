@@ -11,6 +11,7 @@
     </title>
 
     <!-- Styles -->
+    @yield('header')
     <link href="{{ asset('css/bootstrap.min.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/bootstrap.rtl.min.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/font-awesome/css/font-awesome.css') }}" media="all" rel="stylesheet" type="text/css" />
@@ -31,7 +32,6 @@
     <link href="{{ asset('plyr/plyr.css') }}" data-path="/dist/css/" data-file="style.css" media="all" rel="stylesheet" type="text/css" />
 
 
-    @yield('header')
 </head>
 <body>
 @php
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="logo-element">
-                        امیران
+                        {{$site_title}}
                     </div>
                 </li>
                 {{--@can('admin1')--}}
@@ -105,6 +105,39 @@
                     <ul class="nav nav-second-level collapse">
                         <li><a  href="{{route('test.index')}}"> لیست آزمون ها</a></li>
                         <li><a  href="{{route('test.create')}}">ثبت آزمون جدید</a></li>
+                    </ul>
+                </li>
+                <li class="@yield('result')" >
+                    <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">پاسخ آزمون ها</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a  href="{{route('result.index')}}"> لیست  پاسخ آزمون ها</a></li>
+                        <li><a  href="{{route('result.create')}}">ثبت پاسخ آزمون جدید</a></li>
+                    </ul>
+                </li>
+                <li class="@yield('present')" >
+                    <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">ارائه دوره</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a  href="{{route('present.index')}}"> لیست دوره های ارائه شده</a></li>
+                        <li><a  href="{{route('present.create')}}">ارائه دوره جدید</a></li>
+                    </ul>
+                </li>
+                <li class="@yield('payment')" >
+                    <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">پرداخت ها</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a  href="{{route('payment.index')}}"> لیست پرداخت ها</a></li>
+                    </ul>
+                </li>
+                <li class="@yield('financial')" >
+                    <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">درخواست وجه</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a  href="{{route('financial.create')}}">درخواست وجه</a></li>
+                        <li><a  href="{{route('financial.index')}}"> لیست درخواست وجه</a></li>
+                    </ul>
+                </li>
+                <li class="@yield('clearing')" >
+                    <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">پرداخت وجه</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a  href="{{route('clearing.index')}}"> لیست پرداخت وجه</a></li>
                     </ul>
                 </li>
                 <li class="@yield('articles')" >

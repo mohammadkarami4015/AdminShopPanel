@@ -15,9 +15,9 @@ class CreateCourseStudentsTable extends Migration
     {
         Schema::create('course_students', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('mark');
+            $table->string('mark')->nullable();
             $table->string('student_request')->nullable();
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->string('time');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('present_course_id')->unsigned();

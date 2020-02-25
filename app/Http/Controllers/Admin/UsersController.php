@@ -23,7 +23,7 @@ class UsersController extends Controller
     public function activate($id,$value)
     {
         $user=User::find($id);
-        $user->status=$value=='on'?$value:null;
+        $user->status=$value=='on'?$value:"off";
         $user->save();
         return $user->status;
     }

@@ -16,11 +16,10 @@ class CreatePaymentRequestsTable extends Migration
         Schema::create('payment_requests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('amount');
-            $table->string('date');
             $table->string('card_number');
-            $table->string('Sheba');
-            $table->string('status');
-            $table->bigInteger('user_id')->unsigned();
+            $table->string('sheba');
+            $table->string('status')->nullable();
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();
 

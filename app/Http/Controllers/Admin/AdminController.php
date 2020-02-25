@@ -23,7 +23,7 @@ class AdminController extends Controller
     public function activate($id,$value)
     {
         $admin=User::find($id);
-        $admin->status=$value=='on'?$value:null;
+        $admin->status=$value=='on'?$value:'off';
         $admin->save();
         return $admin->status;
     }

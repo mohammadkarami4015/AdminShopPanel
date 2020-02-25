@@ -25,6 +25,27 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    public function presentCourses()
+    {
+        return $this->hasMany(PresentCourse::class);
+    }
+
+    public function financials()
+    {
+        return $this->hasMany(Financial::class);
+    }
+
+    public function courseSubmits()
+    {
+        return $this->hasMany(CourseSubmit::class);
+    }
+
+    public function courseStudents()
+    {
+        return $this->hasMany(CourseStudent::class);
+    }
+
     public function hasRole($role)
     {
         if (is_string($role)){

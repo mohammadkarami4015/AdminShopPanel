@@ -6,10 +6,19 @@
     background-position: center;
 }
 .plusIcon {
-    width: 50px;
+    width: 40px;
     position: absolute;
     bottom: -8px;
     right: 28px;
+}
+.successPayment{
+    background-color: #24c10099;
+}
+.failedPayment{
+    background-color: #ff000099;
+}
+.disNone {
+    display: none;
 }
 .adminProfileDiv {
     display: flex;
@@ -17,63 +26,73 @@
     align-items: center;
     position: relative;
 }
+.dividerDiv {
+    border-top: 1px solid lightgray;
+    margin: 30px 30px;
+}
+
+.preCustom {
+    background-color: #f4f4f400;
+    border: 0 solid;
+    border-radius: 0;
+}
 .pagination {
-    direction: ltr !important;
+direction: ltr !important;
 }
 #map {
-    width: 50vw;
-    height: 50vh;
+width: 50vw;
+height: 50vh;
 }
 .editProfileDiv {
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
+display: flex !important;
+justify-content: center;
+align-items: center;
 }
 
 .logOutForm {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 0px 6px 0px;
-    width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 0 0px 6px 0px;
+width: 100%;
 }
 .logoutBtn {
-    width: 70%;
+width: 70%;
 }
 .searchForm {
-    min-width: 265px;
+min-width: 265px;
 }
 .searchInput {
-    border: solid 1px #1ab394;
-    height: 33px;margin-top: 12px;
-    border-radius: 3px;
-    text-align: center;
+border: solid 1px #1ab394;
+height: 33px;margin-top: 12px;
+border-radius: 3px;
+text-align: center;
 }
 .searchBtn {
-    margin-top: 12px;
-    height: 31px;
+margin-top: 12px;
+height: 31px;
 }
 .searchItemDiv {
-    display: flex;
-    justify-content: space-between;
+display: flex;
+justify-content: space-between;
 }
 .floatRight {
-    float: right;
+float: right;
 }
 .searchListBtn {
-    margin-right: 5px;
-    height: 33px;
-    margin-top: 10px;
-    margin-left: 5px;
+margin-right: 5px;
+height: 33px;
+margin-top: 10px;
+margin-left: 5px;
 }
 .searchListInput {
-    margin-top: 10px;
-    margin-bottom: 15px;
-    margin-right: 5px;
+margin-top: 10px;
+margin-bottom: 15px;
+margin-right: 5px;
 }
 .searchListDiv {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    background-color: white;
+display: flex;
+justify-content: center;
+flex-direction: row;
+background-color: white;
 }

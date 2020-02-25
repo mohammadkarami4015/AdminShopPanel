@@ -12,6 +12,11 @@ class Course extends Model
     use SoftDeletes;
     protected $guarded = [];
 
+    public function presentCourses()
+    {
+        return $this->hasMany(PresentCourse::class);
+    }
+
     public static function createNew(CourseRequest $request)
     {
         $course = new Course();

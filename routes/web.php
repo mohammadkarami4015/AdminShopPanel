@@ -16,6 +16,7 @@ Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/upload/photo/summernote', 'Admin\PhotosController@summernoteUploadPhoto');
 
 Route::get('/active/admin/{id}/{value}', 'Admin\AdminController@activate');
 Route::get('/active/user/{id}/{value}', 'Admin\UsersController@activate');
@@ -25,6 +26,9 @@ Route::get('/active/test/{id}/{value}', 'Admin\TestsController@activate');
 Route::get('/active/question/{id}/{value}', 'Admin\QuestionsController@activate');
 Route::get('/active/article/{id}/{value}', 'Admin\ArticlesController@activate');
 Route::get('/active/news/{id}/{value}', 'Admin\NewsController@activate');
+Route::get('/active/present/{id}/{value}', 'Admin\PresentCoursesController@activate');
+Route::get('/active/submit/{id}/{value}', 'Admin\SubmitsController@activate');
+Route::get('/active/result/{id}/{value}', 'Admin\ResultsController@activate');
 
 Route::get('/search/in/admins/{value}', 'Admin\SearchController@searchInAdmin');
 Route::get('/search/in/users/{value}', 'Admin\SearchController@searchInUsers');
@@ -36,6 +40,12 @@ Route::get('/search/in/news/{value}', 'Admin\SearchController@searchInNews');
 Route::get('/search/in/articles/{value}', 'Admin\SearchController@searchInArticles');
 Route::get('/search/in/user/messages/{value}', 'Admin\SearchController@searchInMessages');
 Route::get('/search/in/questions/{value}/{test_id}', 'Admin\SearchController@searchInQuestions');
+Route::get('/search/in/presents/{value}', 'Admin\SearchController@searchInPresents');
+Route::get('/search/in/payments/{value}', 'Admin\SearchController@searchInPayments');
+Route::get('/search/in/clearing/{value}', 'Admin\SearchController@searchInClearing');
+Route::get('/search/in/results/{value}', 'Admin\SearchController@searchInResults');
+
+Route::get('/confirm/financial/{id}', 'Admin\FinancialController@confirm');
 Route::get('/read/message/{id}', 'Admin\MessagesController@read');
 
 //Ajax for search phone number
@@ -79,6 +89,31 @@ Route::prefix('admin')->group(function() {
 
     //news
     Route::resource('news','Admin\NewsController');
+
+    //financial
+    Route::resource('financial','Admin\FinancialController');
+
+    //clearing
+    Route::get('/create/{id}/clearing', 'Admin\ClearingsController@createTwo')->name('clearing.createTwo');
+    Route::resource('clearing','Admin\ClearingsController');
+
+    //clearing
+    Route::resource('result','Admin\ResultsController');
+
+    //present
+    Route::resource('present','Admin\PresentCoursesController');
+
+    //payment
+    Route::resource('payment','Admin\PaymentsController');
+
+    //submit
+    Route::get('/submit/{id}/list', 'Admin\SubmitsController@index2')->name('submit.index2');
+    Route::resource('submit','Admin\SubmitsController');
+
+    //student
+    Route::get('/student/{id}/list', 'Admin\StudentsController@indexTwo')->name('student.indexTwo');
+    Route::get('/add/student/to/{id}/list', 'Admin\StudentsController@storeTow')->name('student.storeTow');
+    Route::resource('student','Admin\StudentsController');
 
     //photos
     Route::get('/photo/{id}/user', 'Admin\PhotosController@addPhotosForm')->name('photos.addPhotosForm');

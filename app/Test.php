@@ -13,6 +13,16 @@ class Test extends Model
     use SoftDeletes;
     protected $guarded = [];
 
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
+
     public static function createNew(TestRequest $request)
     {
         $test = new Test();
@@ -31,7 +41,6 @@ class Test extends Model
     {
         $this->title = $request->title;
         $this->desc  = $request->desc;
-        $this->photo  = $request->file('photo')?makePhotoTypeFile($request->file('photo'),'test'):$this->photo;
         $this->type  = $request->type;
         $this->price  = $request->price;
         $this->save();
