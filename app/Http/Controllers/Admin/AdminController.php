@@ -40,6 +40,13 @@ class AdminController extends Controller
         return view('admin.index',compact('admins','flag'));
     }
 
+    public function profile(Request $request)
+    {
+        $admin = User::where('id',$request->user()->id)->first();
+        $flag=false;
+        return view('admin.profile',compact('admin','flag'));
+    }
+
     public function create()
     {
         $roles=Role::all();

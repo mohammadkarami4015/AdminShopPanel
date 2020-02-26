@@ -121,7 +121,18 @@
                                                                     @endif
                                                                     <div class="list-group">
                                                                         <a class="list-group-item">عنوان: {{$news->title}}</a>
-                                                                        <a class="list-group-item">توضیحات: {{$news->desc}}</a>
+                                                                        <a class="list-group-item">زیر عنوان: {{$news->sub_title}}</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-10 col-md-offset-1">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">توضیحات</div>
+                                                                    <div class="list-group">
+                                                                        <pre class="preCustom">
+                                                                            {!! $news->desc !!}
+                                                                        </pre>
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -54,15 +54,13 @@ function getCourseType($str){
 
     switch ($str) {
         case "1":
-            return "1";
+            return "مربی";
         case "2":
-            return "2";
+            return "استادیار";
         case "3":
-            return "3";
+            return "دانشیار";
         case "4":
-            return "4";
-        case "5":
-            return "5";
+            return "استاد";
         default:
             return "نامعلوم";
     }

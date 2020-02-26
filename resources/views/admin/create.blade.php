@@ -32,7 +32,7 @@
         <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
             <div class="ibox">
                 <div class="ibox-content">
-                    <form  method="POST" id="form" action="{{ route('admin.store') }}" class="form-horizontal">
+                    <form  method="POST" id="form" action="{{ route('admin.store') }}" class="form-horizontal" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">نام</label>
@@ -54,6 +54,18 @@
                                 @if ($errors->has('phone_number'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('phone_number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('photo') ? ' has-error' : '' }}">
+                            <label for="photo" class="col-md-4 control-label">عکس</label>
+
+                            <div class="col-md-6">
+                                <input id="photo" type="file" class="form-control" name="photo" value="{{ old('photo')}}">
+                                @if ($errors->has('photo'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('photo') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -119,7 +131,7 @@
                         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                             <label for="type" class="col-md-4 control-label">نوع</label>
                             <div class="col-md-6">
-                                <select  class="form-control" name="type" id="type" required>
+                                <select onchange="changeType(this)"  class="form-control" name="type" id="type" required>
                                     <option disabled selected>انتخاب نوع</option>
                                     <option value="1">سوپر ادمین</option>
                                     <option value="2">ادمین</option>
@@ -129,7 +141,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('level') ? ' has-error' : '' }}">
+                        <div id="levelDiv" class="disNone form-group{{ $errors->has('level') ? ' has-error' : '' }}">
                             <label for="level" class="col-md-4 control-label">سطح</label>
                             <div class="col-md-6">
                                 <select  class="form-control" name="level" id="level">
@@ -186,7 +198,17 @@
             </div>
         </div>
     </div>
-@endsection
-@section('footer')
-    <script src="{!! asset('js/materialize.min.js') !!}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        function changeType(that) {
+            let levelDiv= $("#levelDiv")
+            let value= that.value
+            if(value==="5"){
+                levelDiv.css('display','block')
+            }else{
+                levelDiv.css('display','none')
+            }
+
+        }
+    </script>
 @endsection

@@ -16,9 +16,9 @@ class CreateTestsTable extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->string('desc');
+            $table->longText('desc');
             $table->string('status')->default('off')->nullable();
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->string('price');
             $table->string('photo')->nullable();
             $table->softDeletes();

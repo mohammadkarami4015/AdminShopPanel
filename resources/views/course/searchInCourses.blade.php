@@ -51,7 +51,7 @@
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">جزئیات</div>
+                                            <div class="panel-heading">عکس</div>
                                             @if($course->photo)
                                                 <div id="myCarousel{{$course->id}}" class="carousel slide" data-ride="carousel">
                                                     <!-- Wrapper for slides -->
@@ -62,8 +62,16 @@
                                                     </div>
                                                 </div>
                                             @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">توضیحات</div>
                                             <div class="list-group">
-                                                <a class="list-group-item">  توضیحات: {{$course->desc}}</a>
+                                                                        <pre class="preCustom">
+                                                                            {!! $course->desc !!}
+                                                                        </pre>
                                             </div>
                                         </div>
                                     </div>
@@ -80,8 +88,3 @@
     @endforeach
     </tbody>
 </table>
-@if(!$flag)
-    <div class="text-center">
-        {{ $courses->links() }}
-    </div>
-@endif

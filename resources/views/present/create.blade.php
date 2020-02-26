@@ -62,7 +62,7 @@
                             {{ csrf_field() }}
 
                             @if(Gate::check('teacher'))
-                                <input  type="text" class="form-control" name="user_id" value="{{auth()->user()->id}}" required >
+                                <input  type="hidden" class="form-control" name="user_id" value="{{auth()->user()->id}}" required >
                             @elseif(Gate::check('super_admin'))
                                 <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
                                     <label for="user_id" class="col-md-4 control-label">استاد </label>

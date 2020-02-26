@@ -24,7 +24,7 @@ class UserUpdateRequest extends FormRequest
             'name'       => 'string|required',
             'email'       => ['string','required','max:255', Rule::unique('users')->ignore($this->route('user'))],
             'phone_number'       => ['string','required','max:255', Rule::unique('users')->ignore($this->route('user'))],
-            'type'       => 'string|required|max:255',
+            'type'       => 'string|nullable|max:255',
             'about_me'       => 'string|nullable|max:1000',
             'level'       => 'string|nullable|max:255',
             'card_number'       => 'string|nullable|max:255',

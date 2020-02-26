@@ -25,7 +25,7 @@
             </td>
             @can('update')
                 <td>
-                    <a class="btn btn-sm btn-info"  href="{{ route('admin.editAdmins',['id'=>$admin->id ]) }}">ویرایش</a>
+                    <a class="btn btn-sm btn-info"  href="{{ route('admin.editAdmins',['user'=>$admin->id ]) }}">ویرایش</a>
                 </td>
             @endcan
             <td>
@@ -43,16 +43,27 @@
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="panel panel-default">
+
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">عکس پروفایل</div>
+                                                @if($admin->photo)
+                                                    <div id="myCarousel{{$admin->id}}" class="carousel slide" data-ride="carousel">
+                                                        <!-- Wrapper for slides -->
+                                                        <div class="carousel-inner">
+                                                            <div class="item  active ">
+                                                                <img src="/{{$admin->photo}}" alt="" style="width:100%;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+
+                                            </div>
+
                                             <div class="panel-heading">جزئیات</div>
                                             <div class="list-group">
                                                 <a class="list-group-item">  نام: {{$admin->name}}</a>
                                                 <a class="list-group-item">  کد ملی: {{$admin->national_id}}</a>
-                                                <a class="list-group-item">  شماره کارت: {{$admin->card_number}}</a>
-                                                <a class="list-group-item">  شبا: {{$admin->sheba}}</a>
-                                                <a class="list-group-item">  کد معرفی: {{$admin->ref_code}}</a>
-                                                <a class="list-group-item">  معرف: {{$admin->caller}}</a>
                                                 <a class="list-group-item"> نوع: {{getTypeOfUser($admin->type)}}</a>
-                                                <a class="list-group-item"> سطح: {{getLevelOfUser($admin->level)}}</a>
                                                 <a class="list-group-item">  درباره ی من: {{$admin->about_me}}</a>
                                             </div>
                                         </div>

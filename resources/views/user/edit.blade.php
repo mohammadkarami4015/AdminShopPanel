@@ -32,7 +32,7 @@
         <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
             <div class="ibox">
                 <div class="ibox-content">
-                    <form  method="POST" id="form" action="{{ route('user.update',['user'=>$user->id ]) }}" class="form-horizontal">
+                    <form  method="POST" id="form" action="{{ route('user.update',['user'=>$user->id ]) }}" class="form-horizontal" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {{method_field('PATCH')}}
 
@@ -56,6 +56,18 @@
                                 @if ($errors->has('phone_number'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('phone_number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('photo') ? ' has-error' : '' }}">
+                            <label for="photo" class="col-md-4 control-label">عکس</label>
+
+                            <div class="col-md-6">
+                                <input id="photo" type="file" class="form-control" name="photo" value="{{ old('photo')}}">
+                                @if ($errors->has('photo'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('photo') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -85,72 +97,76 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('card_number') ? ' has-error' : '' }}">
-                            <label for="card_number" class="col-md-4 control-label">شماره کارت</label>
-                            <div class="col-md-6">
-                                <input id="card_number" type="text" class="form-control" name="card_number"  value="{{ $user->card_number}}" >
+                        @can('teacher')
+                            <div class="form-group{{ $errors->has('card_number') ? ' has-error' : '' }}">
+                                <label for="card_number" class="col-md-4 control-label">شماره کارت</label>
+                                <div class="col-md-6">
+                                    <input id="card_number" type="text" class="form-control" name="card_number"  value="{{ $user->card_number}}" >
 
-                                @if ($errors->has('card_number'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('card_number') }}</strong>
-                                    </span>
-                                @endif
+                                    @if ($errors->has('card_number'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('card_number') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('sheba') ? ' has-error' : '' }}">
-                            <label for="sheba" class="col-md-4 control-label">شماره شبا</label>
-                            <div class="col-md-6">
-                                <input id="sheba" type="text" class="form-control" name="sheba"  value="{{ $user->sheba}}" >
+                            <div class="form-group{{ $errors->has('sheba') ? ' has-error' : '' }}">
+                                <label for="sheba" class="col-md-4 control-label">شماره شبا</label>
+                                <div class="col-md-6">
+                                    <input id="sheba" type="text" class="form-control" name="sheba"  value="{{ $user->sheba}}" >
 
-                                @if ($errors->has('sheba'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('sheba') }}</strong>
-                                    </span>
-                                @endif
+                                    @if ($errors->has('sheba'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('sheba') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
-                            <label for="role" class="col-md-4 control-label">سمت</label>
-                            <div class="col-md-6">
-                                <select  class="form-control" name="role" id="role">
-                                    @foreach($roles as $role)
-                                        @continue($role->id!=$user->roles[0]->id)
-                                        <option value="{{$role->id}}">{{$role->label}}</option>
-                                    @endforeach
-                                    @foreach($roles as $role)
-                                        @continue($role->id==$user->roles[0]->id)
-                                        <option value="{{$role->id}}">{{$role->label}}</option>
-                                    @endforeach
-                                </select>
+                        @endcan
+                        @can('super_admin')
+                            <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
+                                <label for="role" class="col-md-4 control-label">سمت</label>
+                                <div class="col-md-6">
+                                    <select  class="form-control" name="role" id="role">
+                                        @foreach($roles as $role)
+                                            @continue($role->id!=$user->roles[0]->id)
+                                            <option value="{{$role->id}}">{{$role->label}}</option>
+                                        @endforeach
+                                        @foreach($roles as $role)
+                                            @continue($role->id==$user->roles[0]->id)
+                                            <option value="{{$role->id}}">{{$role->label}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-                            <label for="type" class="col-md-4 control-label">نوع</label>
-                            <div class="col-md-6">
-                                <select  class="form-control" name="type" id="type" required>
-                                    <option disabled selected>انتخاب نوع</option>
-                                    <option value="1" @if($user->type=="1" ) selected @endif >سوپر ادمین</option>
-                                    <option value="2" @if($user->type=="2" ) selected @endif>ادمین</option>
-                                    <option value="3" @if($user->type=="3" ) selected @endif>استاد اولیه</option>
-                                    <option value="4" @if($user->type=="4" ) selected @endif>استاد</option>
-                                    <option value="5" @if($user->type=="5" ) selected @endif>کاربر</option>
-                                </select>
+                            <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                                <label for="type" class="col-md-4 control-label">نوع</label>
+                                <div class="col-md-6">
+                                    <select  class="form-control" name="type" id="type" required>
+                                        <option disabled selected>انتخاب نوع</option>
+                                        <option value="1" @if($user->type=="1" ) selected @endif >سوپر ادمین</option>
+                                        <option value="2" @if($user->type=="2" ) selected @endif>ادمین</option>
+                                        <option value="3" @if($user->type=="3" ) selected @endif>استاد اولیه</option>
+                                        <option value="4" @if($user->type=="4" ) selected @endif>استاد</option>
+                                        <option value="5" @if($user->type=="5" ) selected @endif>کاربر</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('level') ? ' has-error' : '' }}">
-                            <label for="level" class="col-md-4 control-label">سطح</label>
-                            <div class="col-md-6">
-                                <select  class="form-control" name="level" id="level">
-                                    <option disabled selected>انتخاب سطح</option>
-                                    <option value="1" @if($user->level=="1" ) selected @endif>مربی</option>
-                                    <option value="2" @if($user->level=="2" ) selected @endif>استادیار</option>
-                                    <option value="3" @if($user->level=="3" ) selected @endif>دانشیار</option>
-                                    <option value="4" @if($user->level=="4" ) selected @endif>استاد</option>
-                                    <option value="5" @if($user->level=="5" ) selected @endif>دانشجو</option>
-                                    <option value="6" @if($user->level=="6" ) selected @endif>کاربر عادی</option>
-                                </select>
+                            <div class="form-group{{ $errors->has('level') ? ' has-error' : '' }}">
+                                <label for="level" class="col-md-4 control-label">سطح</label>
+                                <div class="col-md-6">
+                                    <select  class="form-control" name="level" id="level">
+                                        <option disabled selected>انتخاب سطح</option>
+                                        <option value="1" @if($user->level=="1" ) selected @endif>مربی</option>
+                                        <option value="2" @if($user->level=="2" ) selected @endif>استادیار</option>
+                                        <option value="3" @if($user->level=="3" ) selected @endif>دانشیار</option>
+                                        <option value="4" @if($user->level=="4" ) selected @endif>استاد</option>
+                                        <option value="5" @if($user->level=="5" ) selected @endif>دانشجو</option>
+                                        <option value="6" @if($user->level=="6" ) selected @endif>کاربر عادی</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+                        @endcan
                         <div class="form-group{{ $errors->has('about_me') ? ' has-error' : '' }}">
                             <label for="about_me" class="col-md-4 control-label">درباره ی من</label>
                             <div class="col-md-6">

@@ -17,8 +17,9 @@ class ArticleRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
+            'sub_title' => 'required|string|max:255',
             'desc' => 'required|string|max:50000',
-            'photo' => 'required|file|max:255',
+            'photo' => 'nullable|file|max:255',
         ];
     }
 }

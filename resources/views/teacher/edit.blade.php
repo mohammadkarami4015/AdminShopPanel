@@ -8,6 +8,32 @@
     active
 @endsection
 
+
+
+@section('header')
+    <link href="{{asset('css/plugins/summernote/summernote.css')}}" rel="stylesheet">
+    <link href="{{asset('css/plugins/summernote/summernote-bs3.css')}}" rel="stylesheet">
+    <style>
+        .note-editor .note-editable{
+            background-color: #f8f8ffa1;
+            border: 1px solid lightgray;
+            border-top: 0 solid;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            min-height: 250px;
+        }
+        .note-editor .note-toolbar {
+            border: 1px solid lightgray;
+            border-bottom: 0 solid;
+            border-top-right-radius:5px;
+            border-top-left-radius:5px;
+            padding-bottom: 15px;
+            background-color: #1ab394;
+        }
+    </style>
+@endsection
+
+
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
@@ -32,7 +58,7 @@
         <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
             <div class="ibox">
                 <div class="ibox-content">
-                    <form  method="POST" id="form" action="{{ route('teacher.update',['teacher'=>$teacher->id ]) }}" class="form-horizontal">
+                    <form  method="POST" id="form" action="{{ route('teacher.update',['teacher'=>$teacher->id ]) }}" class="form-horizontal" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {{method_field('PATCH')}}
 
@@ -56,6 +82,18 @@
                                 @if ($errors->has('phone_number'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('phone_number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('photo') ? ' has-error' : '' }}">
+                            <label for="photo" class="col-md-4 control-label">عکس</label>
+
+                            <div class="col-md-6">
+                                <input id="photo" type="file" class="form-control" name="photo" value="{{ old('photo')}}">
+                                @if ($errors->has('photo'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('photo') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -109,52 +147,54 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
-                            <label for="role" class="col-md-4 control-label">سمت</label>
-                            <div class="col-md-6">
-                                <select  class="form-control" name="role" id="role">
-                                    @foreach($roles as $role)
-                                        @continue($role->id!=$teacher->roles[0]->id)
-                                        <option value="{{$role->id}}">{{$role->label}}</option>
-                                    @endforeach
-                                    @foreach($roles as $role)
-                                        @continue($role->id==$teacher->roles[0]->id)
-                                        <option value="{{$role->id}}">{{$role->label}}</option>
-                                    @endforeach
-                                </select>
+                        @can('super_admin')
+                            <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
+                                <label for="role" class="col-md-4 control-label">سمت</label>
+                                <div class="col-md-6">
+                                    <select  class="form-control" name="role" id="role">
+                                        @foreach($roles as $role)
+                                            @continue($role->id!=$teacher->roles[0]->id)
+                                            <option value="{{$role->id}}">{{$role->label}}</option>
+                                        @endforeach
+                                        @foreach($roles as $role)
+                                            @continue($role->id==$teacher->roles[0]->id)
+                                            <option value="{{$role->id}}">{{$role->label}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-                            <label for="type" class="col-md-4 control-label">نوع</label>
-                            <div class="col-md-6">
-                                <select  class="form-control" name="type" id="type" required>
-                                    <option disabled selected>انتخاب نوع</option>
-                                    <option value="1" @if($teacher->type=="1" ) selected @endif >سوپر ادمین</option>
-                                    <option value="2" @if($teacher->type=="2" ) selected @endif>ادمین</option>
-                                    <option value="3" @if($teacher->type=="3" ) selected @endif>استاد اولیه</option>
-                                    <option value="4" @if($teacher->type=="4" ) selected @endif>استاد</option>
-                                    <option value="5" @if($teacher->type=="5" ) selected @endif>کاربر</option>
-                                </select>
+                            <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                                <label for="type" class="col-md-4 control-label">نوع</label>
+                                <div class="col-md-6">
+                                    <select  class="form-control" name="type" id="type" required>
+                                        <option disabled selected>انتخاب نوع</option>
+                                        <option value="1" @if($teacher->type=="1" ) selected @endif >سوپر ادمین</option>
+                                        <option value="2" @if($teacher->type=="2" ) selected @endif>ادمین</option>
+                                        <option value="3" @if($teacher->type=="3" ) selected @endif>استاد اولیه</option>
+                                        <option value="4" @if($teacher->type=="4" ) selected @endif>استاد</option>
+                                        <option value="5" @if($teacher->type=="5" ) selected @endif>کاربر</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('level') ? ' has-error' : '' }}">
-                            <label for="level" class="col-md-4 control-label">سطح</label>
-                            <div class="col-md-6">
-                                <select  class="form-control" name="level" id="level">
-                                    <option disabled selected>انتخاب سطح</option>
-                                    <option value="1" @if($teacher->level=="1" ) selected @endif>مربی</option>
-                                    <option value="2" @if($teacher->level=="2" ) selected @endif>استادیار</option>
-                                    <option value="3" @if($teacher->level=="3" ) selected @endif>دانشیار</option>
-                                    <option value="4" @if($teacher->level=="4" ) selected @endif>استاد</option>
-                                    <option value="5" @if($teacher->level=="5" ) selected @endif>دانشجو</option>
-                                    <option value="6" @if($teacher->level=="6" ) selected @endif>کاربر عادی</option>
-                                </select>
+                            <div class="form-group{{ $errors->has('level') ? ' has-error' : '' }}">
+                                <label for="level" class="col-md-4 control-label">سطح</label>
+                                <div class="col-md-6">
+                                    <select  class="form-control" name="level" id="level">
+                                        <option disabled selected>انتخاب سطح</option>
+                                        <option value="1" @if($teacher->level=="1" ) selected @endif>مربی</option>
+                                        <option value="2" @if($teacher->level=="2" ) selected @endif>استادیار</option>
+                                        <option value="3" @if($teacher->level=="3" ) selected @endif>دانشیار</option>
+                                        <option value="4" @if($teacher->level=="4" ) selected @endif>استاد</option>
+                                        <option value="5" @if($teacher->level=="5" ) selected @endif>دانشجو</option>
+                                        <option value="6" @if($teacher->level=="6" ) selected @endif>کاربر عادی</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+                        @endcan
                         <div class="form-group{{ $errors->has('about_me') ? ' has-error' : '' }}">
-                            <label for="about_me" class="col-md-4 control-label">درباره ی من</label>
-                            <div class="col-md-6">
-                                <textarea name="about_me" id="about_me" cols="50" rows="10">{{ $teacher->about_me}}</textarea>
+                            <label for="about_me" class="col-md-4 col-md-push-3 control-label">درباره ی من</label>
+                            <div class="col-md-12">
+                                <textarea name="about_me" id="summernote" cols="50" rows="10">{{ $teacher->about_me}}</textarea>
                                 @if ($errors->has('about_me'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('about_me') }}</strong>
@@ -196,5 +236,52 @@
     </div>
 @endsection
 @section('footer')
-    <script src="{!! asset('js/materialize.min.js') !!}"></script>
+    <script src="{!! asset('js/plugins/summernote/summernote.min.js') !!}"></script>
+    <script>
+        $(document).ready(function(){
+
+            $(".summernote").summernote({
+
+                onChange: function () {
+                    $('.note-editor').find('textarea').attr('name', 'value');
+
+                    $('.note-codable').text($('.note-editable').html());
+                }
+            });
+            $(".summernote").trigger('summernote.change');
+
+            $('#summernote').summernote({
+                height: 200,
+                onImageUpload: function(files, editor, welEditable) {
+                    sendFile(files[0], editor, welEditable);
+                }
+            });
+
+            function sendFile(file, editor, welEditable) {
+                let data = new FormData();
+                data.append("file", file);
+                data.append("_token", "{{ csrf_token() }}");
+                $.ajax({
+                    data: data,
+                    type: "POST",
+                    url: "/upload/photo/summernote",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(url) {
+                        editor.insertImage(welEditable, url);
+                    }
+                });
+            }
+
+            document.getElementById("solardate").addEventListener("click", function() {
+                $(".ha-datetimepicker-container").css({top: -900});
+            });
+
+            document.getElementById("solardate2").addEventListener("click", function() {
+                $(".ha-datetimepicker-container").css({top: -900});
+            });
+
+        });
+    </script>
 @endsection

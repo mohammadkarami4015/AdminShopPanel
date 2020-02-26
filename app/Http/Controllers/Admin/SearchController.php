@@ -30,9 +30,13 @@ class SearchController extends Controller
 
     public function searchInAdmin(Request $request)
     {
-        $admins=User::where('phone_number','LIKE','%'.$request->value."%")
-            ->whereIn('type',['1','2'])
+        $admins=User::orWhere('phone_number','LIKE','%'.$request->value."%")
+            ->orWhere('name','LIKE','%'.$request->value."%")
+            ->orWhere('national_id','LIKE','%'.$request->value."%")
             ->orderBy('id','desc')
+            ->get();
+        $admins=User::whereIn('id',$admins->pluck("id"))
+            ->whereIn('type',['1','2'])
             ->get();
         $flag=true;
         return view('admin.searchInAdmins',compact('admins','flag'));
@@ -40,9 +44,13 @@ class SearchController extends Controller
 
     public function searchInUsers(Request $request)
     {
-        $users=User::where('phone_number','LIKE','%'.$request->value."%")
-            ->where('type','5')
+        $users=User::orWhere('phone_number','LIKE','%'.$request->value."%")
+            ->orWhere('name','LIKE','%'.$request->value."%")
+            ->orWhere('national_id','LIKE','%'.$request->value."%")
             ->orderBy('id','desc')
+            ->get();
+        $users=User::whereIn('id',$users->pluck("id"))
+            ->where('type','5')
             ->get();
         $flag=true;
         return view('user.searchInUsers',compact('users','flag'));
@@ -50,9 +58,12 @@ class SearchController extends Controller
 
     public function searchInFirstsTeachers(Request $request)
     {
-        $teachers=User::where('phone_number','LIKE','%'.$request->value."%")
+        $teachers=User::orWhere('phone_number','LIKE','%'.$request->value."%")
+            ->orWhere('name','LIKE','%'.$request->value."%")
+            ->orWhere('national_id','LIKE','%'.$request->value."%")
+            ->get();
+        $teachers=User::whereIn('id',$teachers->pluck("id"))
             ->where('type','3')
-            ->orderBy('id','desc')
             ->get();
         $flag=true;
         return view('teacher.searchInTeachers',compact('teachers','flag'));
@@ -60,9 +71,12 @@ class SearchController extends Controller
 
     public function searchInTeachers(Request $request)
     {
-        $teachers=User::where('phone_number','LIKE','%'.$request->value."%")
+        $teachers=User::orWhere('phone_number','LIKE','%'.$request->value."%")
+            ->orWhere('name','LIKE','%'.$request->value."%")
+            ->orWhere('national_id','LIKE','%'.$request->value."%")
+            ->get();
+        $teachers=User::whereIn('id',$teachers->pluck("id"))
             ->where('type','4')
-            ->orderBy('id','desc')
             ->get();
         $flag=true;
         return view('teacher.searchInTeachers',compact('teachers','flag'));

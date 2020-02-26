@@ -62,6 +62,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/show/all', 'Admin\AdminController@index')->name('admin.index');
     Route::get('/admin/create', 'Admin\AdminController@create')->name('admin.create');
     Route::post('/admin/store', 'Admin\AdminController@store')->name('admin.store');
+    Route::get('/profile/{user}/show', 'Admin\AdminController@profile')->name('admin.profile');
     Route::get('/edit/{user}', 'Admin\AdminController@editAdmins')->name('admin.editAdmins');
     Route::patch('/{user}', 'Admin\AdminController@updateAdmin')->name('admin.updateAdmin');
     Route::post('/admin/show/all/search', 'Admin\AdminController@search')->name('admin.search');

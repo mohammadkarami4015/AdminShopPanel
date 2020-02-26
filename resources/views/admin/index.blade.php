@@ -36,7 +36,7 @@
                         <h5> لیست مدیران</h5>
                     </div>
                     <div class="searchListDiv">
-                        <input class="form-control searchListInput" id="searchInput" type="text" placeholder="جستجو بر اساس شماره تلفن">
+                        <input class="form-control searchListInput" id="searchInput" type="text" placeholder="جستجو بر اساس نام یا شماره ملی یا شماره تلفن">
                         <button class="btn btn-primary btn-sm searchListBtn" id="search" >جستجو</button>
                     </div>
                     <div id="myTable" class="ibox-content table-responsive">
@@ -84,17 +84,28 @@
                                                     <div class="modal-body">
                                                         <div class="row">
                                                             <div class="col-md-10 col-md-offset-1">
+
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">عکس پروفایل</div>
+                                                                    @if($admin->photo)
+                                                                        <div id="myCarousel{{$admin->id}}" class="carousel slide" data-ride="carousel">
+                                                                            <!-- Wrapper for slides -->
+                                                                            <div class="carousel-inner">
+                                                                                <div class="item  active ">
+                                                                                    <img src="/{{$admin->photo}}" alt="" style="width:100%;">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif
+
+                                                                </div>
+
                                                                 <div class="panel panel-default">
                                                                     <div class="panel-heading">جزئیات</div>
                                                                     <div class="list-group">
                                                                         <a class="list-group-item">  نام: {{$admin->name}}</a>
                                                                         <a class="list-group-item">  کد ملی: {{$admin->national_id}}</a>
-                                                                        <a class="list-group-item">  شماره کارت: {{$admin->card_number}}</a>
-                                                                        <a class="list-group-item">  شبا: {{$admin->sheba}}</a>
-                                                                        <a class="list-group-item">  کد معرفی: {{$admin->ref_code}}</a>
-                                                                        <a class="list-group-item">  معرف: {{$admin->caller}}</a>
                                                                         <a class="list-group-item"> نوع: {{getTypeOfUser($admin->type)}}</a>
-                                                                        <a class="list-group-item"> سطح: {{getLevelOfUser($admin->level)}}</a>
                                                                         <a class="list-group-item">  درباره ی من: {{$admin->about_me}}</a>
                                                                     </div>
                                                                 </div>

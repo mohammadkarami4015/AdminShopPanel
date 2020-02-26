@@ -47,6 +47,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row">
+
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="panel panel-default">
                                             <div class="panel-heading"> اطلاعات مقاله</div>
@@ -62,10 +63,22 @@
                                             @endif
                                             <div class="list-group">
                                                 <a class="list-group-item">عنوان: {{$article->title}}</a>
-                                                <a class="list-group-item">توضیحات: {{$article->desc}}</a>
+                                                <a class="list-group-item">زیر عنوان: {{$article->sub_title}}</a>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">توضیحات</div>
+                                            <div class="list-group">
+                                                <pre class="preCustom">
+                                                    {!! $article->desc !!}
+                                                </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -79,8 +92,3 @@
     @endforeach
     </tbody>
 </table>
-@if(!$flag)
-    <div class="text-center">
-        {{ $articles->links() }}
-    </div>
-@endif

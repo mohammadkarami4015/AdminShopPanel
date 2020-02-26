@@ -53,13 +53,31 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1">
+
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">عکس پروفایل</div>
+                                            @if($user->photo)
+                                                <div id="myCarousel{{$user->id}}" class="carousel slide" data-ride="carousel">
+                                                    <!-- Wrapper for slides -->
+                                                    <div class="carousel-inner">
+                                                        <div class="item  active ">
+                                                            <img src="/{{$user->photo}}" alt="" style="width:100%;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+
+                                        </div>
+
                                         <div class="panel panel-default">
                                             <div class="panel-heading"> اطلاعات کاربر</div>
                                             <div class="list-group">
                                                 <a class="list-group-item">  نام: {{$user->name}}</a>
                                                 <a class="list-group-item">  کد ملی: {{$user->national_id}}</a>
-                                                <a class="list-group-item">  شماره کارت: {{$user->card_number}}</a>
-                                                <a class="list-group-item">  شبا: {{$user->sheba}}</a>
+                                                @can('teacher')
+                                                    <a class="list-group-item">  شماره کارت: {{$user->card_number}}</a>
+                                                    <a class="list-group-item">  شبا: {{$user->sheba}}</a>
+                                                @endcan
                                                 <a class="list-group-item">  معرف: {{$user->caller}}</a>
                                                 <a class="list-group-item"> سطح: {{getLevelOfUser($user->level)}}</a>
                                                 <a class="list-group-item">  درباره ی من: {{$user->about_me}}</a>

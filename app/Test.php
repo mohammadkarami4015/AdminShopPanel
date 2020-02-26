@@ -43,6 +43,7 @@ class Test extends Model
         $this->desc  = $request->desc;
         $this->type  = $request->type;
         $this->price  = $request->price;
+        $this->photo  = $request->file('photo')?makePhotoTypeFile($request->file('photo'),'test'):$this->photo;
         $this->save();
     }
 }

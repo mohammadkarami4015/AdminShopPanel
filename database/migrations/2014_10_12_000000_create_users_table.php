@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('ref_code')->nullable();
             $table->string('caller')->nullable();
             $table->string('photo')->nullable();
-            $table->string('about_me')->nullable();
+            $table->longText('about_me')->nullable();
             $table->string('level')->default('student')->nullable();
             $table->string('card_number')->nullable();
             $table->string('sheba')->nullable();

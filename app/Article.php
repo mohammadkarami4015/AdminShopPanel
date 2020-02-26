@@ -29,6 +29,7 @@ class Article extends Model
     public function saveAs($request)
     {
         $this->title = $request->title;
+        $this->sub_title = $request->sub_title;
         $this->user_id = $request->user()->id;
         $this->type= "1";
         $this->desc  = $request->desc;

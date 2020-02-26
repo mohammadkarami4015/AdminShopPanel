@@ -26,6 +26,11 @@
                     <a class="btn btn-sm btn-info"  href="{{ route('test.edit',['test'=>$test->id ]) }}">ویرایش</a>
                 </td>
             @endcan
+            {{--@can('create')--}}
+            <td>
+                <a class="btn btn-sm btn-info"  href="{{ route('question.index2',['test'=>$test->id ]) }}"> سوالات</a>
+            </td>
+            {{--@endcan--}}
             @can('delete')
                 <td>
                     <form class="deleteForm" method="post" action="{{ route('test.destroy',['test'=>$test->id ]) }}">
@@ -51,19 +56,27 @@
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">جزئیات</div>
+                                            <div class="panel-heading">عکس</div>
                                             @if($test->photo)
                                                 <div id="myCarousel{{$test->id}}" class="carousel slide" data-ride="carousel">
                                                     <!-- Wrapper for slides -->
                                                     <div class="carousel-inner">
                                                         <div class="item  active ">
-                                                            <img src="/{{$test->photo}}" alt="Los Angeles" style="width:100%;">
+                                                            <img src="/{{$test->photo}}" alt="" style="width:100%;">
                                                         </div>
                                                     </div>
                                                 </div>
                                             @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">توضیحات</div>
                                             <div class="list-group">
-                                                <a class="list-group-item">  توضیحات: {{$test->desc}}</a>
+                                                                        <pre class="preCustom">
+                                                                            {!! $test->desc !!}
+                                                                        </pre>
                                             </div>
                                         </div>
                                     </div>
@@ -80,8 +93,3 @@
     @endforeach
     </tbody>
 </table>
-@if(!$flag)
-    <div class="text-center">
-        {{ $tests->links() }}
-    </div>
-@endif

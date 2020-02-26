@@ -53,6 +53,21 @@
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="panel panel-default">
+                                            <div class="panel-heading">عکس</div>
+                                            @if($teacher->photo)
+                                                <div id="myCarousel{{$teacher->id}}" class="carousel slide" data-ride="carousel">
+                                                    <!-- Wrapper for slides -->
+                                                    <div class="carousel-inner">
+                                                        <div class="item  active ">
+                                                            <img src="/{{$teacher->photo}}" alt="Los Angeles" style="width:100%;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="panel panel-default">
                                             <div class="panel-heading"> اطلاعات کاربر</div>
                                             <div class="list-group">
                                                 <a class="list-group-item">  نام: {{$teacher->name}}</a>
@@ -61,7 +76,16 @@
                                                 <a class="list-group-item">  شبا: {{$teacher->sheba}}</a>
                                                 <a class="list-group-item">  معرف: {{$teacher->caller}}</a>
                                                 <a class="list-group-item"> سطح: {{getLevelOfUser($teacher->level)}}</a>
-                                                <a class="list-group-item">  درباره ی من: {{$teacher->about_me}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">درباره ی من</div>
+                                            <div class="list-group">
+                                                <pre class="preCustom">
+                                                    {!! $teacher->about_me !!}
+                                                </pre>
                                             </div>
                                         </div>
                                     </div>

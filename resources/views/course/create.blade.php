@@ -8,6 +8,30 @@
     active
 @endsection
 
+
+@section('header')
+    <link href="{{asset('css/plugins/summernote/summernote.css')}}" rel="stylesheet">
+    <link href="{{asset('css/plugins/summernote/summernote-bs3.css')}}" rel="stylesheet">
+    <style>
+        .note-editor .note-editable{
+            background-color: #f8f8ffa1;
+            border: 1px solid lightgray;
+            border-top: 0 solid;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            min-height: 250px;
+        }
+        .note-editor .note-toolbar {
+            border: 1px solid lightgray;
+            border-bottom: 0 solid;
+            border-top-right-radius:5px;
+            border-top-left-radius:5px;
+            padding-bottom: 15px;
+            background-color: #1ab394;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
@@ -75,18 +99,17 @@
                             <div class="col-md-6">
                                 <select  class="form-control" name="type" id="type" required>
                                     <option disabled selected>انتخاب نوع</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    <option value="1">مربی</option>
+                                    <option value="2">استادیار</option>
+                                    <option value="3">دانشیار</option>
+                                    <option value="4">استاد</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
-                            <label for="desc" class="col-md-4 control-label">توضیحات</label>
-                            <div class="col-md-6">
-                                <textarea name="desc" id="desc" cols="50" rows="10">{{ old('desc')}}</textarea>
+                            <label for="desc" class="col-md-4 col-md-push-3 control-label">توضیحات  </label>
+                            <div class="col-md-12">
+                                <textarea name="desc" id="summernote" cols="50" rows="10">{{ old('desc')}}</textarea>
                                 @if ($errors->has('desc'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('desc') }}</strong>
@@ -108,5 +131,43 @@
     </div>
 @endsection
 @section('footer')
-    <script src="{!! asset('js/materialize.min.js') !!}"></script>
+    <script src="{!! asset('js/plugins/summernote/summernote.min.js') !!}"></script>
+    <script>
+        $(document).ready(function(){
+
+            $(".summernote").summernote({
+
+                onChange: function () {
+                    $('.note-editor').find('textarea').attr('name', 'value');
+
+                    $('.note-codable').text($('.note-editable').html());
+                }
+            });
+            $(".summernote").trigger('summernote.change');
+
+            $('#summernote').summernote({
+                height: 200,
+                onImageUpload: function(files, editor, welEditable) {
+                    sendFile(files[0], editor, welEditable);
+                }
+            });
+
+            function sendFile(file, editor, welEditable) {
+                let data = new FormData();
+                data.append("file", file);
+                data.append("_token", "{{ csrf_token() }}");
+                $.ajax({
+                    data: data,
+                    type: "POST",
+                    url: "/upload/photo/summernote",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(url) {
+                        editor.insertImage(welEditable, url);
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

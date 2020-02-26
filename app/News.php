@@ -32,6 +32,7 @@ class News extends Model
     public function saveAs($request)
     {
         $this->title = $request->title;
+        $this->sub_title = $request->sub_title ;
         $this->user_id = $request->user()->id;
         $this->type= "2";
         $this->desc  = $request->desc;

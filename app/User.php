@@ -59,10 +59,12 @@ class User extends Authenticatable
     {
         $admin = new User();
         $admin->saveAs($request);
-        foreach ($admin->roles as $role){
-            $admin->roles()->detach($role->id);
+        if ($request->role){
+            foreach ($admin->roles as $role){
+                $admin->roles()->detach($role->id);
+            }
+            $admin->roles()->attach($request->role);
         }
-        $admin->roles()->attach($request->role);
         return $admin;
     }
 
@@ -72,12 +74,13 @@ class User extends Authenticatable
         $this->name       = $request->name;
         $this->phone_number       = $request->phone_number;
         $this->email       = $request->email;
-        $this->type       = $request->type;
+        $this->type       = $request->type?$request->type:$this->type;
+        $this->level= $request->level?$request->level:$this->level;
         $this->about_me= $request->about_me;
-        $this->level= $request->level;
         $this->card_number= $request->card_number;
         $this->sheba= $request->sheba;
         $this->national_id= $request->national_id;
+        $this->photo  = $request->file('photo')?makePhotoTypeFile($request->file('photo'),'profile'):$this->photo;
         if ($request->password){
             $this->password       = bcrypt($request->password);
         }
@@ -88,10 +91,12 @@ class User extends Authenticatable
     {
         $admin = User::find($id);
         $admin->saveAsForUpdate($request);
-        foreach ($admin->roles as $role){
-            $admin->roles()->detach($role->id);
+        if ($request->role){
+            foreach ($admin->roles as $role){
+                $admin->roles()->detach($role->id);
+            }
+            $admin->roles()->attach($request->role);
         }
-        $admin->roles()->attach($request->role);
         return $admin;
     }
 
@@ -100,12 +105,13 @@ class User extends Authenticatable
         $this->name       = $request->name;
         $this->phone_number       = $request->phone_number;
         $this->email       = $request->email;
-        $this->type       = $request->type;
+        $this->type       = $request->type?$request->type:$this->type;
+        $this->level= $request->level?$request->level:$this->level;
         $this->about_me= $request->about_me;
-        $this->level= $request->level;
         $this->card_number= $request->card_number;
         $this->sheba= $request->sheba;
         $this->national_id= $request->national_id;
+        $this->photo  = $request->file('photo')?makePhotoTypeFile($request->file('photo'),'profile'):$this->photo;
         if ($request->password){
             $this->password       = bcrypt($request->password);
         }
@@ -116,10 +122,12 @@ class User extends Authenticatable
     {
         $user = User::find($id);
         $user->saveAsForUpdate($request);
-        foreach ($user->roles as $role){
-            $user->roles()->detach($role->id);
+        if ($request->role){
+            foreach ($user->roles as $role){
+                $user->roles()->detach($role->id);
+            }
+            $user->roles()->attach($request->role);
         }
-        $user->roles()->attach($request->role);
         return $user;
     }
 
@@ -128,12 +136,13 @@ class User extends Authenticatable
         $this->name       = $request->name;
         $this->phone_number       = $request->phone_number;
         $this->email       = $request->email;
-        $this->type       = $request->type;
+        $this->type       = $request->type?$request->type:$this->type;
+        $this->level= $request->level?$request->level:$this->level;
         $this->about_me= $request->about_me;
-        $this->level= $request->level;
         $this->card_number= $request->card_number;
         $this->sheba= $request->sheba;
         $this->national_id= $request->national_id;
+        $this->photo  = $request->file('photo')?makePhotoTypeFile($request->file('photo'),'profile'):$this->photo;
         if ($request->password){
             $this->password       = bcrypt($request->password);
         }
@@ -144,10 +153,12 @@ class User extends Authenticatable
     {
         $teacher = User::find($id);
         $teacher->saveAsForUpdate($request);
-        foreach ($teacher->roles as $role){
-            $teacher->roles()->detach($role->id);
+        if ($request->role){
+            foreach ($teacher->roles as $role){
+                $teacher->roles()->detach($role->id);
+            }
+            $teacher->roles()->attach($request->role);
         }
-        $teacher->roles()->attach($request->role);
         return $teacher;
     }
 
@@ -162,6 +173,7 @@ class User extends Authenticatable
         $this->card_number= $request->card_number;
         $this->sheba= $request->sheba;
         $this->national_id= $request->national_id;
+        $this->photo  = $request->file('photo')?makePhotoTypeFile($request->file('photo'),'profile'):$this->photo;
         if ($request->password){
             $this->password       = bcrypt($request->password);
         }

@@ -47,7 +47,7 @@
                                 <th>دانشجو</th>
                                 <th>زمان انتخابی</th>
                                 <th>تاریخ ثبت</th>
-                                <th>وضعیت پرداخت</th>
+                                @can('super_admin')<th>وضعیت پرداخت</th>@endcan
                             </tr>
                             </thead>
                             <tbody >
@@ -57,6 +57,7 @@
                                     <td>@if($c_s->user){{$c_s->user->name}}@endif</td>
                                     <td>{{$c_s->time}}</td>
                                     <td>{{jalaliFormat($c_s->created_at)}}</td>
+                                    @can('super_admin')
                                     <td>
                                         <div class="switch">
                                             <label>
@@ -65,6 +66,7 @@
                                             </label>
                                         </div>
                                     </td>
+                                    @endcan
                                     @can('delete')
                                         <td>
                                             <form class="deleteForm" method="post" action="{{ route('submit.destroy',['submit'=>$c_s->id ]) }}">
@@ -80,9 +82,11 @@
                                             <a  class="btn btn-sm btn-info" href="{{ route('submit.edit',['submit'=>$c_s->id ]) }}">ویرایش</a>
                                         </td>
                                     @endcan
+                                    @if(Gate::check('teacher') || Gate::check('super_admin'))
                                     <td>
                                         <a  class="btn btn-sm btn-info" href="{{ route('student.storeTow',['id'=>$c_s->id ]) }}">افزودن به کلاس</a>
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>
