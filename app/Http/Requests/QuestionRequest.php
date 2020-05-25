@@ -22,12 +22,10 @@ class QuestionRequest extends FormRequest
     {
         return [
             'test_id'       => 'string|required',
-            'title'       => 'string|required',
             'question'       => 'string|required|max:500',
-            'answer1'       => 'string|required|max:500',
-            'answer2'       => 'string|required|max:500',
-            'answer3'       => 'string|nullable|max:500',
-            'answer4'       => 'string|nullable|max:500',
+            'answers'       => 'array|required|max:500',
+            'values'       => 'array|required|max:500',
+            'valuex'       => 'array|nullable|max:500',
         ];
     }
 }

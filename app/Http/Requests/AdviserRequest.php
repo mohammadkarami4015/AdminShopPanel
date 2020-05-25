@@ -25,7 +25,7 @@ class AdviserRequest extends FormRequest
             'telegram' => 'string|max:255|nullable',
             'type' => 'string|max:255|nullable',
             'old' => 'string|max:255|nullable',
-            'description' => 'string|max:500|nullable',
+            'description' => 'stringnullable',
             'cv' => 'string|max:500|nullable',
             'status' => 'string|max:255|nullable',
         ];

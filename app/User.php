@@ -41,6 +41,11 @@ class User extends Authenticatable
         return $this->hasMany(CourseSubmit::class);
     }
 
+    public function userTests()
+    {
+        return $this->hasMany(UserTest::class);
+    }
+
     public function courseStudents()
     {
         return $this->hasMany(CourseStudent::class);

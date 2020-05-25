@@ -70,15 +70,13 @@ function getTestType($str){
 
     switch ($str) {
         case "1":
-            return "1";
+            return "دو گزینه ای";
         case "2":
-            return "2";
+            return "چهار گزینه ای (دو انتخابی)";
         case "3":
-            return "3";
+            return "پنج گزینه ای";
         case "4":
-            return "4";
-        case "5":
-            return "5";
+            return "هشت نمره ای";
         default:
             return "نامعلوم";
     }

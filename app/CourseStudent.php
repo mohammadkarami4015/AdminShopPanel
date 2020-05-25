@@ -26,7 +26,7 @@ class CourseStudent extends Model
     public static function addNew($id)
     {
         $c_submit= CourseSubmit::find($id);
-        if (! CourseStudent::where('user_id',$c_submit->user_id)->first()){
+        if (! CourseStudent::where('user_id',$c_submit->user_id)->where('present_course_id',$c_submit->present_course_id)->first()){
             $c_student=new CourseStudent();
             $c_student->mark  = null;
             $c_student->time  = $c_submit->time;

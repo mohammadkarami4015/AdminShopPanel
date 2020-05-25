@@ -23,6 +23,11 @@ class Test extends Model
         return $this->hasMany(Result::class);
     }
 
+    public function userTests()
+    {
+        return $this->hasMany(UserTest::class);
+    }
+
     public static function createNew(TestRequest $request)
     {
         $test = new Test();

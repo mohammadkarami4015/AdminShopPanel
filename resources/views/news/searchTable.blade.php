@@ -71,9 +71,7 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">توضیحات</div>
                                             <div class="list-group">
-                                                                        <pre class="preCustom">
-                                                                            {!! $news->desc !!}
-                                                                        </pre>
+                                                {!! $news->desc !!}
                                             </div>
                                         </div>
                                     </div>

@@ -29,29 +29,31 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+        <div class="col-md-10 col-md-offset-1 ">
             <div class="ibox">
                 <div class="ibox-content">
                     <form  method="POST" id="form" action="{{ route('question.update',['question'=>$question->id ]) }}" class="form-horizontal" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {{method_field('PATCH')}}
-                        <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">عنوان</label>
-
+                        {{--<div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                            <label for="type" class="col-md-4 control-label"> نوع</label>
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="title" value="{{ $question->title}}" required >
-                                <input id="test_id" type="hidden" class="form-control" name="test_id" value="{{$question->test_id}}" required >
-                            @if ($errors->has('title'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('title') }}</strong>
-                                    </span>
-                                @endif
+                                <select onchange="changeType(this)"  class="form-control" name="type" id="type">
+                                    <option value="1" @if($question->type=="1") selected @endif>دو گزینه ای</option>
+                                    <option value="2" @if($question->type=="2") selected @endif> چهار گزینه ای (دو انتخابی) </option>
+                                    <option value="3" @if($question->type=="3") selected @endif>پنج گزینه ای</option>
+                                    <option value="4" @if($question->type=="4") selected @endif>هشت نمره ای</option>
+                                </select>
                             </div>
-                        </div>
+                        </div>--}}
+
+                        <input id="test_id" type="hidden" class="form-control" name="test_id" value="{{$question->test_id}}" >
+
+
                         <div class="form-group{{ $errors->has('question') ? ' has-error' : '' }}">
-                            <label for="question" class="col-md-4 control-label">سوال</label>
+                            <label for="question" class="col-md-2 control-label">سوال</label>
                             <div class="col-md-6">
-                                <textarea name="question" id="question" cols="50" rows="5">{{ $question->question}}</textarea>
+                                <textarea name="question" id="question" cols="50" rows="2">{{ $question->question}}</textarea>
                                 @if ($errors->has('question'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('question') }}</strong>
@@ -59,50 +61,30 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('answer1') ? ' has-error' : '' }}">
-                            <label for="answer1" class="col-md-4 control-label">گزینه اول</label>
-                            <div class="col-md-6">
-                                <textarea name="answer1" id="answer1" cols="50" rows="5">{{ $question->answer1}}</textarea>
-                                @if ($errors->has('answer1'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('answer1') }}</strong>
+
+                        @foreach(explode(";",$question->answers) as $key => $answer)
+                            <div id="typeOne1" class="form-group{{ $errors->has('answers') ? ' has-error' : '' }}">
+                                <label for="answers" class="col-md-2 control-label">گزینه {{$key+1}}</label>
+                                <div class="col-md-5">
+                                    <input id="answers[]" type="text" class="form-control" name="answers[]" value="{{$answer}}" >
+
+                                    @if ($errors->has('answers'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('answers') }}</strong>
                                     </span>
+                                    @endif
+                                </div>
+                                <div class="col-md-2">
+                                    <input id="values[]" type="text" class="form-control" name="values[]"  value="{{explode(";",$question->values)[$key]}}" placeholder="ارزش"  >
+                                </div>
+                                @if($question->type=="2")
+                                    <div class="col-md-2">
+                                        <input id="valuex[]" type="text" class="form-control" name="valuex[]" value="{{explode(";",$question->valuex)[$key]}}" placeholder="ارزش"  >
+                                    </div>
                                 @endif
                             </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('answer2') ? ' has-error' : '' }}">
-                            <label for="answer2" class="col-md-4 control-label">گزینه دوم</label>
-                            <div class="col-md-6">
-                                <textarea name="answer2" id="answer2" cols="50" rows="5">{{ $question->answer2}}</textarea>
-                                @if ($errors->has('answer2'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('answer2') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('answer3') ? ' has-error' : '' }}">
-                            <label for="answer3" class="col-md-4 control-label">گزینه سوم</label>
-                            <div class="col-md-6">
-                                <textarea name="answer3" id="answer3" cols="50" rows="5">{{ $question->answer3}}</textarea>
-                                @if ($errors->has('answer3'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('answer3') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('answer4') ? ' has-error' : '' }}">
-                            <label for="answer4" class="col-md-4 control-label">گزینه چهارم</label>
-                            <div class="col-md-6">
-                                <textarea name="answer4" id="answer4" cols="50" rows="5">{{ $question->answer4}}</textarea>
-                                @if ($errors->has('answer4'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('answer4') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                        @endforeach
+
                         <div class="row">
                             <div class="col-lg-6 col-md-offset-3">
                                 <button type="submit" class="btn btn-primary">

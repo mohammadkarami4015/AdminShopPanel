@@ -35,10 +35,12 @@
                     <div class="ibox-title">
                         <h5> لیست پرداخت ها</h5>
                     </div>
-                    <div style="display: flex;justify-content: center;flex-direction: row;background-color: white;">
-                        <input style="margin-top: 10px;margin-bottom: 15px;margin-right: 5px;" class="form-control" id="searchInput" type="text" placeholder="جستجو بر اساس عنوان دوره یا نام کاربر یا عنوان تست یا مبلغ ">
-                        <button class="btn btn-primary btn-sm" style="margin-right: 5px;height: 33px;margin-top: 10px;margin-left: 5px;" id="search" >جستجو</button>
-                    </div>
+                    @if(Gate::check('super_admin') || Gate::check('admin'))
+                        <div style="display: flex;justify-content: center;flex-direction: row;background-color: white;">
+                            <input style="margin-top: 10px;margin-bottom: 15px;margin-right: 5px;" class="form-control" id="searchInput" type="text" placeholder="جستجو بر اساس عنوان دوره یا نام کاربر یا عنوان تست یا مبلغ ">
+                            <button class="btn btn-primary btn-sm" style="margin-right: 5px;height: 33px;margin-top: 10px;margin-left: 5px;" id="search" >جستجو</button>
+                        </div>
+                    @endif
                     <div id="myTable"  class="ibox-content table-responsive">
                         <table class="table table-responsive">
                             <thead>

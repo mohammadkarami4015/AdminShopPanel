@@ -45,7 +45,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>عنوان</th>
-                                {{--<th>نوع </th>--}}
+                                <th>نوع </th>
                                 <th>وضعیت </th>
                             </tr>
                             </thead>
@@ -54,7 +54,7 @@
                                 <tr>
                                     <td>{{$test->id}}</td>
                                     <td>{{$test->title}}</td>
-                                    {{--<td>{{getTestType($test->type)}}</td>--}}
+                                    <td>{{getTestType($test->type)}}</td>
                                     <td>
                                         <div class="switch">
                                             <label>
@@ -116,9 +116,7 @@
                                                                 <div class="panel panel-default">
                                                                     <div class="panel-heading">توضیحات</div>
                                                                     <div class="list-group">
-                                                                        <pre class="preCustom">
-                                                                            {!! $test->desc !!}
-                                                                        </pre>
+                                                                        {!! $test->desc !!}
                                                                     </div>
                                                                 </div>
                                                             </div>

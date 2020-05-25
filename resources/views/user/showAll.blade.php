@@ -120,6 +120,7 @@
                                                                             <a class="list-group-item">  شماره کارت: {{$user->card_number}}</a>
                                                                             <a class="list-group-item">  شبا: {{$user->sheba}}</a>
                                                                         @endcan
+                                                                        <a class="list-group-item"> کد معرفی: {{"ATBTEST".$user->id}}</a>
                                                                         <a class="list-group-item">  معرف: {{$user->caller}}</a>
                                                                         <a class="list-group-item"> سطح: {{getLevelOfUser($user->level)}}</a>
                                                                         <a class="list-group-item">  درباره ی من: {{$user->about_me}}</a>

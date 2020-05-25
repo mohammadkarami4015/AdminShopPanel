@@ -81,6 +81,31 @@
                         </ul>
                     </li>
                 @endcan
+                @can('teacher')
+                    <li class="@yield('teacher')" >
+                        <a><i class="fa fa-user"></i> <span class="nav-label">اطلاعات من</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a  href=" {{route('teacher.myProfile')}}">اطلاعات کاربری</a></li>
+                            <li><a  href=" {{route('teacher.myCourse')}}">لیست دوره های ارائه شده من</a></li>
+                            <li><a  href=" {{route('teacher.myRequest')}}">لیست درخواست وجه من</a></li>
+                            <li><a  href=" {{route('teacher.myTest')}}">آزمون های من</a></li>
+                            <li><a  href=" {{route('teacher.educationalTree')}}">درخت آموزشی</a></li>
+                            <li><a  href=" {{route('user.userEducationalStatus')}}">وضعیت آموزشی  </a></li>
+                        </ul>
+                    </li>
+                @endcan
+                @can('student')
+                    <li class="@yield('student')" >
+                        <a><i class="fa fa-user"></i> <span class="nav-label">اطلاعات من</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a  href=" {{route('user.myProfile')}}">اطلاعات کاربری</a></li>
+                            <li><a  href=" {{route('user.mySubmits')}}">لیست ثبت نام اولیه من</a></li>
+                            <li><a  href=" {{route('user.myCourse')}}">کلاس های من</a></li>
+                            <li><a  href=" {{route('user.myTest')}}">آزمون های من</a></li>
+                            <li><a  href=" {{route('user.userEducationalStatus')}}">وضعیت آموزشی  </a></li>
+                        </ul>
+                    </li>
+                @endcan
                 @if(Gate::check('super_admin') || Gate::check('admin'))
                     <li class="@yield('users')" >
                         <a><i class="fa fa-users"></i> <span class="nav-label">کاربران </span> <span class="fa arrow"></span></a>
@@ -123,23 +148,12 @@
                             <li><a  href="{{route('present.create')}}">ارائه دوره جدید</a></li>
                         </ul>
                     </li>
-                    <li class="@yield('payment')" >
-                        <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">پرداخت ها</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a  href="{{route('payment.index')}}"> لیست پرداخت ها</a></li>
-                        </ul>
-                    </li>
-                    <li class="@yield('financial')" >
-                        <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">درخواست وجه</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a  href="{{route('financial.create')}}">درخواست وجه</a></li>
-                            <li><a  href="{{route('financial.index')}}"> لیست درخواست وجه</a></li>
-                        </ul>
-                    </li>
+
                     <li class="@yield('clearing')" >
                         <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">پرداخت وجه</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a  href="{{route('clearing.index')}}"> لیست پرداخت وجه</a></li>
+                            <li><a  href="{{route('clearing.create')}}"> لیست پرداخت وجه</a></li>
                         </ul>
                     </li>
                     <li class="@yield('messages')" >
@@ -170,7 +184,20 @@
                             <li><a  href="{{route('news.create')}}">ثبت خبر جدید</a></li>
                         </ul>
                     </li>
+                    <li class="@yield('financial')" >
+                        <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">درخواست وجه</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a  href="{{route('financial.create')}}">درخواست وجه</a></li>
+                            <li><a  href="{{route('financial.index')}}"> لیست درخواست وجه</a></li>
+                        </ul>
+                    </li>
                 @endif
+                <li class="@yield('payment')" >
+                    <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">پرداخت ها</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a  href="{{route('payment.index')}}"> لیست پرداخت ها</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>

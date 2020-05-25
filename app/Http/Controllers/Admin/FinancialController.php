@@ -31,7 +31,7 @@ class FinancialController extends Controller
     {
         if (Gate::check('teacher')){
             $financials=Financial::where('user_id',auth()->user()->id)->orderBy('id','desc')->paginate(20);
-        }elseif (Gate::check('super_admin')){
+        }elseif (Gate::check('super_admin') || Gate::check('admin')){
             $financials=Financial::orderBy('id','desc')->paginate(20);
         }
 
@@ -64,7 +64,11 @@ class FinancialController extends Controller
         $financial=Financial::find($id);
         $financial->update($request->only(['amount', 'card_number','sheba']));
         flash()->success('success', 'عملیات با موفقیت انجام شد!');
-        return redirect()->route('financial.index');
+        if ($financial->user->type=="3" || $financial->user->type=="4"){
+            return redirect()->route('teacher.myRequest');
+        }else{
+            return redirect()->route('financial.index');
+        }
     }
 
     public function destroy($id)

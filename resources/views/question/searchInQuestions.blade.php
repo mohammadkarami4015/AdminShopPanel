@@ -2,7 +2,7 @@
     <thead>
     <tr>
         <th>#</th>
-        <th>عنوان</th>
+        {{--<th>عنوان</th>--}}
         <th>سوال </th>
         <th>وضعیت </th>
     </tr>
@@ -11,7 +11,7 @@
     @foreach($questions as $question)
         <tr>
             <td>{{$question->id}}</td>
-            <td>{{$question->title}}</td>
+            {{--<td>{{$question->title}}</td>--}}
             <td>{{$question->question}}</td>
             <td>
                 <div class="switch">
@@ -36,7 +36,7 @@
                     </form>
                 </td>
             @endcan
-            <td>
+            {{--<td>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter{{$question->id}}">
                     جزئیات
                 </button>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-            </td>
+            </td>--}}
         </tr>
     @endforeach
     </tbody>

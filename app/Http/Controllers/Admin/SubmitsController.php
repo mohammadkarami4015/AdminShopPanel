@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Course;
+use App\CourseStudent;
 use App\CourseSubmit;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseSubmitRequest;
@@ -32,8 +33,9 @@ class SubmitsController extends Controller
     public function index2($present_course_id)
     {
         $c_ses=CourseSubmit::where('present_course_id',$present_course_id)->orderBy('id','desc')->paginate(20);
+        $c_stes=CourseStudent::where('present_course_id',$present_course_id)->get()->pluck("user_id")->toArray();
         $flag=false;
-        return view('submit.index',compact('c_ses','flag'));
+        return view('submit.index',compact('c_ses',"c_stes",'flag'));
     }
 
 

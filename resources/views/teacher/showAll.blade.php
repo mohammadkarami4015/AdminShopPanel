@@ -116,6 +116,7 @@
                                                                         <a class="list-group-item">  کد ملی: {{$teacher->national_id}}</a>
                                                                         <a class="list-group-item">  شماره کارت: {{$teacher->card_number}}</a>
                                                                         <a class="list-group-item">  شبا: {{$teacher->sheba}}</a>
+                                                                        <a class="list-group-item"> کد معرفی: {{"ATBTEST".$teacher->id}}</a>
                                                                         <a class="list-group-item">  معرف: {{$teacher->caller}}</a>
                                                                         <a class="list-group-item"> سطح: {{getLevelOfUser($teacher->level)}}</a>
                                                                     </div>
@@ -125,9 +126,7 @@
                                                                 <div class="panel panel-default">
                                                                     <div class="panel-heading">درباره ی من</div>
                                                                     <div class="list-group">
-                                                                        <pre class="preCustom">
-                                                                            {!! $teacher->about_me !!}
-                                                                        </pre>
+                                                                        {!! $teacher->about_me !!}
                                                                     </div>
                                                                 </div>
                                                             </div>

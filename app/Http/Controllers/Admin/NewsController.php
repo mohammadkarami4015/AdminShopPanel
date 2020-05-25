@@ -8,6 +8,7 @@ use App\Http\Requests\NewsRequest;
 use App\News;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class NewsController extends Controller
 {
@@ -28,7 +29,11 @@ class NewsController extends Controller
 
     public function index()
     {
-        $newses=News::orderBy('id','desc')->where('type','2')->paginate(20);
+        if (Gate::check('teacher')){
+            $newses=News::where('user_id',auth()->user()->id)->where('type','2')->orderBy('id','desc')->paginate(20);
+        }elseif (Gate::check('super_admin') || Gate::check('admin') ){
+            $newses=News::orderBy('id','desc')->where('type','2')->paginate(20);
+        }
         $flag=false;
         return view('news.index',compact('newses','flag'));
     }

@@ -72,9 +72,7 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">توضیحات</div>
                                             <div class="list-group">
-                                                <pre class="preCustom">
-                                                    {!! $article->desc !!}
-                                                </pre>
+                                                {!! $article->desc !!}
                                             </div>
                                         </div>
                                     </div>

@@ -1,3 +1,35 @@
+
+.imgEdTree {
+    height: 50px;
+    width: 50px;
+    border-radius: 37px;
+    box-shadow: 0px 1px 4px 0px grey;
+}
+
+.btn-accepted {
+    height: 50px;
+    border-radius: 37px;
+    box-shadow: 0px 1px 4px 0px grey;
+    background-color: #17b718;
+    color: white;
+    padding: 4px 15px;
+    pointer-events: none
+}
+
+.height-70 {
+    height: 70px;
+}
+
+.btn-not-accepted {
+    height: 50px;
+    border-radius: 37px;
+    box-shadow: 0px 1px 4px 0px grey;
+    background-color: #eee;
+    color: #676a6c;
+    padding: 4px 15px;
+    pointer-events: none;
+}
+
 .adminProfile {
     height:100px;
     width:100px;

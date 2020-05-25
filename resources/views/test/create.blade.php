@@ -94,18 +94,18 @@
                                 @endif
                             </div>
                         </div>
-                        {{--<div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                             <label for="type" class="col-md-4 control-label">نوع</label>
                             <div class="col-md-6">
                                 <select  class="form-control" name="type" id="type" required>
                                     <option disabled selected>انتخاب نوع</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
+                                    <option value="1">دو گزینه ای</option>
+                                    <option value="2">چهار گزینه ای (دو انتخابی)</option>
+                                    <option value="3">پنج گزینه ای</option>
+                                    <option value="4">هشت نمره ای</option>
                                 </select>
                             </div>
-                        </div>--}}
+                        </div>
                         <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
                             <label for="desc" class="col-md-4 col-md-push-3 control-label">توضیحات  </label>
                             <div class="col-md-12">

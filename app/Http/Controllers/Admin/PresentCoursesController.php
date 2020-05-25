@@ -30,7 +30,7 @@ class PresentCoursesController extends Controller
     {
         if (Gate::check('teacher')){
             $p_ces=PresentCourse::where('user_id',auth()->user()->id)->orderBy('id','desc')->paginate(20);
-        }elseif (Gate::check('super_admin')){
+        }elseif (Gate::check('super_admin') || Gate::check('admin') ){
             $p_ces=PresentCourse::orderBy('id','desc')->paginate(20);
         }
         $flag=false;
@@ -48,9 +48,13 @@ class PresentCoursesController extends Controller
 
     public function store(PresentCourseRequest $request)
     {
-        PresentCourse::createNew($request);
+        $p_c=PresentCourse::createNew($request);
         flash()->success('success', 'عملیات با موفقیت انجام شد!');
-        return redirect()->route('present.index');
+        if ($p_c->user->type=="3" || $p_c->user->type=="4"){
+            return redirect()->route('teacher.myCourse');
+        }else{
+            return redirect()->route('present.index');
+        }
     }
 
     public function edit($id)
@@ -62,9 +66,13 @@ class PresentCoursesController extends Controller
 
     public function update(PresentCourseRequest $request,$id)
     {
-        PresentCourse::updateInstance($request,$id);
+        $p_c=PresentCourse::updateInstance($request,$id);
         flash()->success('success', 'عملیات با موفقیت انجام شد!');
-        return redirect()->route('present.index');
+        if ($p_c->user->type=="3" || $p_c->user->type=="4"){
+            return redirect()->route('teacher.myCourse');
+        }else{
+            return redirect()->route('present.index');
+        }
     }
 
     public function destroy($id)

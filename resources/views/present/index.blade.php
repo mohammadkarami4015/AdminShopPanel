@@ -46,6 +46,7 @@
                                 <th>#</th>
                                 <th>عنوان</th>
                                 <th>استاد</th>
+                                <th>نوع</th>
                                 <th>تاریخ اتمام ثبت نام</th>
                                 <th>تاریخ شروع کلاس ها</th>
                                 <th>ظرفیت</th>
@@ -58,6 +59,7 @@
                                     <td>{{$p_c->id}}</td>
                                     <td>@if($p_c->course){{$p_c->course->title}}@endif</td>
                                     <td>@if($p_c->user){{$p_c->user->name.' '.$p_c->user->last_name}}@endif</td>
+                                    <td>@if($p_c->course){{getCourseType($p_c->course->type)}}@endif</td>
                                     <td>{{$p_c->start_date}}</td>
                                     <td>{{$p_c->submit_date}}</td>
                                     <td>{{$p_c->capacity}}</td>

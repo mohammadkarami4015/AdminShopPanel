@@ -55,9 +55,7 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">پاسخ</div>
                                             <div class="list-group">
-                                                <pre class="preCustom">
-                                                    {!! $result->value !!}
-                                                </pre>
+                                                {!! $result->value !!}
                                             </div>
                                         </div>
                                     </div>

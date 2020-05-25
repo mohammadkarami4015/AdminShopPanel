@@ -84,7 +84,7 @@
                                     @endcan
                                     @if(Gate::check('teacher') || Gate::check('super_admin'))
                                     <td>
-                                        <a  class="btn btn-sm btn-info" href="{{ route('student.storeTow',['id'=>$c_s->id ]) }}">افزودن به کلاس</a>
+                                        <a @if(in_array($c_s->user_id, $c_stes)) disabled @endif class="btn btn-sm btn-info" href="{{ route('student.storeTow',['id'=>$c_s->id ]) }}">افزودن به کلاس</a>
                                     </td>
                                     @endif
                                 </tr>

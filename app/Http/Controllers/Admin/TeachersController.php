@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\CourseStudent;
 use App\Http\Requests\TeacherUpdateRequest;
+use App\PresentCourse;
+use App\Result;
 use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
+use App\UserTest;
+use Illuminate\Http\Request;
 
 class TeachersController extends Controller
 {
@@ -52,10 +57,10 @@ class TeachersController extends Controller
     {
         $teacher= User::updateTeacherInstance($request,$id);
         flash()->success('success', 'عملیات با موفقیت انجام شد!');
-        if ($teacher->type=="3"){
-            return redirect()->route('teacher.index');
+        if ($teacher->type=="3" || $teacher->type=="4"){
+            return redirect()->route('teacher.myProfile');
         }else{
-            return redirect()->route('teacher.index2');
+            return redirect()->route('teacher.index1');
         }
     }
 
@@ -66,5 +71,59 @@ class TeachersController extends Controller
         return back();
 
     }
+
+
+    public function myProfile(Request $request)
+    {
+        $teacher = User::where('id',$request->user()->id)->first();
+        $flag=false;
+        return view('teacher.myProfile',compact('teacher','flag'));
+    }
+
+    public function myRequest(Request $request)
+    {
+        $teacher = User::where('id',$request->user()->id)->first();
+        $flag=false;
+        return view('teacher.myRequest',compact('teacher','flag'));
+    }
+
+    public function myCourse(Request $request)
+    {
+        $teacher = User::where('id',$request->user()->id)->first();
+        $flag=false;
+        return view('teacher.myCourse',compact('teacher','flag'));
+    }
+
+    public function myTest(Request $request)
+    {
+        $teacher = User::where('id',$request->user()->id)->first();
+        $flag=false;
+        return view('teacher.myTest',compact('teacher','flag'));
+    }
+
+    public function showResult($id)
+    {
+        $user_test=UserTest::find($id);
+        $results = Result::where('test_id',$user_test->test_id)->orderBy('id','desc')->get();
+        return view('test.showResult',compact('results','user_test'));
+    }
+
+    public function educationalTree(Request $request)
+    {
+        $p_ces=PresentCourse::where("user_id",$request->user()->id)->get()->pluck("id")->toArray();
+        $c_stes=CourseStudent::whereIn("present_course_id",$p_ces)->get()->pluck("user_id")->toArray();
+        $users = User::whereIn('id',$c_stes)->orderBy('id','desc')->get();
+        return view('teacher.educationalTree',compact('users'));
+    }
+
+    public function userEducationalTree($id)
+    {
+        $p_ces=PresentCourse::where("user_id",$id)->get()->pluck("id")->toArray();
+        $c_stes=CourseStudent::whereIn("present_course_id",$p_ces)->get()->pluck("user_id")->toArray();
+        $users = User::whereIn('id',$c_stes)->orderBy('id','desc')->get();
+        $c_user=User::find($id);
+        return view('teacher.userEducationalTree',compact('users','c_user'));
+    }
+
 
 }

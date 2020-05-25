@@ -68,6 +68,12 @@ Route::prefix('admin')->group(function() {
     Route::post('/admin/show/all/search', 'Admin\AdminController@search')->name('admin.search');
 
     //user
+    Route::get('/user/educational/status', 'Admin\UsersController@userEducationalStatus')->name('user.userEducationalStatus');
+    Route::get('/user/my/profile', 'Admin\UsersController@myProfile')->name('user.myProfile');
+    Route::get('/user/my/submits', 'Admin\UsersController@mySubmits')->name('user.mySubmits');
+    Route::get('/user/my/course', 'Admin\UsersController@myCourse')->name('user.myCourse');
+    Route::get('/user/my/test', 'Admin\UsersController@myTest')->name('user.myTest');
+    Route::get('/user/show/{id}/test', 'Admin\UsersController@showResult')->name('user.showResult');
     Route::resource('user','Admin\UsersController');
 
     //course
@@ -82,7 +88,14 @@ Route::prefix('admin')->group(function() {
     Route::resource('question','Admin\QuestionsController');
 
     //teacher
+    Route::get('/user/{id}/educational/tree', 'Admin\TeachersController@userEducationalTree')->name('teacher.userEducationalTree');
+    Route::get('/teacher/educational/tree', 'Admin\TeachersController@educationalTree')->name('teacher.educationalTree');
     Route::get('/teacher/index', 'Admin\TeachersController@index2')->name('teacher.index2');
+    Route::get('/teacher/my/profile', 'Admin\TeachersController@myProfile')->name('teacher.myProfile');
+    Route::get('/teacher/my/course', 'Admin\TeachersController@myCourse')->name('teacher.myCourse');
+    Route::get('/teacher/my/request', 'Admin\TeachersController@myRequest')->name('teacher.myRequest');
+    Route::get('/teacher/my/test', 'Admin\TeachersController@myTest')->name('teacher.myTest');
+    Route::get('/teacher/show/{id}/test', 'Admin\TeachersController@showResult')->name('teacher.showResult');
     Route::resource('teacher','Admin\TeachersController');
 
     //articles
