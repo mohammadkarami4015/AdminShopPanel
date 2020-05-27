@@ -32,6 +32,7 @@ class Article extends Model
         $this->sub_title = $request->sub_title;
         $this->user_id = $request->user()->id;
         $this->type= "1";
+        $this->sub_desc  = $request->sub_desc;
         $this->desc  = $request->desc;
         $this->photo  = $request->file('photo')?makePhotoTypeFile($request->file('photo'),'article'):$this->photo;
         $this->save();

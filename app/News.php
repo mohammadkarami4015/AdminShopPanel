@@ -36,6 +36,7 @@ class News extends Model
         $this->user_id = $request->user()->id;
         $this->type= "2";
         $this->desc  = $request->desc;
+        $this->sub_desc  = $request->sub_desc;
         $this->photo  = $request->file('photo')?makePhotoTypeFile($request->file('photo'),'news'):$this->photo;
         $this->save();
     }

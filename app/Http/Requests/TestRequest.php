@@ -23,6 +23,7 @@ class TestRequest extends FormRequest
         return [
             'title'       => 'string|required',
             'desc'       => 'string|required',
+            'sub_desc'       => 'string|required',
             'type'       => 'string|nullable|max:255',
             'photo'       => 'nullable',
             'price'       => 'string|nullable|max:255',

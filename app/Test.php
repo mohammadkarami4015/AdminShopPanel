@@ -46,6 +46,7 @@ class Test extends Model
     {
         $this->title = $request->title;
         $this->desc  = $request->desc;
+        $this->sub_desc  = $request->sub_desc;
         $this->type  = $request->type;
         $this->price  = $request->price;
         $this->photo  = $request->file('photo')?makePhotoTypeFile($request->file('photo'),'test'):$this->photo;

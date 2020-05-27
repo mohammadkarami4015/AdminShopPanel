@@ -99,6 +99,17 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('sub_desc') ? ' has-error' : '' }}">
+                                <label for="sub_desc" class="col-md-4 control-label">توضیح مختصر</label>
+                                <div class="col-md-6">
+                                    <textarea name="sub_desc"  cols="70" rows="5">{{ $article->sub_desc}}</textarea>
+                                    @if ($errors->has('sub_desc'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('sub_desc') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
                                 <label for="desc" class="col-md-4 col-md-push-3 control-label">توضیحات  </label>
                                 <div class="col-md-12" id="">

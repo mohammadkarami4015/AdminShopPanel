@@ -17,6 +17,7 @@ class CreateArticlesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('sub_title');
+            $table->string('sub_desc');
             $table->string('desc');
             $table->string('photo')->nullable();
             $table->string('status')->default('off')->nullable();

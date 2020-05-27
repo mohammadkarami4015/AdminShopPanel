@@ -22,7 +22,8 @@ class CourseRequest extends FormRequest
     {
         return [
             'title'       => 'string|required',
-            'desc'       => 'string|required|max:255',
+            'desc'       => 'string|required|max:50000',
+            'sub_desc'       => 'string|required|max:5000',
             'type'       => 'string|required|max:255',
             'photo'       => 'nullable',
             'price'       => 'string|nullable|max:255',

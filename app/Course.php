@@ -34,6 +34,7 @@ class Course extends Model
     public function saveAs($request)
     {
         $this->title = $request->title;
+        $this->sub_desc  = $request->sub_desc;
         $this->desc  = $request->desc;
         $this->photo  = $request->file('photo')?makePhotoTypeFile($request->file('photo'),'course'):$this->photo;
         $this->type  = $request->type;
