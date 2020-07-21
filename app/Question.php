@@ -28,6 +28,7 @@ class Question extends Model
     public function saveAs($request)
     {
         $this->type= $request->type;
+        $this->number= $request->number;
         if ($request->type=="1"){
             $this->question  = $request->question;
             $this->answers  = implode(";",array_slice($request->answers,0,2));
@@ -62,6 +63,7 @@ class Question extends Model
 
     public function saveAsUpdate($request)
     {
+        $this->number= $request->number;
         if ($this->type=="1"){
             $this->question  = $request->question;
             $this->answers  = implode(";",$request->answers);

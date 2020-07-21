@@ -130,6 +130,7 @@ Route::prefix('admin')->group(function() {
     Route::resource('student','Admin\StudentsController');
 
     //photos
+    Route::get('/add/photo/{id}/slider', 'Admin\PhotosController@addPhotosFormSlider')->name('photos.addPhotosFormSlider');
     Route::get('/photo/{id}/user', 'Admin\PhotosController@addPhotosForm')->name('photos.addPhotosForm');
     Route::delete('/user/{id}/destroy/photo', 'Admin\PhotosController@destroyPhoto')->name('photos.destroyPhoto');
     Route::post('/add/{id}/photos', 'Admin\PhotosController@addPhotos')->name('photos.addPhotos');
@@ -138,4 +139,9 @@ Route::prefix('admin')->group(function() {
     Route::post('/update/setting','Admin\SettingController@update')->name('setting.update');
     Route::get('/setting/show/all','Admin\SettingController@index')->name('setting.index');
     Route::get('/setting/{id}/edit','Admin\SettingController@edit')->name('setting.edit');
+    Route::get('/setting/add/new/slider','Admin\SettingController@addSlider')->name('setting.addSlider');
+    Route::post('/setting/store/slider','Admin\SettingController@storeSlider')->name('setting.storeSlider');
+    Route::get('/setting/edit/{id}/slider','Admin\SettingController@editSlider')->name('setting.editSlider');
+    Route::post('/setting/update/{id}/slider','Admin\SettingController@updateSlider')->name('setting.updateSlider');
+    Route::delete('/setting/delete/{id}/slider','Admin\SettingController@destroy')->name('setting.destroy');
 });

@@ -28,8 +28,9 @@ class PhotosController extends Controller
     public function addPhotosForm($id)
     {
         $item=User::find($id);
-        return view('photo.addPhotos', compact('item'));
+        return view('photo.addSliderPhotos', compact('item'));
     }
+
 
     public function addPhotos(PhotoRequest $request,$id)
     {
@@ -38,6 +39,7 @@ class PhotosController extends Controller
         $user->save();
         return back();
     }
+
 
     public function summernoteUploadPhoto(Request $request)
     {

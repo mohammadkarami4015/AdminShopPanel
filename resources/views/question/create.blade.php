@@ -38,12 +38,23 @@
                         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                             <label for="type" class="col-md-4 control-label"> نوع</label>
                             <div class="col-md-6">
-                                <select onchange="changeType(this)"  class="form-control" name="type" id="type">
-                                    <option value="1">دو گزینه ای</option>
-                                    <option value="2">چهار گزینه ای (دو انتخابی) </option>
-                                    <option value="3">پنج گزینه ای</option>
-                                    <option value="4">هشت نمره ای</option>
+                                <select disabled onchange="changeType(this)"  class="form-control" name="type" id="type">
+                                    <option value="1" @if($test->type=="1") selected @endif>دو گزینه ای</option>
+                                    <option value="2" @if($test->type=="2") selected @endif>چهار گزینه ای (دو انتخابی) </option>
+                                    <option value="3" @if($test->type=="3") selected @endif>پنج گزینه ای</option>
+                                    <option value="4" @if($test->type=="4") selected @endif>هشت نمره ای</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('number') ? ' has-error' : '' }}">
+                            <label for="number" class="col-md-4 control-label">شماره سوال</label>
+                            <div class="col-md-6">
+                                <textarea name="number" id="number" cols="66" rows="2">{{ old('number')}}</textarea>
+                                @if ($errors->has('number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('number') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('question') ? ' has-error' : '' }}">

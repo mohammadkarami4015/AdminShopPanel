@@ -49,6 +49,17 @@
 
                         <input id="test_id" type="hidden" class="form-control" name="test_id" value="{{$question->test_id}}" >
 
+                        <div class="form-group{{ $errors->has('number') ? ' has-error' : '' }}">
+                            <label for="number" class="col-md-2 control-label">شماره سوال</label>
+                            <div class="col-md-6">
+                                <textarea name="number" id="number" cols="50" rows="2">{{ $question->number}}</textarea>
+                                @if ($errors->has('number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group{{ $errors->has('question') ? ' has-error' : '' }}">
                             <label for="question" class="col-md-2 control-label">سوال</label>

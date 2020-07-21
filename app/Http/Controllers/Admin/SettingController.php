@@ -45,4 +45,49 @@ class SettingController extends Controller
 
     }
 
+    public function addSlider()
+    {
+        return view('setting.addSlider');
+    }
+
+    public function storeSlider(Request $request)
+    {
+        $photo = $request->file('file')?makePhotoTypeFile($request->file('file'),'slider'):"";
+        $value=$request->link.";".$photo;
+        $setting=new Setting();
+        $setting->value=$value;
+        $setting->title="اسلایدر";
+        $setting->key="slider";
+        $setting->save();
+        flash()->success('success', 'عملیات با موفقیت انجام شد!');
+        return redirect()->route('setting.index');
+    }
+
+
+    public function editSlider($id)
+    {
+        $setting= Setting::find($id);
+        return view('setting.editSlider' , compact('setting'));
+    }
+
+    public function updateSlider(Request $request,$id)
+    {
+
+        $setting=Setting::query()->find($id);
+        $photo = $request->file('file')?makePhotoTypeFile($request->file('file'),'slider'):explode(";",$setting->value)[1];
+        $value=$request->link.";".$photo;
+        $setting->value=$value;
+        $setting->save();
+        flash()->success('success', 'عملیات با موفقیت انجام شد!');
+        return redirect()->route('setting.index');
+    }
+
+    public function destroy($id)
+    {
+         Setting::destroy($id);
+
+        return back();
+    }
+
+
 }
