@@ -38,11 +38,13 @@
                         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                             <label for="type" class="col-md-4 control-label"> نوع</label>
                             <div class="col-md-6">
-                                <select disabled onchange="changeType(this)"  class="form-control" name="type" id="type">
-                                    <option value="1" @if($test->type=="1") selected @endif>دو گزینه ای</option>
-                                    <option value="2" @if($test->type=="2") selected @endif>چهار گزینه ای (دو انتخابی) </option>
-                                    <option value="3" @if($test->type=="3") selected @endif>پنج گزینه ای</option>
-                                    <option value="4" @if($test->type=="4") selected @endif>هشت نمره ای</option>
+                                <select onchange="changeType(this)"  class="form-control" name="type" id="type">
+                                    <option selected  >نوع تست را انتخاب کنید</option>
+                                    <option value="1" >دو گزینه ای</option>
+                                    <option value="2" >چهار گزینه ای (دو انتخابی) </option>
+                                    <option value="3" >پنج گزینه ای</option>
+                                    <option value="4" >هشت نمره ای</option>
+                                    <option value="5" >چهار گزینه ای</option>
                                 </select>
                             </div>
                         </div>
@@ -388,6 +390,70 @@
 
 
 
+
+
+                        <div id="typeFive1" class="form-group{{ $errors->has('answers') ? ' has-error' : '' }} disNone">
+                            <label for="answers" class="col-md-4 control-label">گزینه اول</label>
+                            <div class="col-md-6">
+                                <input id="answers[]" type="text" class="form-control" name="answers[]"   >
+                                @if ($errors->has('answers'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('answers') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col-md-2">
+                                <input id="values[]" type="text" class="form-control" name="values[]"  placeholder="ارزش"  >
+                            </div>
+                        </div>
+                        <div id="typeFive2" class="form-group{{ $errors->has('answers') ? ' has-error' : '' }} disNone">
+                            <label for="answers" class="col-md-4 control-label">گزینه دوم</label>
+                            <div class="col-md-6">
+                                <input id="answers[]" type="text" class="form-control" name="answers[]"   >
+                                @if ($errors->has('answers'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('answers') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col-md-2">
+                                <input id="values[]" type="text" class="form-control" name="values[]"  placeholder="ارزش"  >
+                            </div>
+                        </div>
+                        <div id="typeFive3" class="form-group{{ $errors->has('answers') ? ' has-error' : '' }} disNone">
+                            <label for="answers" class="col-md-4 control-label">گزینه سوم</label>
+                            <div class="col-md-6">
+                                <input id="answers[]" type="text" class="form-control" name="answers[]"   >
+                                @if ($errors->has('answers'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('answers') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col-md-2">
+                                <input id="values[]" type="text" class="form-control" name="values[]"  placeholder="ارزش"  >
+                            </div>
+                        </div>
+                        <div id="typeFive4" class="form-group{{ $errors->has('answers') ? ' has-error' : '' }} disNone">
+                            <label for="answers" class="col-md-4 control-label">گزینه چهارم</label>
+                            <div class="col-md-6">
+                                <input id="answers[]" type="text" class="form-control" name="answers[]"   >
+                                @if ($errors->has('answers'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('answers') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col-md-2">
+                                <input id="values[]" type="text" class="form-control" name="values[]"  placeholder="ارزش"  >
+                            </div>
+                        </div>
+
+
+
+
+
+
                         <div class="row">
                             <div class="col-lg-6 col-md-offset-3">
                                 <button type="submit" class="btn btn-primary">
@@ -425,6 +491,15 @@
             let typeFour6= $("#typeFour6")
             let typeFour7= $("#typeFour7")
             let typeFour8= $("#typeFour8")
+
+
+            let typeFive1= $("#typeFive1")
+            let typeFive2= $("#typeFive2")
+            let typeFive3= $("#typeFive3")
+            let typeFive4= $("#typeFive4")
+
+
+
             let value= that.value
 
             if(value==="3"){
@@ -451,6 +526,12 @@
                 typeFour7.css('display','none')
                 typeFour8.css('display','none')
 
+
+                typeFive1.css('display','none')
+                typeFive2.css('display','none')
+                typeFive3.css('display','none')
+                typeFive4.css('display','none')
+
             }
             if(value==="2"){
                 typeTwo1.css('display','block')
@@ -475,6 +556,11 @@
 
                 typeOne1.css('display','none')
                 typeOne2.css('display','none')
+
+                typeFive1.css('display','none')
+                typeFive2.css('display','none')
+                typeFive3.css('display','none')
+                typeFive4.css('display','none')
             }
             if(value==="1"){
 
@@ -500,6 +586,11 @@
                 typeFour6.css('display','none')
                 typeFour7.css('display','none')
                 typeFour8.css('display','none')
+
+                typeFive1.css('display','none')
+                typeFive2.css('display','none')
+                typeFive3.css('display','none')
+                typeFive4.css('display','none')
 
             }
 
@@ -527,6 +618,44 @@
                 typeFour6.css('display','block')
                 typeFour7.css('display','block')
                 typeFour8.css('display','block')
+
+                typeFive1.css('display','none')
+                typeFive2.css('display','none')
+                typeFive3.css('display','none')
+                typeFive4.css('display','none')
+
+            }
+
+
+            if(value==="5"){
+
+                typeOne1.css('display','none')
+                typeOne2.css('display','none')
+
+                typeThree1.css('display','none')
+                typeThree2.css('display','none')
+                typeThree3.css('display','none')
+                typeThree4.css('display','none')
+                typeThree5.css('display','none')
+
+                typeTwo1.css('display','none')
+                typeTwo2.css('display','none')
+                typeTwo3.css('display','none')
+                typeTwo4.css('display','none')
+
+                typeFour1.css('display','none')
+                typeFour2.css('display','none')
+                typeFour3.css('display','none')
+                typeFour4.css('display','none')
+                typeFour5.css('display','none')
+                typeFour6.css('display','none')
+                typeFour7.css('display','none')
+                typeFour8.css('display','none')
+
+                typeFive1.css('display','block')
+                typeFive2.css('display','block')
+                typeFive3.css('display','block')
+                typeFive4.css('display','block')
 
             }
         }

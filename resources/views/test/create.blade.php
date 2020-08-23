@@ -103,6 +103,7 @@
                                     <option value="2">چهار گزینه ای (دو انتخابی)</option>
                                     <option value="3">پنج گزینه ای</option>
                                     <option value="4">هشت نمره ای</option>
+                                    <option value="5">چهار گزینه ای</option>
                                 </select>
                             </div>
                         </div>

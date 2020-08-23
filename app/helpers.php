@@ -77,6 +77,8 @@ function getTestType($str){
             return "پنج گزینه ای";
         case "4":
             return "هشت نمره ای";
+        case "5":
+            return "چهار گزینه ای";
         default:
             return "نامعلوم";
     }

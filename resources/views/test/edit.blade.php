@@ -105,6 +105,7 @@
                                     <option value="2" @if($test->type=="2" ) selected @endif>چهار گزینه ای (دو انتخابی)</option>
                                     <option value="3" @if($test->type=="3" ) selected @endif>پنج گزینه ای</option>
                                     <option value="4" @if($test->type=="4" ) selected @endif>هشت نمره ای</option>
+                                    <option value="5" @if($test->type=="5" ) selected @endif>چهار گزینه ای</option>
                                 </select>
                             </div>
                         </div>

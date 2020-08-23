@@ -35,6 +35,8 @@
                     <form  method="POST" id="form" action="{{ route('question.update',['question'=>$question->id ]) }}" class="form-horizontal" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {{method_field('PATCH')}}
+
+
                         {{--<div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                             <label for="type" class="col-md-4 control-label"> نوع</label>
                             <div class="col-md-6">

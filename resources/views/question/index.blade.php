@@ -44,7 +44,7 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                {{--<th>عنوان</th>--}}
+                                <th>شماره سوال</th>
                                 <th>سوال </th>
                                 <th>وضعیت </th>
                             </tr>
@@ -53,7 +53,7 @@
                             @foreach($questions as $question)
                                 <tr>
                                     <td>{{$question->id}}</td>
-                                    {{--<td>{{$question->title}}</td>--}}
+                                    <td>{{$question->number}}</td>
                                     <td>{{$question->question}}</td>
                                     <td>
                                         <div class="switch">

@@ -57,6 +57,12 @@ class Question extends Model
             $this->values= implode(";",array_slice($request->values,11,8));
             $this->test_id  = $request->test_id;
             $this->save();
+        }if ($request->type=="5"){
+            $this->question  = $request->question;
+            $this->answers  = implode(";",array_slice($request->answers,19,4));
+            $this->values= implode(";",array_slice($request->values,19,4));
+            $this->test_id  = $request->test_id;
+            $this->save();
         }
     }
 
@@ -84,6 +90,12 @@ class Question extends Model
             $this->save();
         }
         if ($this->type=="4"){
+            $this->question  = $request->question;
+            $this->answers  = implode(";",$request->answers);
+            $this->values= implode(";",$request->values);
+            $this->save();
+        }
+        if ($this->type=="5"){
             $this->question  = $request->question;
             $this->answers  = implode(";",$request->answers);
             $this->values= implode(";",$request->values);
