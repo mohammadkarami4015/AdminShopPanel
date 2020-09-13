@@ -48,7 +48,7 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => "poorya",
+            'database' => "poorya_develop",
             'username' => "root",
             'password' => "697444",
             'unix_socket' => env('DB_SOCKET', ''),
