@@ -2,8 +2,8 @@
 
 namespace App;
 
-use App\Http\Requests\ArticleRequest;
-use App\Http\Requests\CourseRequest;
+use App\Http\Requests\Shop\ArticleRequest;
+use App\Http\Requests\Shop\CourseRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 

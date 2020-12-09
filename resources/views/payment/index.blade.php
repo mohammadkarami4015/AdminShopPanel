@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    {{$site_title}}پرداخت ها
+    لیست پرداختی ها
 @endsection
 
 @section('payment')
@@ -11,17 +11,15 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2> لیست پرداخت ها</h2>
+            <h2>لیست سفارش</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a href="{{route('admin.dashboard')}}">خانه</a>
+                    <a href="{{route('dashboard')}}">خانه</a>
                 </li>
                 <li>
-                    <a>پرداخت ها</a>
+                    <a href="">پرداختی ها</a>
                 </li>
-                <li class="active">
-                    <strong> لیست پرداخت ها</strong>
-                </li>
+
             </ol>
         </div>
         <div class="col-lg-2">
@@ -30,65 +28,66 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-11 col-md-pull-1 col-lg-11 col-lg-pull-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <div class="col-md-11">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5> لیست پرداخت ها</h5>
+                        <h5> لیست پرداختی ها</h5>
                     </div>
-                    @if(Gate::check('super_admin') || Gate::check('admin'))
-                        <div style="display: flex;justify-content: center;flex-direction: row;background-color: white;">
-                            <input style="margin-top: 10px;margin-bottom: 15px;margin-right: 5px;" class="form-control" id="searchInput" type="text" placeholder="جستجو بر اساس عنوان دوره یا نام کاربر یا عنوان تست یا مبلغ ">
-                            <button class="btn btn-primary btn-sm" style="margin-right: 5px;height: 33px;margin-top: 10px;margin-left: 5px;" id="search" >جستجو</button>
-                        </div>
-                    @endif
-                    <div id="myTable"  class="ibox-content table-responsive">
+
+                    <div class="searchListDiv">
+                        <input onkeyup="Search()" class="form-control searchListInput" id="searchInput" type="text"
+                               placeholder=" جستجو بر اساس  عنوان ،توضیحات و قیمت" name="data">
+
+                    </div>
+
+                    <div id="myTable" class="ibox-content table-responsive">
                         <table class="table table-responsive">
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>کاربر</th>
-                                <th>عنوان تست</th>
-                                <th>نام دوره</th>
-                                <th>مبلغ</th>
-                                <th>مبلغ پرداخت شده</th>
-                                <th>وضعیت پرداخت</th>
-                                <th>تاریخ</th>
+                                <th>نام فروشگاه</th>
+                                <th>نام کاربر</th>
+                                <th>مقدار پرداختی</th>
+                                <th>کد پیگیری</th>
+                                <th>نوع</th>
+                                <th>وضغیت</th>
+                                <th>تاریخ پرداخت</th>
                             </tr>
                             </thead>
-                            <tbody >
+                            <tbody>
                             @foreach($payments as $payment)
-                                <tr class="@if($payment->status=='success') successPayment @else failedPayment @endif">
+                                <tr>
                                     <td>{{$payment->id}}</td>
-                                    <td>@if($payment->user){{$payment->user->name}}@endif</td>
-                                    <td>@if($payment->test){{$payment->test->title}}@endif</td>
-                                    <td>@if($payment->presentCourse){{$payment->presentCourse->course->title}}@endif</td>
+                                    <td>{{optional($payment->shop)->title}}</td>
+                                    <td>{{optional($payment->user)->name}}</td>
                                     <td>{{$payment->amount}}</td>
-                                    <td>{{$payment->paid_amount}}</td>
-                                    <td>@if($payment->status=='success'){{"پرداخت موفق"}} @else  {{'پرداخت ناموفق'}} @endif</td>
-                                    <td>{{jalaliFormat($payment->created_at)}}</td>
+                                    <td>{{$payment->ref_code}}</td>
+                                    <td>{{$payment->type}}</td>
+                                    <td>{{$payment->status}}</td>
+                                    <td>{{$payment->created_at}}</td>
+
+                                    <td>
+                                        <a class="btn btn-sm btn-primary"
+                                           href="">جزییات</a>
+                                    </td>
+
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        @if(!$flag)
-                            <div class="text-center">
-                                {{ $payments->links() }}
-                            </div>
-                        @endif
+
+                        <div class="text-center">
+                            {{ $payments->links() }}
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
+{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
+{{--    <script>--}}
 
-        $('#search').on('click',function () {
-            var value =$('#searchInput').val();
-            $.get(`/search/in/payments/{value}`,{value:value}, function(result){
-                console.log(result)
-                $('#myTable').html(result)
-            });
-        })
     </script>
+
 @endsection

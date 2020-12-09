@@ -49,7 +49,6 @@
         <div class="container">
             <a style="color: white;" class="navbar-brand" href="{{ url('/') }}">
                 {{--{{' '.\App\Setting::where('key','title')->first()->value.''}}--}}
-                Poorya
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -66,7 +65,7 @@
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
-                            <a style="color: white;" class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a style="color: white;" class="nav-link" href="{{ route('login') }}">{{ __('ورود') }}</a>
                         </li>
                     @else
                         <li class="nav-item dropdown">
