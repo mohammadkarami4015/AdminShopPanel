@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-      {{$site_title}}  | لیست مدیران
+         لیست مدیران
 @endsection
 
 @section('admins')
@@ -14,14 +14,12 @@
             <h2>لیست مدیران</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a href="{{route('admin.dashboard')}}">خانه</a>
+                    <a href="{{route('dashboard')}}">خانه</a>
                 </li>
                 <li>
-                    <a>مدیران</a>
+                    <a href="{{route('admin.index')}}">مدیران</a>
                 </li>
-                <li class="active">
-                    <strong>لیست مدیران</strong>
-                </li>
+
             </ol>
         </div>
         <div class="col-lg-2">
@@ -45,6 +43,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>نام</th>
+                                <th> نام خانوادگی</th>
                                 <th>ایمیل </th>
                                 <th>تلفن </th>
                                 <th>وضعیت </th>
@@ -55,6 +54,7 @@
                                 <tr>
                                     <td>{{$admin->id}}</td>
                                     <td>{{$admin->name}}</td>
+                                    <td>{{$admin->last_name}}</td>
                                     <td>{{$admin->email}}</td>
                                     <td>{{$admin->phone_number}}</td>
                                     <td>
@@ -65,11 +65,9 @@
                                             </label>
                                         </div>
                                     </td>
-                                    @can('update')
                                         <td>
-                                            <a class="btn btn-sm btn-info"  href="{{ route('admin.editAdmins',['user'=>$admin->id ]) }}">ویرایش</a>
+                                            <a class="btn btn-sm btn-info"  href="{{ route('admin.edit',$admin) }}">ویرایش</a>
                                         </td>
-                                    @endcan
                                     <td>
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter{{$admin->id}}">
                                             جزئیات
@@ -85,28 +83,29 @@
                                                         <div class="row">
                                                             <div class="col-md-10 col-md-offset-1">
 
-                                                                <div class="panel panel-default">
-                                                                    <div class="panel-heading">عکس پروفایل</div>
-                                                                    @if($admin->photo)
-                                                                        <div id="myCarousel{{$admin->id}}" class="carousel slide" data-ride="carousel">
-                                                                            <!-- Wrapper for slides -->
-                                                                            <div class="carousel-inner">
-                                                                                <div class="item  active ">
-                                                                                    <img src="/{{$admin->photo}}" alt="" style="width:100%;">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    @endif
+{{--                                                                <div class="panel panel-default">--}}
+{{--                                                                    <div class="panel-heading">عکس پروفایل</div>--}}
+{{--                                                                    @if($admin->photo)--}}
+{{--                                                                        <div id="myCarousel{{$admin->id}}" class="carousel slide" data-ride="carousel">--}}
+{{--                                                                            <!-- Wrapper for slides -->--}}
+{{--                                                                            <div class="carousel-inner">--}}
+{{--                                                                                <div class="item  active ">--}}
+{{--                                                                                    <img src="/{{$admin->photo}}" alt="" style="width:100%;">--}}
+{{--                                                                                </div>--}}
+{{--                                                                            </div>--}}
+{{--                                                                        </div>--}}
+{{--                                                                    @endif--}}
 
-                                                                </div>
+{{--                                                                </div>--}}
 
                                                                 <div class="panel panel-default">
                                                                     <div class="panel-heading">جزئیات</div>
                                                                     <div class="list-group">
                                                                         <a class="list-group-item">  نام: {{$admin->name}}</a>
-                                                                        <a class="list-group-item">  کد ملی: {{$admin->national_id}}</a>
-                                                                        <a class="list-group-item"> نوع: {{getTypeOfUser($admin->type)}}</a>
-                                                                        <a class="list-group-item">  درباره ی من: {{$admin->about_me}}</a>
+                                                                        <a class="list-group-item">  نام خانوادگی: {{$admin->last_name}}</a>
+                                                                        <a class="list-group-item">  شماره تماس: {{$admin->phone_number}}</a>
+                                                                        <a class="list-group-item"> وضعیت: {{$admin->status == 'on' ? 'فعال' : 'غیرفعال'}}</a>
+                                                                        <a class="list-group-item">  ایمیل: {{$admin->email}}</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -123,11 +122,9 @@
                             @endforeach
                             </tbody>
                         </table>
-                        @if(!$flag)
                             <div class="text-center">
                                 {{ $admins->links() }}
                             </div>
-                        @endif
                     </div>
                 </div>
             </div>
@@ -137,8 +134,9 @@
     <script>
         function activate(id) {
             var switchButton = '#switchButton' + id;
-            var value =$(switchButton).is(":checked")?'on':'off';
-            $.get(`/active/admin/${id}/${value}`,{id: id,value:value}, function(result){
+            var value = $(switchButton).is(":checked") ? 'on' : 'off';
+            console.log(value)
+            $.get(`/admin/activate/${id}/${value}`, function (result) {
             });
         }
         $('#search').on('click',function () {

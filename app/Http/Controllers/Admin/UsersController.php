@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Course;
 use App\CourseStudent;
-use App\Http\Requests\UserRequest;
-use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\Shop\UserRequest;
+use App\Http\Requests\Shop\UserUpdateRequest;
 use App\Result;
 use App\Role;
 use App\State;

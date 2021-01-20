@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Admin;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -37,4 +40,22 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function login(LoginRequest $request)
+    {
+        $admin = Admin::query()
+            ->where('email', $request->get('email'))->first();
+
+        if (!$admin)
+            return back()->withErrors('ایمیل یا رمز عبور را اشتباه وارد کرد اید');
+        elseif (!Hash::check($request->get('password'), $admin->password)) {
+            return back()->withErrors('ایمیل یا رمز عبور را اشتباه وارد کرد اید');
+        } else {
+            \auth()->login($admin);
+            return redirect('/');
+        }
+    }
+
+
+
 }

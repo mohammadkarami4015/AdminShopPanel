@@ -44,35 +44,19 @@
                 <li class="nav-header">
                     <div class="dropdown profile-element">
                         <div class="adminProfileDiv">
-                            <div class="adminProfile" style="background-image:url( @if(auth()->user()->photo){{'/'.auth()->user()->photo}} @else {{'/image/user.png'}} @endif )">
+                            <div class="adminProfile" style="">
                             </div>
-                            <a href="{{route('photos.addPhotosForm',['id'=>auth()->user()->id])}}"><img class="plusIcon" src="/image/plus.png" alt=""></a>
+                            <a href=""><img class="plusIcon" src="http://admin.alefbakala.ir/logo" style="width:100px; box-shadow: 3px 3px 3px 3px white" alt="الفبا کالا"></a>
 
                         </div>
-                        <div >
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span style="display: flex;justify-content: center;align-items: center;flex-direction: row-reverse;" class="clear">
-                                    <span class="block m-t-xs"> <strong class="font-bold">{{auth()->user()->name}}{{' '}}</strong></span>
-                                    <span class="text-muted text-xs block" style="margin: 0px 6px;"><b class="caret"></b></span>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu animated fadeInLeft m-t-xs">
-                                <li><a class="editProfileDiv" href="{{route('admin.profile',['user'=>auth()->user()->id])}}">پروفایل</a></li>
-                                <li class="divider"></li>
-                                <li>
-                                    <form class="logOutForm" id="logout-form" action="{{ route('logout') }}" method="POST" >
-                                        @csrf
-                                        <button class="btn btn-danger logoutBtn" type="submit"><i class="material-icons"></i> خروج</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
+                        <br>
+                        <br>
+
                     </div>
                     <div class="logo-element">
-                        {{$site_title}}
                     </div>
                 </li>
-                @can('super_admin')
+
                     <li class="@yield('admins')" >
                         <a><i class="fa fa-user"></i> <span class="nav-label">مدیران</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
@@ -80,140 +64,82 @@
                             <li><a  href=" {{route('admin.create')}}">ثبت حساب جدید</a></li>
                         </ul>
                     </li>
-                @endcan
-                @can('teacher')
-                    <li class="@yield('teacher')" >
-                        <a><i class="fa fa-user"></i> <span class="nav-label">اطلاعات من</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a  href=" {{route('teacher.myProfile')}}">اطلاعات کاربری</a></li>
-                            <li><a  href=" {{route('teacher.myCourse')}}">لیست دوره های ارائه شده من</a></li>
-                            <li><a  href=" {{route('teacher.myRequest')}}">لیست درخواست وجه من</a></li>
-                            <li><a  href=" {{route('teacher.myTest')}}">آزمون های من</a></li>
-                            <li><a  href=" {{route('teacher.educationalTree')}}">درخت آموزشی</a></li>
-                            <li><a  href=" {{route('user.userEducationalStatus')}}">وضعیت آموزشی  </a></li>
-                        </ul>
-                    </li>
-                @endcan
-                @can('student')
-                    <li class="@yield('student')" >
-                        <a><i class="fa fa-user"></i> <span class="nav-label">اطلاعات من</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a  href=" {{route('user.myProfile')}}">اطلاعات کاربری</a></li>
-                            <li><a  href=" {{route('user.mySubmits')}}">لیست ثبت نام اولیه من</a></li>
-                            <li><a  href=" {{route('user.myCourse')}}">کلاس های من</a></li>
-                            <li><a  href=" {{route('user.myTest')}}">آزمون های من</a></li>
-                            <li><a  href=" {{route('user.userEducationalStatus')}}">وضعیت آموزشی  </a></li>
-                        </ul>
-                    </li>
-                @endcan
-                @if(Gate::check('super_admin') || Gate::check('admin'))
-                    <li class="@yield('users')" >
-                        <a><i class="fa fa-users"></i> <span class="nav-label">کاربران </span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a   href="{{route('user.index')}}">   لیست کاربران</a></li>
-                        </ul>
-                    </li>
-                    <li class="@yield('teachers')" >
-                        <a><i class="fa fa-users"></i> <span class="nav-label">اساتید</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a   href="{{route('teacher.index')}}">   لیست اساتید اولیه</a></li>
-                            <li><a   href="{{route('teacher.index2')}}">   لیست اساتید</a></li>
-                        </ul>
-                    </li>
-                    <li class="@yield('course')" >
-                        <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">دوره ها</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a  href="{{route('course.index')}}"> لیست دوره ها</a></li>
-                            <li><a  href="{{route('course.create')}}">ثبت دوره جدید</a></li>
-                        </ul>
-                    </li>
-                    <li class="@yield('test')" >
-                        <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">آزمون ها</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a  href="{{route('test.index')}}"> لیست آزمون ها</a></li>
-                            <li><a  href="{{route('test.create')}}">ثبت آزمون جدید</a></li>
-                        </ul>
-                    </li>
-                    <li class="@yield('result')" >
-                        <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">پاسخ آزمون ها</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a  href="{{route('result.index')}}"> لیست  پاسخ آزمون ها</a></li>
-                            <li><a  href="{{route('result.create')}}">ثبت پاسخ آزمون جدید</a></li>
-                        </ul>
-                    </li>
-                    <li class="@yield('present')" >
-                        <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">ارائه دوره</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a  href="{{route('present.index')}}"> لیست دوره های ارائه شده</a></li>
-                            <li><a  href="{{route('present.create')}}">ارائه دوره جدید</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="@yield('clearing')" >
-                        <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">پرداخت وجه</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a  href="{{route('clearing.index')}}"> لیست پرداخت وجه</a></li>
-                            <li><a  href="{{route('clearing.create')}}"> لیست پرداخت وجه</a></li>
-                        </ul>
-                    </li>
-                    <li class="@yield('messages')" >
-                        <a><i class="fa fa-envelope-o"></i> <span class="nav-label"> پیام ها</span> <span class="fa arrow"></span>@if(session('number_of_new_message')>0)<span style="margin: 0 8px " class="label label-info pull-left">{{session('number_of_new_message')}}</span>@endif</a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a  href="{{route('messages.index')}}">    لیست پیام ها</a></li>
-                        </ul>
-                    </li>
-                    <li class="@yield('setting')" >
-                        <a><i class="fa fa-cogs"></i> <span class="nav-label"> تنظیمات</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a id="pjax" href="{{route('setting.index')}}">لیست تنظیمات</a></li>
-                        </ul>
-                    </li>
-                @endif
-                @if(Gate::check('super_admin') || Gate::check('teacher') || Gate::check('admin'))
-                    <li class="@yield('articles')" >
-                        <a><i class="fa fa-newspaper-o"></i> <span class="nav-label"> مقالات</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a  href="{{route('articles.index')}}"> لیست مقالات</a></li>
-                            <li><a  href="{{route('articles.create')}}">ثبت مقاله جدید</a></li>
-                        </ul>
-                    </li>
-                    <li class="@yield('news')" >
-                        <a><i class="fa fa-newspaper-o"></i> <span class="nav-label"> اخبار</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a  href="{{route('news.index')}}"> لیست خبرها</a></li>
-                            <li><a  href="{{route('news.create')}}">ثبت خبر جدید</a></li>
-                        </ul>
-                    </li>
-                    <li class="@yield('financial')" >
-                        <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">درخواست وجه</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a  href="{{route('financial.create')}}">درخواست وجه</a></li>
-                            <li><a  href="{{route('financial.index')}}"> لیست درخواست وجه</a></li>
-                        </ul>
-                    </li>
-                @endif
-                <li class="@yield('payment')" >
-                    <a><i class="fa fa-newspaper-o"></i> <span class="nav-label">پرداخت ها</span> <span class="fa arrow"></span></a>
+                <li class="@yield('cities')">
+                    <a><i class="fa fa-user"></i> <span class="nav-label">شهرها</span> <span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a  href="{{route('payment.index')}}"> لیست پرداخت ها</a></li>
+                        <li><a href=" {{route('city.index')}}">لیست همه شهرها</a></li>
+                        <li><a href=" {{route('city.create')}}">ثبت شهر جدید</a></li>
                     </ul>
                 </li>
+                <li class="@yield('groups')">
+                    <a><i class="fa fa-user"></i> <span class="nav-label">گروه ها</span> <span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href=" {{route('group.index')}}">لیست همه گروه ها</a></li>
+                        <li><a href=" {{route('group.create')}}">ثبت گروه جدید</a></li>
+                    </ul>
+                </li>
+
+                <li class="@yield('subgroups')">
+                    <a><i class="fa fa-user"></i> <span class="nav-label">زیرگروه ها</span> <span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href=" {{route('subgroup.index')}}">لیست همه  زیر گروه ها</a></li>
+                        <li><a href=" {{route('subgroup.create')}}">ثبت زیر گروه جدید</a></li>
+                    </ul>
+                </li>
+
+                <li class="@yield('subgroups')">
+                    <a><i class="fa fa-user"></i> <span class="nav-label"> محصولات</span> <span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href=" {{route('products.index')}}">لیست همه محصولات </a></li>
+                    </ul>
+                </li>
+
+                <li class="@yield('payments')">
+                    <a><i class="fa fa-user"></i> <span class="nav-label">پرداختی ها</span> <span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href=" {{route('payment.index')}}">لیست همه پرداختی ها</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="@yield('shop')">
+                    <a><i class="fa fa-user"></i> <span class="nav-label">فروشگاه</span> <span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href=" {{route('shop.index')}}">لیست همه فروشگاه ها</a></li>
+                        <li><a href=" ">افزودن فروشگاه جدید</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="@yield('exit')">
+                    <a><i class="fa fa-user"></i> <span class="nav-label">خروج </span> <span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <form action="{{route('logout')}}" class="logOutForm" id="logout-form"  method="POST" >
+                                @csrf
+                                <button class="btn btn-danger logoutBtn" type="submit"><i class="material-icons"></i> خروج</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+
+
             </ul>
         </div>
     </nav>
     <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation">
-               {{-- <div class="navbar-header floatRight">
+               <div class="navbar-header floatRight">
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    <form  method="POST" role="search" class="searchForm" action="{{route('admin.searchPhoneNumber')}}">
-                        {{ csrf_field() }}
-                        <div class="searchItemDiv">
-                            <input type="text" placeholder="شماره تلفن را وارد نمایید" class="searchInput" name="phone_number" id="myInputTop">
-                            <button type="submit" class="searchBtn btn btn-primary">جستجو</button>
-                        </div>
-                    </form>
-                </div>--}}
+                </div>
                 <ul class="nav navbar-top-links navbar-left">
                     <li>
                         <span class="m-r-sm text-muted welcome-message">به بخش مدیریت خوش آمدید</span>
@@ -227,19 +153,32 @@
             </nav>
         </div>
         <div>
+            @include('error')
             @yield('content')
         </div>
     </div>
 </div>
 
 <script type="text/javascript" src="{!! asset('js/jquery-2.1.1.js') !!}"></script>
+<script src="{{asset('/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
+
+<script>
+
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2({
+            dir: "rtl"
+        });
+        $('.Select2').val(null).trigger('change');
+    });
+</script>
 <script type="text/javascript" src="{!! asset('js/bootstrap.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('js/sweetalert.min.js') !!}"></script>
 @include('flash')
 <script type="text/javascript" src="{!! asset('js/plugins/metisMenu/jquery.metisMenu.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('js/plugins/slimscroll/jquery.slimscroll.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('js/rada.js') !!}"></script>
-<script type="text/javascript" src="{!! asset('js/plugins/pace/pace.min.js') !!}"></script>
+{{--<script type="text/javascript" src="{!! asset('js/plugins/pace/pace.min.js') !!}"></script>--}}
 @yield('footer')
 
 </body>

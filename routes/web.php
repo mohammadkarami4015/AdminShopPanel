@@ -1,147 +1,228 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\Shop\DiscountController;
+use App\Http\Controllers\Shop\MessageController;
+use App\Http\Controllers\Shop\OrderController;
+use App\Http\Controllers\Shop\PaymentsController;
+use App\Http\Controllers\Shop\ProductCommentController;
+use App\Http\Controllers\Shop\ProductController;
+use App\Http\Controllers\Shop\ShopCategoryController;
+use App\Http\Controllers\Shop\ShopController;
+use App\Http\Controllers\SubgroupController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::post('/upload/photo/summernote', 'Admin\PhotosController@summernoteUploadPhoto');
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
 
-Route::get('/active/admin/{id}/{value}', 'Admin\AdminController@activate');
-Route::get('/active/user/{id}/{value}', 'Admin\UsersController@activate');
-Route::get('/active/teacher/{id}/{value}', 'Admin\TeachersController@activate');
-Route::get('/active/course/{id}/{value}', 'Admin\CoursesController@activate');
-Route::get('/active/test/{id}/{value}', 'Admin\TestsController@activate');
-Route::get('/active/question/{id}/{value}', 'Admin\QuestionsController@activate');
-Route::get('/active/article/{id}/{value}', 'Admin\ArticlesController@activate');
-Route::get('/active/news/{id}/{value}', 'Admin\NewsController@activate');
-Route::get('/active/present/{id}/{value}', 'Admin\PresentCoursesController@activate');
-Route::get('/active/submit/{id}/{value}', 'Admin\SubmitsController@activate');
-Route::get('/active/result/{id}/{value}', 'Admin\ResultsController@activate');
+        return view('dashboard');
+    })->name('dashboard');
 
-Route::get('/search/in/admins/{value}', 'Admin\SearchController@searchInAdmin');
-Route::get('/search/in/users/{value}', 'Admin\SearchController@searchInUsers');
-Route::get('/search/in/courses/{value}', 'Admin\SearchController@searchInCourses');
-Route::get('/search/in/teachers/{value}', 'Admin\SearchController@searchInTeachers');
-Route::get('/search/in/first/teachers/{value}', 'Admin\SearchController@searchInFirstsTeachers');
-Route::get('/search/in/tests/{value}', 'Admin\SearchController@searchInTests');
-Route::get('/search/in/news/{value}', 'Admin\SearchController@searchInNews');
-Route::get('/search/in/articles/{value}', 'Admin\SearchController@searchInArticles');
-Route::get('/search/in/user/messages/{value}', 'Admin\SearchController@searchInMessages');
-Route::get('/search/in/questions/{value}/{test_id}', 'Admin\SearchController@searchInQuestions');
-Route::get('/search/in/presents/{value}', 'Admin\SearchController@searchInPresents');
-Route::get('/search/in/payments/{value}', 'Admin\SearchController@searchInPayments');
-Route::get('/search/in/clearing/{value}', 'Admin\SearchController@searchInClearing');
-Route::get('/search/in/results/{value}', 'Admin\SearchController@searchInResults');
+    /**********************************************************ADMIN ROUTE*********************************************/
+    Route::patch('/admin/change-password/{admin}', [AdminController::class, 'changePassword'])->name('admin.change-password');
 
-Route::get('/confirm/financial/{id}', 'Admin\FinancialController@confirm');
-Route::get('/read/message/{id}', 'Admin\MessagesController@read');
+    Route::get('/admin/activate/{id}/{value}', [AdminController::class, 'activate'])->name('admin.activate');
 
-//Ajax for search phone number
-Route::post('/search/phone', 'Admin\AdminController@searchPhoneNumber')->name('admin.searchPhoneNumber');
-Route::get('result/search/phone', 'Admin\AdminController@resultSearchPhoneNumber')->name('admin.resultSearchPhoneNumber');
+    Route::resource('admin', 'AdminController');
+    /**********************************************************CITY ROUTE*********************************************/
+    Route::get('/city-activate/{id}/{value}', [CityController::class, 'activate'])->name('city.activate');
 
-Route::prefix('admin')->group(function() {
+    Route::get('/city-search', [CityController::class, 'search'])->name('city.search');
 
-    //messages
-    Route::get('messages','Admin\MessagesController@messages')->name('messages.index');
+    Route::resource('city', 'CityController');
 
-    //admin
-    Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('admin.dashboard');
-    Route::get('/show/all', 'Admin\AdminController@index')->name('admin.index');
-    Route::get('/admin/create', 'Admin\AdminController@create')->name('admin.create');
-    Route::post('/admin/store', 'Admin\AdminController@store')->name('admin.store');
-    Route::get('/profile/{user}/show', 'Admin\AdminController@profile')->name('admin.profile');
-    Route::get('/edit/{user}', 'Admin\AdminController@editAdmins')->name('admin.editAdmins');
-    Route::patch('/{user}', 'Admin\AdminController@updateAdmin')->name('admin.updateAdmin');
-    Route::post('/admin/show/all/search', 'Admin\AdminController@search')->name('admin.search');
+    /**********************************************************GROUP ROUTE*********************************************/
+    Route::get('/group-search', [GroupController::class, 'search'])->name('group.search');
 
-    //user
-    Route::get('/user/educational/status', 'Admin\UsersController@userEducationalStatus')->name('user.userEducationalStatus');
-    Route::get('/user/my/profile', 'Admin\UsersController@myProfile')->name('user.myProfile');
-    Route::get('/user/my/submits', 'Admin\UsersController@mySubmits')->name('user.mySubmits');
-    Route::get('/user/my/course', 'Admin\UsersController@myCourse')->name('user.myCourse');
-    Route::get('/user/my/test', 'Admin\UsersController@myTest')->name('user.myTest');
-    Route::get('/user/show/{id}/test', 'Admin\UsersController@showResult')->name('user.showResult');
-    Route::resource('user','Admin\UsersController');
+    Route::get('/group-activate/{id}/{value}', [GroupController::class, 'activate'])->name('group.activate');
 
-    //course
-    Route::resource('course','Admin\CoursesController');
+    Route::resource('group', 'GroupController');
 
-    //test
-    Route::resource('test','Admin\TestsController');
+    /**********************************************************SUBGROUP ROUTE*********************************************/
+    Route::get('/subgroup-search', [SubgroupController::class, 'search'])->name('subgroup.search');
 
-    //test
-    Route::get('/question/{test}/index', 'Admin\QuestionsController@index2')->name('question.index2');
-    Route::get('/create/{test}/new/question', 'Admin\QuestionsController@createNew')->name('question.createNew');
-    Route::resource('question','Admin\QuestionsController');
+    Route::resource('subgroup', 'SubgroupController');
 
-    //teacher
-    Route::get('/user/{id}/educational/tree', 'Admin\TeachersController@userEducationalTree')->name('teacher.userEducationalTree');
-    Route::get('/teacher/educational/tree', 'Admin\TeachersController@educationalTree')->name('teacher.educationalTree');
-    Route::get('/teacher/index', 'Admin\TeachersController@index2')->name('teacher.index2');
-    Route::get('/teacher/my/profile', 'Admin\TeachersController@myProfile')->name('teacher.myProfile');
-    Route::get('/teacher/my/course', 'Admin\TeachersController@myCourse')->name('teacher.myCourse');
-    Route::get('/teacher/my/request', 'Admin\TeachersController@myRequest')->name('teacher.myRequest');
-    Route::get('/teacher/my/test', 'Admin\TeachersController@myTest')->name('teacher.myTest');
-    Route::get('/teacher/show/{id}/test', 'Admin\TeachersController@showResult')->name('teacher.showResult');
-    Route::resource('teacher','Admin\TeachersController');
+    /**********************************************************SUBGROUP ROUTE*********************************************/
+    Route::prefix('products')->group(function () {
 
-    //articles
-    Route::resource('articles','Admin\ArticlesController');
+        Route::get('', [\App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
 
-    //news
-    Route::resource('news','Admin\NewsController');
+        Route::get('/search', [\App\Http\Controllers\ProductController::class, 'search'])->name('products.search');
 
-    //financial
-    Route::resource('financial','Admin\FinancialController');
+        Route::get('/{product}', [\App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
+    });
 
-    //clearing
-    Route::get('/create/{id}/clearing', 'Admin\ClearingsController@createTwo')->name('clearing.createTwo');
-    Route::resource('clearing','Admin\ClearingsController');
+    /**********************************************************PAYMENT ROUTE*********************************************/
+    Route::get('/payments', [PaymentController::class, 'index'])->name('payment.index');
 
-    //clearing
-    Route::resource('result','Admin\ResultsController');
+    /**********************************************************SUBGROUP ROUTE*********************************************/
+    Route::get('/message', [\App\Http\Controllers\MessageController::class, 'index'])->name('message.index');
 
-    //present
-    Route::resource('present','Admin\PresentCoursesController');
+    /**********************************************************SHOP ROUTE*********************************************/
+    Route::prefix('/shops')->group(function () {
 
-    //payment
-    Route::resource('payment','Admin\PaymentsController');
+        Route::get('/search', [ShopController::class, 'search'])->name('shop.search');
 
-    //submit
-    Route::get('/submit/{id}/list', 'Admin\SubmitsController@index2')->name('submit.index2');
-    Route::resource('submit','Admin\SubmitsController');
+        Route::get('/activate/{id}/{value}', [ShopController::class, 'activate'])->name('shop.activate');
 
-    //student
-    Route::get('/student/{id}/list', 'Admin\StudentsController@indexTwo')->name('student.indexTwo');
-    Route::get('/add/student/to/{id}/list', 'Admin\StudentsController@storeTow')->name('student.storeTow');
-    Route::resource('student','Admin\StudentsController');
+        Route::get('/', [ShopController::class, 'index'])->name('shop.index');
 
-    //photos
-    Route::get('/add/photo/{id}/slider', 'Admin\PhotosController@addPhotosFormSlider')->name('photos.addPhotosFormSlider');
-    Route::get('/photo/{id}/user', 'Admin\PhotosController@addPhotosForm')->name('photos.addPhotosForm');
-    Route::delete('/user/{id}/destroy/photo', 'Admin\PhotosController@destroyPhoto')->name('photos.destroyPhoto');
-    Route::post('/add/{id}/photos', 'Admin\PhotosController@addPhotos')->name('photos.addPhotos');
+        Route::prefix('/{shop}')->group(function () {
 
-    //setting
-    Route::post('/update/setting','Admin\SettingController@update')->name('setting.update');
-    Route::get('/setting/show/all','Admin\SettingController@index')->name('setting.index');
-    Route::get('/setting/{id}/edit','Admin\SettingController@edit')->name('setting.edit');
-    Route::get('/setting/add/new/slider','Admin\SettingController@addSlider')->name('setting.addSlider');
-    Route::post('/setting/store/slider','Admin\SettingController@storeSlider')->name('setting.storeSlider');
-    Route::get('/setting/edit/{id}/slider','Admin\SettingController@editSlider')->name('setting.editSlider');
-    Route::post('/setting/update/{id}/slider','Admin\SettingController@updateSlider')->name('setting.updateSlider');
-    Route::delete('/setting/delete/{id}/slider','Admin\SettingController@destroy')->name('setting.destroy');
+            Route::get('', [ShopController::class, 'details'])->name('shop.details');
+
+            Route::get('/edit', [ShopController::class, 'edit'])->name('shop.edit');
+
+            Route::patch('', [ShopController::class, 'update'])->name('shop.update');
+
+            Route::delete('/', [ShopController::class, 'destroy'])->name('shop.delete');
+
+            Route::delete('/delete-photo', [ShopController::class, 'deletePhoto'])->name('shop.delete-photo');
+
+            Route::delete('/delete-sendPrice', [ShopController::class, 'deleteSendPrice'])->name('shop.delete-sendPrice');
+
+            Route::post('/create-sendPrice', [ShopController::class, 'createSendPrice'])->name('shop.create-sendPrice');
+
+            Route::post('/add-photo', [ShopController::class, 'addPhoto'])->name('shop.add-photo');
+
+            Route::post('/add-logo', [ShopController::class, 'addLogo'])->name('shop.add-logo');
+
+            Route::post('/working-hours', [ShopController::class, 'workingHour'])->name('shop.workingHour');
+
+            Route::post('/latLang', [ShopController::class, 'updateLatLang'])->name('shop.latLang');
+
+            /**********************************************************PRODUCT ROUTE*********************************************/
+            Route::prefix('/product')->group(function () {
+
+                Route::get('/search', [ProductController::class, 'search'])->name('product.search');
+
+                Route::get('/', [ProductController::class, 'index'])->name('product.index');
+
+                Route::get('/create', [ProductController::class, 'create'])->name('product.create');
+
+                Route::post('/', [ProductController::class, 'store'])->name('product.store');
+
+                Route::prefix('/{product}')->group(function () {
+
+                    Route::get('/', [ProductController::class, 'show'])->name('product.show');
+
+                    Route::get('/edit', [ProductController::class, 'edit'])->name('product.edit');
+
+                    Route::patch('/', [ProductController::class, 'update'])->name('product.update');
+
+                    Route::delete('/', [ProductController::class, 'destroy'])->name('product.destroy');
+
+                    Route::post('/features', [ProductController::class, 'addFeature'])->name('product.addFeatures');
+
+                    Route::delete('/features', [ProductController::class, 'deleteFeature'])->name('product.deleteFeatures');
+
+                    Route::post('/photo', [ProductController::class, 'addPhoto'])->name('product.add-photo');
+
+                    Route::delete('/Photo', [ProductController::class, 'deletePhoto'])->name('product.delete-photo');
+
+                    Route::prefix('/productComment')->group(function () {
+
+                        Route::get('/', [ProductCommentController::class, 'index'])->name('productComment.index');
+
+                        Route::get('/reply/{productComment}', [ProductCommentController::class, 'create'])->name('productComment.create');
+
+                        Route::post('/reply/{productComment}', [ProductCommentController::class, 'reply'])->name('productComment.reply');
+
+                        Route::delete('/reply/{productComment}', [ProductCommentController::class, 'destroy'])->name('productComment.destroy');
+
+                        Route::get('/verify/{id}/{value}', [ProductCommentController::class, 'verify'])->name('productComment.verify');
+                    });
+                });
+            });
+
+            /****************************************************************SHOP_CATEGORY ROUTES***********************************************/
+            Route::prefix('/shop-categories')->group(function () {
+
+                Route::get('/search', [ShopCategoryController::class, 'search'])->name('shopCategory.search');
+
+                Route::get('/', [ShopCategoryController::class, 'index'])->name('shopCategory.index');
+
+                Route::get('/create', [ShopCategoryController::class, 'create'])->name('shopCategory.create');
+
+                Route::post('/', [ShopCategoryController::class, 'store'])->name('shopCategory.store');
+
+                Route::prefix('/{shopCategory}')->group(function () {
+
+                    Route::get('/edit', [ShopCategoryController::class, 'edit'])->name('shopCategory.edit');
+
+                    Route::patch('/', [ShopCategoryController::class, 'update'])->name('shopCategory.update');
+
+                    Route::delete('/', [ShopCategoryController::class, 'destroy'])->name('shopCategory.destroy');
+                });
+
+            });
+
+            /****************************************************************ORDER ROUTE***********************************************/
+            Route::prefix('order')->group(function () {
+
+                Route::get('/search', [OrderController::class, 'search'])->name('order.search');
+
+                Route::get('/', [OrderController::class, 'index'])->name('order.index');
+
+                Route::post('/filter', [OrderController::class, 'filterByStatus'])->name('order.filterStatus');
+
+                Route::get('/{order}', [OrderController::class, 'show'])->name('order.show');
+
+                Route::get('/edit/{order}', [OrderController::class, 'edit'])->name('order.edit');
+
+                Route::patch('/{order}', [OrderController::class, 'update'])->name('order.update');
+            });
+
+            /****************************************************************DISCOUNT ROUTE***********************************************/
+            Route::prefix('/discount')->group(function () {
+
+                Route::get('/search', [DiscountController::class, 'search'])->name('discount.search');
+
+                Route::get('/', [DiscountController::class, 'index'])->name('discount.index');
+
+                Route::get('/create', [DiscountController::class, 'create'])->name('discount.create');
+
+                Route::post('/', [DiscountController::class, 'store'])->name('discount.store');
+
+                Route::prefix('/{discount}')->group(function () {
+
+                    Route::get('/', [DiscountController::class, 'show'])->name('discount.show');
+
+                    Route::get('/edit', [DiscountController::class, 'edit'])->name('discount.edit');
+
+                    Route::patch('/', [DiscountController::class, 'update'])->name('discount.update');
+
+                    Route::delete('/', [DiscountController::class, 'destroy'])->name('discount.destroy');
+                });
+            });
+
+            /****************************************************************PAYMENT ROUTE***********************************************/
+            Route::prefix('payment')->group(function () {
+
+                Route::get('', [PaymentsController::class, 'index'])->name('ShopPayment.index');
+
+            });
+
+            /****************************************************************MESSAGE ROUTE***********************************************/
+
+            Route::prefix('message')->group(function () {
+
+                Route::get('/', [MessageController::class, 'index'])->name('shopMessage.index');
+
+                Route::get('/create', [MessageController::class, 'create'])->name('shopMessage.create');
+
+                Route::post('/', [MessageController::class, 'store'])->name('shopMessage.store');
+            });
+        });
+    });
+
+
 });

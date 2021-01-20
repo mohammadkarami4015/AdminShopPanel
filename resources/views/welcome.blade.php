@@ -69,7 +69,7 @@
     @if (Route::has('login'))
         <div class="top-right links">
             @auth
-                <a href="{{ url('/admin/dashboard') }}">Home</a>
+                <a href="{{ route('dashboard')}}">Home</a>
             @else
                 <a href="{{ route('login') }}">Login</a>
             @endauth
@@ -78,7 +78,7 @@
 
     <div class="content">
         <div class="title m-b-md">
-            Poorya
+
             {{--{{\App\Setting::where('key','title')->first()->value}}--}}
         </div>
 

@@ -2,26 +2,37 @@
 
 namespace App;
 
-use App\Http\Requests\MessageRequest;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
     protected $guarded = [];
 
-    public static function createNew(MessageRequest $request)
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+
+    public static function createNew($title, $sent_message, $shop_id, $receiver_id, $type)
     {
         $message = new Message();
-        $message->saveAs($request);
+        $message->saveAs($title, $sent_message, $shop_id, $receiver_id, $type);
         return $message;
     }
 
-    public function saveAs($request)
+    public function saveAs($title, $sent_message, $shop_id, $receiver_id, $type)
     {
-        $this->name = $request->name;
-        $this->title = $request->title;
-        $this->message  = $request->message;
-        $this->phone_number  = $request->phone_number;
+        $this->title = $title;
+        $this->message = $sent_message;
+        $this->user_id = $receiver_id;
+        $this->type = $type;
+        $this->shop_id = $shop_id;
         $this->save();
     }
+
 }
