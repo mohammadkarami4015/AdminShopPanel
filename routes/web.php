@@ -75,6 +75,10 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/', [ShopController::class, 'index'])->name('shop.index');
 
+        Route::get('/create', [ShopController::class, 'create'])->name('shop.create');
+
+        Route::post('/', [ShopController::class, 'store'])->name('shop.store');
+
         Route::prefix('/{shop}')->group(function () {
 
             Route::get('', [ShopController::class, 'details'])->name('shop.details');

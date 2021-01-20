@@ -112,7 +112,7 @@
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href=" {{route('shop.index')}}">لیست همه فروشگاه ها</a></li>
-                        <li><a href=" ">افزودن فروشگاه جدید</a></li>
+                        <li><a href="{{route('shop.create')}} ">افزودن فروشگاه جدید</a></li>
 
                     </ul>
                 </li>
