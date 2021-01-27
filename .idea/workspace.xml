@@ -24,10 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6db0e4d4-1ffd-41c0-a232-6e21e930a3e5" name="Default" comment="fix bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Shop/ShopController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Shop/ShopController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Shop.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Shop.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/AdminRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/AdminRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/shops/order/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/shops/order/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
