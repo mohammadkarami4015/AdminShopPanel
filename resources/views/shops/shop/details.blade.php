@@ -89,7 +89,7 @@
                                                         @endphp
                                                         <div class="item  active ">
                                                             @foreach($photos as $photo)
-                                                                <img src="/{{$photo}}" width="45%">
+                                                                <img src="{{$photo}}" width="45%">
                                                             @endforeach
                                                         </div>
 

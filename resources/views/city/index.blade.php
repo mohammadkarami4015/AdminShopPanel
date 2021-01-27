@@ -37,11 +37,11 @@
                         <h5> لیست شهرها</h5>
                     </div>
                     <div class="searchListDiv">
-                        <input class="form-control searchListInput" id="searchInput" type="text"
-                               placeholder="جستجو بر اساس نام شهر یا کشور">
-                        <button class="btn btn-primary btn-sm searchListBtn" id="search">جستجو</button>
+                        <input onkeyup="Search()" class="form-control searchListInput" id="searchInput" type="text"
+                               placeholder=" جستجو بر اساس   نام  " name="data">
+
                     </div>
-                    <div id="myTable" class="ibox-content table-responsive">
+                    <div id="" class="ibox-content table-responsive">
                         <table class="table table-responsive">
                             <thead>
                             <tr>
@@ -51,7 +51,7 @@
                                 <th>وضعیت</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="myTable">
                             @foreach($cities as $city)
                                 <tr>
                                     <td>{{$city->id}}</td>
@@ -104,15 +104,15 @@
         function activate(id) {
             var switchButton = '#switchButton' + id;
             var value = $(switchButton).is(":checked") ? 'on' : 'off';
-            $.get(`/active/admin/${id}/${value}`, {id: id, value: value}, function (result) {
+            $.get(`/city-activate/${id}/${value}`, function (result) {
             });
         }
 
-        $('#search').on('click', function () {
+        function Search() {
             var value = $('#searchInput').val();
-            $.get(`/search/in/admins/{value}`, {value: value}, function (result) {
+            $.get(`city-search`, {data: value}, function (result) {
                 $('#myTable').html(result)
             });
-        })
+        }
     </script>
 @endsection

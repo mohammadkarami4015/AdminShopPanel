@@ -34,12 +34,6 @@
                         <h5> لیست پرداختی ها</h5>
                     </div>
 
-                    <div class="searchListDiv">
-                        <input onkeyup="Search()" class="form-control searchListInput" id="searchInput" type="text"
-                               placeholder=" جستجو بر اساس  عنوان ،توضیحات و قیمت" name="data">
-
-                    </div>
-
                     <div id="myTable" class="ibox-content table-responsive">
                         <table class="table table-responsive">
                             <thead>

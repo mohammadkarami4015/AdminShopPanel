@@ -46,27 +46,12 @@
                         <div class="adminProfileDiv">
                             <div class="adminProfile" style="">
                             </div>
-                            <a href=""><img class="plusIcon" src="/image/plus.png" alt=""></a>
+                            <a href=""><img class="plusIcon" src="http://admin.alefbakala.ir/logo" style="width:100px; box-shadow: 3px 3px 3px 3px white" alt="الفبا کالا"></a>
 
                         </div>
-                        <div >
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span style="display: flex;justify-content: center;align-items: center;flex-direction: row-reverse;" class="clear">
-                                    <span class="block m-t-xs"> <strong class="font-bold"></strong></span>
-                                    <span class="text-muted text-xs block" style="margin: 0px 6px;"><b class="caret"></b></span>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu animated fadeInLeft m-t-xs">
-                                <li><a class="editProfileDiv" >پروفایل</a></li>
-                                <li class="divider"></li>
-                                <li>
-                                    <form action="{{route('logout')}}" class="logOutForm" id="logout-form"  method="POST" >
-                                        @csrf
-                                        <button class="btn btn-danger logoutBtn" type="submit"><i class="material-icons"></i> خروج</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
+                        <br>
+                        <br>
+
                     </div>
                     <div class="logo-element">
                     </div>
@@ -97,6 +82,15 @@
                 </li>
 
                 <li class="@yield('subgroups')">
+                    <a><i class="fa fa-user"></i> <span class="nav-label">زیرگروه ها</span> <span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href=" {{route('subgroup.index')}}">لیست همه  زیر گروه ها</a></li>
+                        <li><a href=" {{route('subgroup.create')}}">ثبت زیر گروه جدید</a></li>
+                    </ul>
+                </li>
+
+                <li class="@yield('subgroups')">
                     <a><i class="fa fa-user"></i> <span class="nav-label"> محصولات</span> <span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
@@ -118,8 +112,21 @@
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href=" {{route('shop.index')}}">لیست همه فروشگاه ها</a></li>
-                        <li><a href=" ">افزودن فروشگاه جدید</a></li>
+                        <li><a href="{{route('shop.create')}} ">افزودن فروشگاه جدید</a></li>
 
+                    </ul>
+                </li>
+
+                <li class="@yield('exit')">
+                    <a><i class="fa fa-user"></i> <span class="nav-label">خروج </span> <span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <form action="{{route('logout')}}" class="logOutForm" id="logout-form"  method="POST" >
+                                @csrf
+                                <button class="btn btn-danger logoutBtn" type="submit"><i class="material-icons"></i> خروج</button>
+                            </form>
+                        </li>
                     </ul>
                 </li>
 
@@ -132,13 +139,6 @@
             <nav class="navbar navbar-static-top" role="navigation">
                <div class="navbar-header floatRight">
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-{{--                    <form  method="POST" role="search" class="searchForm" action="{{route('admin.searchPhoneNumber')}}">--}}
-{{--                        {{ csrf_field() }}--}}
-{{--                        <div class="searchItemDiv">--}}
-{{--                            <input type="text" placeholder="شماره تلفن را وارد نمایید" class="searchInput" name="phone_number" id="myInputTop">--}}
-{{--                            <button type="submit" class="searchBtn btn btn-primary">جستجو</button>--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
                 </div>
                 <ul class="nav navbar-top-links navbar-left">
                     <li>

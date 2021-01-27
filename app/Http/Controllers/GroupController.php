@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\Http\Requests\GroupRequest;
+use Illuminate\Http\Request;
 
 class GroupController
 {
@@ -52,4 +53,18 @@ class GroupController
 
         return back();
     }
+
+    public function search(Request $request)
+    {
+        $groups = Group::query()->where('title', 'like', '%' . $request->get('data') . '%')->latest()->get();
+
+        return view('group.searchResult', compact('groups'));
+    }
+
+    public function activate($id, $value)
+    {
+        $shop = Group::query()->findOrFail($id);
+        $shop->update(['status' => $value]);
+    }
+
 }

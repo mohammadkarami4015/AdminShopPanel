@@ -8,6 +8,7 @@ use App\Http\Requests\Shop\ProductAddPhotoRequest;
 use App\Http\Requests\Shop\ProductDeleteFeatureRequest;
 use App\Http\Requests\Shop\ProductDeletePhotoRequest;
 use App\Http\Requests\Shop\ProductRequest;
+use App\Http\Requests\Shop\ProductUpdateRequest;
 use App\Product;
 use App\Shop;
 use App\ShopCategory;
@@ -42,19 +43,20 @@ class ProductController
 
     public function create(Shop $shop)
     {
-        $shopCategories = ShopCategory::query()->where('shop_id', auth()->id())->get();
+        $shopCategories = ShopCategory::query()->where('shop_id', $shop->id)->get();
+       
         return view('shops.product.create', compact('shopCategories', 'shop'));
     }
 
     public function store(Shop $shop, ProductRequest $request)
     {
-        $shop_products = Product::query()->where('shop_id', auth()->id())->get();
+        $shop_products = Product::query()->where('shop_id', $shop->id)->get();
 
         if (count($shop_products) >= 50) {
             return back()->withErrors('تعداد محصولات شما بیشتر از 50 می باشد');
         }
 
-        $product = Product::createNew($request);
+        $product = Product::createNew($request,$shop);
 
         if ($request->file("photos"))
             $product->createPhoto($request->file("photos"));
@@ -66,7 +68,7 @@ class ProductController
     {
         $photos = explode(';', $product->photos);
 
-        $shopCategories = ShopCategory::query()->where('shop_id', auth()->id())->get();
+        $shopCategories = ShopCategory::query()->where('shop_id', $shop->id)->get();
 
         if ($product->features == null)
             $features = [];
@@ -77,11 +79,12 @@ class ProductController
 
     }
 
-    public function update(Shop $shop, ProductRequest $request, Product $product)
+    public function update(Shop $shop, ProductUpdateRequest $request, Product $product)
     {
-        $product->update($request->except(['photos', 'admin_verification']));
+        
+        $product->update($request->except(['photos']));
 
-        return redirect(route('product.index', 'shop'));
+        return redirect(route('product.index', compact('shop')));
     }
 
     public function destroy(Shop $shop, Product $product)

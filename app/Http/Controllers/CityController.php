@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\City;
 use App\Country;
 use App\Http\Requests\CityRequest;
+use Illuminate\Http\Request;
 
 class CityController
 {
@@ -59,4 +60,18 @@ class CityController
 
         return back();
     }
+
+    public function activate($id, $value)
+    {
+        $shop = City::query()->findOrFail($id);
+        $shop->update(['status' => $value]);
+    }
+
+    public function search(Request $request)
+    {
+       $cities = City::query()->where('title','like','%'.$request->get('data').'%')->latest()->get();
+
+       return view('city.searchResult',compact('cities'));
+    }
+
 }

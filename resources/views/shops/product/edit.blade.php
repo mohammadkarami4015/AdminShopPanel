@@ -130,14 +130,14 @@
                                 <div class="col-md-6">
                                     <select id="price" type="text" class="form-control" name="installment_flag"
                                           required>
-                                        <option {{$product->installment_flag == 'yse' ? 'selected' : ''}} value="yse">دارد</option>
+                                        <option {{$product->installment_flag == 'yes' ? 'selected' : ''}} value="yse">دارد</option>
                                         <option {{$product->installment_flag == 'no' ? 'selected' : ''}} value="no">ندارد</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="price" class="col-md-4 control-label">  شرایط اقساط</label>
+                                <label for="price" class="col-md-4 control-label">  پیش پرداخت </label>
 
                                 <div class="col-md-6">
                                     <input id="price" type="text" class="form-control" name="installment"
@@ -159,6 +159,20 @@
 
                                 </div>
                             </div>
+                            
+                             <div class="form-group">
+                                <label for="title" class="col-md-4 control-label"> وضعیت تایید </label>
+
+                                <div class="col-md-6">
+                                    <select id="title" class="form-control" name="admin_verification">
+                                        <option {{$product->admin_verification == 'on' ? 'selected' : '' }} value="on">تایید  </option>
+                                        <option {{$product->admin_verification == 'off' ? 'selected' : '' }} value="off">  عدم تایید </option>
+
+                                    </select>
+
+                                </div>
+                            </div>
+
 
                             <div class="row">
                                 <div class="col-lg-6 col-md-offset-3">
@@ -269,7 +283,7 @@
                                 @foreach($photos as $key=>$url)
                                     <tr>
                                         <td>{{$key}}</td>
-                                        <td><img src="/{{($url)}}"
+                                        <td><img src="{{($url)}}"
                                                  alt="" style="width:30%;"></td>
 
                                         <td>

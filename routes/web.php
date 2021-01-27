@@ -2,6 +2,8 @@
 
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Shop\DiscountController;
 use App\Http\Controllers\Shop\MessageController;
@@ -11,6 +13,7 @@ use App\Http\Controllers\Shop\ProductCommentController;
 use App\Http\Controllers\Shop\ProductController;
 use App\Http\Controllers\Shop\ShopCategoryController;
 use App\Http\Controllers\Shop\ShopController;
+use App\Http\Controllers\SubgroupController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,20 +30,32 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/activate/{id}/{value}', [AdminController::class, 'activate'])->name('admin.activate');
 
-    Route::resource('admin', 'adminController');
+    Route::resource('admin', 'AdminController');
     /**********************************************************CITY ROUTE*********************************************/
+    Route::get('/city-activate/{id}/{value}', [CityController::class, 'activate'])->name('city.activate');
+
+    Route::get('/city-search', [CityController::class, 'search'])->name('city.search');
+
     Route::resource('city', 'CityController');
 
     /**********************************************************GROUP ROUTE*********************************************/
+    Route::get('/group-search', [GroupController::class, 'search'])->name('group.search');
+
+    Route::get('/group-activate/{id}/{value}', [GroupController::class, 'activate'])->name('group.activate');
+
     Route::resource('group', 'GroupController');
 
     /**********************************************************SUBGROUP ROUTE*********************************************/
+    Route::get('/subgroup-search', [SubgroupController::class, 'search'])->name('subgroup.search');
+
     Route::resource('subgroup', 'SubgroupController');
 
     /**********************************************************SUBGROUP ROUTE*********************************************/
     Route::prefix('products')->group(function () {
 
         Route::get('', [\App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
+
+        Route::get('/search', [\App\Http\Controllers\ProductController::class, 'search'])->name('products.search');
 
         Route::get('/{product}', [\App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
     });
@@ -54,9 +69,15 @@ Route::middleware('auth')->group(function () {
     /**********************************************************SHOP ROUTE*********************************************/
     Route::prefix('/shops')->group(function () {
 
+        Route::get('/search', [ShopController::class, 'search'])->name('shop.search');
+
         Route::get('/activate/{id}/{value}', [ShopController::class, 'activate'])->name('shop.activate');
 
         Route::get('/', [ShopController::class, 'index'])->name('shop.index');
+
+        Route::get('/create', [ShopController::class, 'create'])->name('shop.create');
+
+        Route::post('/', [ShopController::class, 'store'])->name('shop.store');
 
         Route::prefix('/{shop}')->group(function () {
 

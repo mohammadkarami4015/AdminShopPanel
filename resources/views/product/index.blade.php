@@ -66,13 +66,10 @@
                                     <td>{{$product->price}}</td>
                                     <td>{{$product->status=='on' ? 'فعال' : 'غیر فعال'}}</td>
 
-
-
                                     <td>
                                         <a class="btn btn-sm btn-info"
                                            href="{{ route('products.show',$product)}}"> جزئیات</a>
                                     </td>
-
 
                                 </tr>
                             @endforeach
@@ -91,9 +88,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
 
-        function Search(id) {
+        function Search() {
             var value = $('#searchInput').val();
-            $.get(`/shops/${id}/product/search`, {data: value}, function (result) {
+            $.get(`/products/search`, {data: value}, function (result) {
                 $('#myTable').html(result)
             });
         }

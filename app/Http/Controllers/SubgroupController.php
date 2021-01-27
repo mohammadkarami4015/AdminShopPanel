@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\Http\Requests\SubgroupRequest;
 use App\Subgroup;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Http\Request;
 
 class SubgroupController
 {
@@ -35,7 +37,7 @@ class SubgroupController
     {
         $groups = Group::query()->where('status', 'on')->get();
 
-        return view('subgroup.edit', compact('subgroup','groups'));
+        return view('subgroup.edit', compact('subgroup', 'groups'));
     }
 
     public function update(SubGroupRequest $request, Subgroup $subgroup)
@@ -55,4 +57,12 @@ class SubgroupController
 
         return back();
     }
+
+    public function search(Request $request)
+    {
+        $subgroups = Subgroup::search($request->get('data'));
+
+        return view('subgroup.searchResult', compact('subgroups'));
+    }
+
 }

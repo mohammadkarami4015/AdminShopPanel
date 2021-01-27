@@ -205,9 +205,9 @@
                             <label for="title" class="col-md-4 control-label"> وضعیت </label>
 
                             <div class="col-md-6">
-                                <select id="title" class="form-control" name="status">
-                                    <option {{$shop->status == 'on' ? 'selected' : '' }} value="on">فعال</option>
-                                    <option {{$shop->status == 'off' ? 'selected' : '' }} value="off"> غیر فعال</option>
+                                <select id="title" class="form-control" name="admin_verification">
+                                    <option {{$shop->admin_verification == 'on' ? 'selected' : '' }} value="on">فعال</option>
+                                    <option {{$shop->admin_verification == 'off' ? 'selected' : '' }} value="off"> غیر فعال</option>
 
                                 </select>
 
@@ -394,7 +394,7 @@
                               enctype="multipart/form-data">
                             @csrf
                             <div style="float: left;margin-top: -10px">
-                                <img src="/{{$shop->logo}}" width="200px" height="150px" style="border: solid 1px">
+                                <img src="{{$shop->logo}}" width="200px" height="150px" style="border: solid 1px">
                             </div>
                             <div>
                                 <h3>انتخاب لوگو</h3>
@@ -440,7 +440,7 @@
                         @foreach($photos as $key=>$url)
                             <tr>
                                 <td>{{$key}}</td>
-                                <td><img src="/{{($url)}}"
+                                <td><img src="{{($url)}}"
                                          alt="" style="width:60%;"></td>
                                 <td style="color: blue">عکس فروشگاه</td>
                                 <td>

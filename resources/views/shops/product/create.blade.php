@@ -76,6 +76,7 @@
                                 <label for="type" class="col-md-4 control-label">زیر شاخه</label>
                                 <div class="col-md-6">
                                     <select class="form-control" name="shop_category_id" id="type" required>
+                                  
                                         <option disabled selected>انتخاب زیر شاخه</option>
                                         @foreach($shopCategories as $value)
                                             <option value="{{$value->id}}">{{$value->title}}</option>
@@ -127,14 +128,14 @@
                                 <div class="col-md-6">
                                     <select id="price" type="text" class="form-control" name="installment_flag"
                                             value="{{ old('installment_flag')}}" required>
-                                        <option value="yse">دارد</option>
+                                        <option value="yes">دارد</option>
                                         <option value="no">ندارد</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="price" class="col-md-4 control-label">  شرایط اقساط</label>
+                                <label for="price" class="col-md-4 control-label">   پیش پرداخت</label>
 
                                 <div class="col-md-6">
                                     <input id="price" type="text" class="form-control" name="installment"

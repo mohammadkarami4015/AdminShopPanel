@@ -58,6 +58,7 @@
                                 <th>موجودی</th>
                                 <th>قیمت</th>
                                 <th>وضعیت</th>
+                                <th> وضعیت تایید</th>
                             </tr>
                             </thead>
                             <tbody id="myTable">
@@ -69,6 +70,8 @@
                                     <td>{{$product->inventory}}</td>
                                     <td>{{$product->price}}</td>
                                     <td>{{$product->status=='on' ? 'فعال' : 'غیر فعال'}}</td>
+                                    
+                                    <td>{{$product->admin_verification =='on' ? 'تایید شده' : 'تایید نشده'}}</td>
                                     <td>
                                         <form class="deleteForm" method="post"
                                               action="{{ route('product.destroy',[$shop,$product]) }}">

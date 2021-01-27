@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Shop;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class ShopUpdateRequest extends FormRequest
+class ShopStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,10 +32,14 @@ class ShopUpdateRequest extends FormRequest
             'subgroup_id' => 'required',
             'country_id' => 'required',
             'city_id' => 'required',
-            'contact_phone' => 'required',
-            'admin_verification' => 'required',
             'address' => 'required',
             'min_order_price' => 'required',
+            'phone_number' => [
+                'required',
+                'digits:11',
+                'numeric',
+                Rule::unique('shops','phone_number')
+            ]
         ];
     }
 }

@@ -54,8 +54,8 @@ class Discount extends Model
 
     public function updateExpire($expire)
     {
-        $jDate = Jalalian::fromFormat('Y/m/d', $expire);
-        $this->expire = $jDate;
+    
+        $this->expire = $expire;
         $this->save();
     }
 

@@ -37,11 +37,11 @@
                         <h5> لیست زیرگروه ها</h5>
                     </div>
                     <div class="searchListDiv">
-                        <input class="form-control searchListInput" id="searchInput" type="text"
-                               placeholder="جستجو بر اساس نام زیرگروه  یا کشور">
-                        <button class="btn btn-primary btn-sm searchListBtn" id="search">جستجو</button>
+                        <input onkeyup="Search()" class="form-control searchListInput" id="searchInput" type="text"
+                               placeholder=" جستجو بر اساس   نام  " name="data">
+
                     </div>
-                    <div id="myTable" class="ibox-content table-responsive">
+                    <div  class="ibox-content table-responsive">
                         <table class="table table-responsive">
                             <thead>
                             <tr>
@@ -50,7 +50,7 @@
                                 <th>نام گروه</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="myTable">
                             @foreach($subgroups as $subgroup)
                                 <tr>
                                     <td>{{$subgroup->id}}</td>
@@ -87,5 +87,15 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        function Search() {
+            var value = $('#searchInput').val();
+            $.get(`subgroup-search`, {data: value}, function (result) {
+                $('#myTable').html(result)
+            });
+        }
 
+
+    </script>
 @endsection

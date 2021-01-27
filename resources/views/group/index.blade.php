@@ -4,7 +4,7 @@
     لیست  گروه ها
 @endsection
 
-@section('cities')
+@section('groups')
     active
 @endsection
 
@@ -37,11 +37,11 @@
                         <h5> لیست گروه ها</h5>
                     </div>
                     <div class="searchListDiv">
-                        <input class="form-control searchListInput" id="searchInput" type="text"
-                               placeholder="جستجو بر اساس نام گروه  یا کشور">
-                        <button class="btn btn-primary btn-sm searchListBtn" id="search">جستجو</button>
+                        <input onkeyup="Search()" class="form-control searchListInput" id="searchInput" type="text"
+                               placeholder=" جستجو بر اساس   نام  " name="data">
+
                     </div>
-                    <div id="myTable" class="ibox-content table-responsive">
+                    <div id="" class="ibox-content table-responsive">
                         <table class="table table-responsive">
                             <thead>
                             <tr>
@@ -50,7 +50,7 @@
                                 <th>وضعیت</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="myTable">
                             @foreach($groups as $group)
                                 <tr>
                                     <td>{{$group->id}}</td>
@@ -98,18 +98,18 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-        function activate(id) {
-            var switchButton = '#switchButton' + id;
-            var value = $(switchButton).is(":checked") ? 'on' : 'off';
-            $.get(`/active/admin/${id}/${value}`, {id: id, value: value}, function (result) {
+        function Search() {
+            var value = $('#searchInput').val();
+            $.get(`group-search`, {data: value}, function (result) {
+                $('#myTable').html(result)
             });
         }
 
-        $('#search').on('click', function () {
-            var value = $('#searchInput').val();
-            $.get(`/search/in/admins/{value}`, {value: value}, function (result) {
-                $('#myTable').html(result)
+        function activate(id) {
+            var switchButton = '#switchButton' + id;
+            var value = $(switchButton).is(":checked") ? 'on' : 'off';
+            $.get(`/group-activate/${id}/${value}`, function (result) {
             });
-        })
+        }
     </script>
 @endsection

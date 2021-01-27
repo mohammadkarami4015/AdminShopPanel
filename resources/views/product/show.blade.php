@@ -115,11 +115,11 @@
                                                                     $feature =explode(',',$feature)
                                                 @endphp
 
+
                                                 @if($feature)
                                                     <tr>
                                                         <td>{{$feature[0]}}</td>
                                                         <td>{{$feature[1]}}</td>
-
                                                     </tr>
                                                 @endif
                                             @endforeach

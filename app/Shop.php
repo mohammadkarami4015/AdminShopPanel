@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
@@ -71,19 +71,27 @@ class Shop extends Authenticatable
 
     public static function createNew(Request $request)
     {
-        $shop = new Shop();
-        $shop->saveAs($request);
-        return $shop;
+      return  self::query()->create([
+            'name' => $request->name,
+            'title' => $request->title,
+            'email' => $request->email,
+            'group_id' => $request->group_id,
+            'subgroup_id' => $request->subgroup_id,
+            'instagram' => $request->instagram,
+            'telegram' => $request->telegram,
+            'whatsup' => $request->whatsup,
+            'country_id' => $request->country_id,
+            'city_id' => $request->city_id,
+            'contact_phone' => $request->contact_phone,
+            'phone_number' => $request->phone_number,
+            'admin_verification' => 'on',
+            'desc' => $request->desc,
+            'address' => $request->address,
+            'send_prices' => $request->send_prices,
+            'min_order_price' => $request->min_order_price,
+        ]);
     }
 
-    public function saveAs($request)
-    {
-        $now = Carbon::now();
-        $this->phone_number = $request->phone_number;
-        $this->credit = $now->addDays(60);
-        $this->admin_verification = null;
-        $this->save();
-    }
 
     public function updateShop($request)
     {
@@ -99,12 +107,12 @@ class Shop extends Authenticatable
             'country_id' => $request->country_id,
             'city_id' => $request->city_id,
             'contact_phone' => $request->contact_phone,
-            'status' => $request->status,
+            'admin_verification' => $request->admin_verification,
             'desc' => $request->desc,
             'address' => $request->address,
             'send_prices' => $request->send_prices,
             'min_order_price' => $request->min_order_price,
-            'notification_token' => $request->notification_token,
+
         ]);
     }
 
@@ -130,7 +138,7 @@ class Shop extends Authenticatable
             $file_name = "logo" . $this->id . random_int(0, 1000) . '-' . time() . '.' . $file->getClientOriginalExtension();
             $path = 'photos/shop/' . $this->id . "/";
             $file->move($path, $file_name);
-            return $path . $file_name;
+            return 'http://admin.alefbakala.ir/' . $path . $file_name;
         } else {
             return "";
         }
@@ -145,7 +153,7 @@ class Shop extends Authenticatable
             $file_name = "other" . $this->id . random_int(1, 100) . '-' . time() . '.' . $file->getClientOriginalExtension();
             $path = 'photos/shop/' . $this->id . "/";
             $file->move($path, $file_name);
-            return $path . $file_name;
+            return 'http://admin.alefbakala.ir/' . $path . $file_name;
         } else {
             return "";
         }
@@ -180,20 +188,22 @@ class Shop extends Authenticatable
         $this->save();
     }
 
-    public function workingHour($request)
-    {
-
-    }
 
     public function updateWorkingTime($request)
     {
         $workingDay = implode(',', [$request->get('from'), $request->get('to')]);
         $workingHour = implode(',', [$request->get('toNumber'), $request->get('fromNumber')]);
-        $workingTime=implode(';',[$workingDay,$workingHour]);
+        $workingTime = implode(';', [$workingDay, $workingHour]);
 
         $this->working_hours = $workingTime;
         $this->save();
     }
 
-
+    public function scopeSearch(Builder $query, $data)
+    {
+        return $query->where('title', 'like', '%' . $data . '%')
+            ->orWhere('name', 'like', '%' . $data . '%')
+            ->orWhere('desc', 'like', '%' . $data . '%')
+            ->orWhere('address', 'like', '%' . $data . '%');
+    }
 }

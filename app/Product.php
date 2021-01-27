@@ -45,14 +45,12 @@ class Product extends Model
         return $this->hasMany(ProductComment::class);
     }
 
-    public static function createNew(Request $request)
+    public static function createNew(Request $request, $shop)
     {
-        $shop = auth()->user();
-
         return $shop->products()->create([
             'group_id' => $shop->group->id,
             'subgroup_id' => $shop->subgroup_id,
-            'city_id' => $shop->city->id,
+            'city_id' => $shop->cityـid,
             'shop_category_id' => $request->get('shop_category_id'),
             'title' => $request->get('title'),
             'desc' => $request->get('desc'),
@@ -63,7 +61,7 @@ class Product extends Model
             'installment_flag' => $request->get('installment_flag'),
             'installment' => $request->get('installment'),
             'status' => "on",
-            'admin_verification' => null,
+            'admin_verification' => 'on',
         ]);
     }
 
@@ -74,7 +72,7 @@ class Product extends Model
             $file_name = "product" . $this->id . random_int(100, 1000) . '-' . time() . '.' . $file->getClientOriginalExtension();
             $path = 'photos/shop/' . $this->shop_id . "/products/";
             $file->move($path, $file_name);
-            return $path . $file_name;
+            return 'http://admin.alefbakala.ir/' . $path . $file_name;
         } else {
             return "";
         }
@@ -103,6 +101,14 @@ class Product extends Model
 
             return $query;
         });
+    }
+
+    public function scopeSearchAll(Builder $query, $data)
+    {
+       return $query->where('title', 'like', '%' . $data . '%')
+            ->orWhere('desc', 'like', '%' . $data . '%')
+            ->orWhere('price', 'like', '%' . $data . '%');
+
     }
 
     public function addFeatures($request)

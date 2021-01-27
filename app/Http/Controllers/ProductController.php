@@ -16,11 +16,11 @@ class ProductController
         return view('product.index', compact('products'));
     }
 
-    public function search(Request $request, $id)
+    public function search(Request $request)
     {
-        $products = Product::search($id, $request->data)->latest()->get();
-        $shop = Shop::query()->find($id);
-        return view('shops.product.searchResult', compact('products','shop'));
+        $products = Product::searchAll( $request->get('data'))->latest()->get();
+
+        return view('product.searchResult', compact('products'));
     }
 
     public function show( Product $product)

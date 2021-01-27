@@ -11,6 +11,7 @@ use App\Http\Requests\Shop\ShopAddPhotoRequest;
 use App\Http\Requests\Shop\ShopCreateSendPriceRequest;
 use App\Http\Requests\Shop\ShopDeletePhotoRequest;
 use App\Http\Requests\Shop\ShopDeleteSendPriceRequest;
+use App\Http\Requests\Shop\ShopStoreRequest;
 use App\Http\Requests\Shop\ShopUpdateRequest;
 use App\Http\Requests\Shop\ShopWorkingTimeRequest;
 use App\Shop;
@@ -37,6 +38,26 @@ class ShopController
         return view('shops.shop.details', compact('shop', 'sendPrices'));
     }
 
+    public function create()
+    {
+        $countries = Country::all();
+        $cities = City::all();
+        $groups = Group::all();
+        $subGroups = Subgroup::all();
+
+        return view('shops.shop.create', compact( 'countries', 'cities', 'groups', 'subGroups'));
+
+    }
+
+    public function store(ShopStoreRequest $request)
+    {
+        Shop::createNew($request);
+
+        flash('فروشگاه مورد نظر با موفقیت ثبت شد');
+
+        return redirect()->route('shop.index');
+    }
+
     public function edit(Shop $shop)
     {
         $countries = Country::all();
@@ -56,6 +77,8 @@ class ShopController
     public function update(ShopUpdateRequest $request, Shop $shop)
     {
         $shop->updateShop($request);
+
+        flash('فروشگاه مورد نظر با موفقیت ویرایش شد');
 
         return redirect(route('shop.details', $shop));
     }
@@ -145,7 +168,14 @@ class ShopController
     public function activate($id, $value)
     {
         $shop = Shop::query()->findOrFail($id);
-        $shop->update(['status' => $value]);
+        $shop->update(['admin_verification' => $value]);
+    }
+
+    public function search(Request $request)
+    {
+        $shops = Shop::search($request->get('data'))->latest()->get();
+
+        return view('shops.shop.searchResult', compact('shops'));
     }
 
 }

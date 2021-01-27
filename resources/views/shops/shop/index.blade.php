@@ -65,7 +65,7 @@
                                             <label>
                                                 <input id="switchButton{{$shop->id}}" onchange="activate({{$shop->id}})"
                                                        name="status" type="checkbox"
-                                                       @if($shop->status=='on')checked @endif >
+                                                       @if($shop->admin_verification=='on')checked @endif >
                                                 <span class="lever"></span>
                                             </label>
                                         </div>
@@ -107,8 +107,14 @@
         function activate(id) {
             var switchButton = '#switchButton' + id;
             var value = $(switchButton).is(":checked") ? 'on' : 'off';
-            console.log(value)
             $.get(`/shops/activate/${id}/${value}`, function (result) {
+            });
+        }
+
+        function Search() {
+            var value = $('#searchInput').val();
+            $.get(`/shops/search`, {data: value}, function (result) {
+                $('#myTable').html(result)
             });
         }
     </script>
