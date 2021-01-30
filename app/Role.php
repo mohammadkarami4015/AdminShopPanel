@@ -21,8 +21,8 @@ class Role extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function assignPermission($permission)
+    public function assignPermission($permissions)
     {
-        $this->permissions()->sync(Permission::whereName($permission));
+        $this->permissions()->sync($permissions);
     }
 }
