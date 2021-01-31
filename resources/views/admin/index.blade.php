@@ -82,22 +82,6 @@
                                                     <div class="modal-body">
                                                         <div class="row">
                                                             <div class="col-md-10 col-md-offset-1">
-
-{{--                                                                <div class="panel panel-default">--}}
-{{--                                                                    <div class="panel-heading">عکس پروفایل</div>--}}
-{{--                                                                    @if($admin->photo)--}}
-{{--                                                                        <div id="myCarousel{{$admin->id}}" class="carousel slide" data-ride="carousel">--}}
-{{--                                                                            <!-- Wrapper for slides -->--}}
-{{--                                                                            <div class="carousel-inner">--}}
-{{--                                                                                <div class="item  active ">--}}
-{{--                                                                                    <img src="/{{$admin->photo}}" alt="" style="width:100%;">--}}
-{{--                                                                                </div>--}}
-{{--                                                                            </div>--}}
-{{--                                                                        </div>--}}
-{{--                                                                    @endif--}}
-
-{{--                                                                </div>--}}
-
                                                                 <div class="panel panel-default">
                                                                     <div class="panel-heading">جزئیات</div>
                                                                     <div class="list-group">
@@ -106,6 +90,22 @@
                                                                         <a class="list-group-item">  شماره تماس: {{$admin->phone_number}}</a>
                                                                         <a class="list-group-item"> وضعیت: {{$admin->status == 'on' ? 'فعال' : 'غیرفعال'}}</a>
                                                                         <a class="list-group-item">  ایمیل: {{$admin->email}}</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-10 col-md-offset-1">
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">نقش ها</div>
+                                                                        <div class="list-group">
+                                                                            @foreach($admin->roles as $role)
+                                                                                <a class="list-group-item">
+                                                                                    <b>نام: </b>  {{$role->name}}
+                                                                                    <b style="margin-right: 30px">توضیحات: </b> {{$role->label}}
+                                                                                </a>
+                                                                            @endforeach
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>

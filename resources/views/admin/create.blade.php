@@ -8,6 +8,12 @@
     active
 @endsection
 
+
+@section('header')
+    <link rel="stylesheet" href="/bower_components/select2/dist/css/select2.min.css">
+
+@endsection
+
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
@@ -83,6 +89,19 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="title" class="col-md-4 control-label">نقش ها</label>
+                            <div class="col-md-6">
+                                <select class="form-control select2 select2-dropdown"
+                                        data-placeholder="انتخاب نقش"
+                                        multiple name="roles[]" id="type" tabindex="-1">
+                                    @foreach($roles as $role)
+                                        <option value="{{$role->id}}">{{$role->label}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="email" class="col-md-4 control-label">رمز عبور </label>
                             <div class="col-md-6">
                                 <input id="email" type="password" class="form-control" name="password"
@@ -114,3 +133,20 @@
     </div>
 
 @endsection
+
+@section('footer')
+
+    <script src="{{asset('/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
+
+    <script>
+
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2({
+                dir: "rtl"
+            });
+            $('.Select2').val(null).trigger('change');
+        });
+    </script>
+@endsection
+

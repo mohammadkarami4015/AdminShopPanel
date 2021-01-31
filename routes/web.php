@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Shop\DiscountController;
 use App\Http\Controllers\Shop\MessageController;
 use App\Http\Controllers\Shop\OrderController;
@@ -28,6 +29,8 @@ Route::middleware('auth')->group(function () {
     /**********************************************************ADMIN ROUTE*********************************************/
     Route::patch('/admin/change-password/{admin}', [AdminController::class, 'changePassword'])->name('admin.change-password');
 
+    Route::patch('/admin/update-role/{admin}', [AdminController::class, 'updateRoles'])->name('admin.update-role');
+
     Route::get('/admin/activate/{id}/{value}', [AdminController::class, 'activate'])->name('admin.activate');
 
     Route::resource('admin', 'AdminController');
@@ -49,6 +52,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/subgroup-search', [SubgroupController::class, 'search'])->name('subgroup.search');
 
     Route::resource('subgroup', 'SubgroupController');
+
+ /**********************************************************ROLE ROUTE*********************************************/
+    Route::get('/role-search', [RoleController::class, 'search'])->name('role.search');
+
+    Route::resource('role', 'RoleController');
 
     /**********************************************************SUBGROUP ROUTE*********************************************/
     Route::prefix('products')->group(function () {

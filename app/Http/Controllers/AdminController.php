@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Admin;
 use App\Http\Requests\AdminRequest;
 use App\Http\Requests\PasswordRequest;
+use App\Http\Requests\AdminUpdateRoleRequest;
+use App\Role;
 
 class AdminController
 {
@@ -17,15 +19,22 @@ class AdminController
 
     public function create()
     {
-        return view('admin.create');
+        $roles =Role::all();
+
+        return view('admin.create',compact('roles'));
     }
 
     public function store(AdminRequest $request)
     {
-        Admin::query()->create(array_merge(
+        $admin = Admin::query()->create(array_merge(
             ['password' => bcrypt($request->get('password'))],
             $request->only('name', 'last_name', 'phone_number', 'status', 'email')
         ));
+
+        /** @var Admin $admin */
+        if ($request->get('roles')) {
+            $admin->roles()->sync($request->get('roles'));
+        }
 
         flash('عملیات با موفقیت انجام شد!');
         return redirect()->route('admin.index');
@@ -33,12 +42,18 @@ class AdminController
 
     public function edit(Admin $admin)
     {
-        return view('admin.edit', compact('admin'));
+        $roles = Role::all();
+        return view('admin.edit', compact('admin', 'roles'));
     }
 
     public function update(AdminRequest $request, Admin $admin)
     {
-        $admin->update($request->validated());
+        $admin->update($request->except('roles'));
+
+        /** @var Admin $admin */
+        if ($request->get('roles')) {
+            $admin->roles()->sync($request->get('roles'));
+        }
 
         flash('عملیات با موفقیت انجام شد!');
         return back();
@@ -54,6 +69,14 @@ class AdminController
     public function changePassword(PasswordRequest $request, Admin $admin)
     {
         $admin->update(['password' => bcrypt($request->get('password'))]);
+        flash('عملیات با موفقیت انجام شد!');
+        return back();
+    }
+
+    public function updateRoles(Admin $admin, AdminUpdateRoleRequest $request)
+    {
+        $admin->roles()->sync($request->get('role_id'));
+
         flash('عملیات با موفقیت انجام شد!');
         return back();
     }

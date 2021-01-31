@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class RoleStoreRequest extends FormRequest
+class AdminUpdateRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class RoleStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,15 @@ class RoleStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'role_id' => [
+                'required',
+                'array',
+            ],
+            'role_id.*' => [
+                'required',
+                'numeric',
+                Rule::exists('roles', 'id')
+            ],
         ];
     }
 }

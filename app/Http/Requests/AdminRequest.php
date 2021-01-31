@@ -28,6 +28,7 @@ class AdminRequest extends FormRequest
                 'phone_number' => ['digits:11', 'required', 'max:255', Rule::unique('admins', 'phone_number')],
                 'password' => 'string|required|confirmed|max:255',
                 'status' => ['required', Rule::in(['on', 'off'])],
+                'roles'=>['array','nullable'],
             ];
         else
             return [

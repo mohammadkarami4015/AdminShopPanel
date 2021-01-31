@@ -12,31 +12,36 @@
 
     <!-- Styles -->
     @yield('header')
-    <link href="{{ asset('css/bootstrap.min.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/bootstrap.rtl.min.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/font-awesome/css/font-awesome.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/plugins/morris/morris-0.4.3.min.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/animate.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/admin.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/plugins/dropzone/basic.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/plugins/dropzone/dropzone.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/style.rtl.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/materialize.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/plugins/chosen/chosen.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('dist/css/s.map.min.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('dist/css/fa/style.css') }}" data-path="/dist/css/" data-file="style.css" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/dropdown/materilizeDropdown.css') }}" data-path="/dist/css/" data-file="style.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/bootstrap.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/bootstrap.rtl.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/font-awesome/css/font-awesome.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/plugins/morris/morris-0.4.3.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/animate.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/admin.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/plugins/dropzone/basic.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/plugins/dropzone/dropzone.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css') }}" media="all"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/style.rtl.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/materialize.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/plugins/chosen/chosen.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css') }}" media="all"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('dist/css/s.map.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('dist/css/fa/style.css') }}" data-path="/dist/css/" data-file="style.css" media="all"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/dropdown/materilizeDropdown.css') }}" data-path="/dist/css/" data-file="style.css"
+          media="all" rel="stylesheet" type="text/css"/>
     <link href="{{asset('src/ha-datetimepicker.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('plyr/plyr.css') }}" data-path="/dist/css/" data-file="style.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('plyr/plyr.css') }}" data-path="/dist/css/" data-file="style.css" media="all" rel="stylesheet"
+          type="text/css"/>
 
 
 </head>
 <body>
 @php
 
-@endphp
+    @endphp
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -46,7 +51,8 @@
                         <div class="adminProfileDiv">
                             <div class="adminProfile" style="">
                             </div>
-                            <a href=""><img class="plusIcon" src="http://admin.alefbakala.ir/logo" style="width:100px; box-shadow: 3px 3px 3px 3px white" alt="الفبا کالا"></a>
+                            <a href=""><img class="plusIcon" src="http://admin.alefbakala.ir/logo"
+                                            style="width:100px; box-shadow: 3px 3px 3px 3px white" alt="الفبا کالا"></a>
 
                         </div>
                         <br>
@@ -57,13 +63,23 @@
                     </div>
                 </li>
 
-                    <li class="@yield('admins')" >
-                        <a><i class="fa fa-user"></i> <span class="nav-label">مدیران</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a  href=" {{route('admin.index')}}">لیست همه مدیران</a></li>
-                            <li><a  href=" {{route('admin.create')}}">ثبت حساب جدید</a></li>
-                        </ul>
-                    </li>
+                <li class="@yield('admins')">
+                    <a><i class="fa fa-user"></i> <span class="nav-label">مدیران</span> <span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href=" {{route('admin.index')}}">لیست همه مدیران</a></li>
+                        <li><a href=" {{route('admin.create')}}">ثبت حساب جدید</a></li>
+                    </ul>
+                </li>
+
+                <li class="@yield('roles')">
+                    <a><i class="fa fa-user"></i> <span class="nav-label">نقش ها</span> <span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href=" {{route('role.index')}}">لیست همه نقش ها</a></li>
+                        <li><a href=" {{route('role.create')}}">افزودن نقش</a></li>
+                    </ul>
+                </li>
                 <li class="@yield('cities')">
                     <a><i class="fa fa-user"></i> <span class="nav-label">شهرها</span> <span
                             class="fa arrow"></span></a>
@@ -85,7 +101,7 @@
                     <a><i class="fa fa-user"></i> <span class="nav-label">زیرگروه ها</span> <span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href=" {{route('subgroup.index')}}">لیست همه  زیر گروه ها</a></li>
+                        <li><a href=" {{route('subgroup.index')}}">لیست همه زیر گروه ها</a></li>
                         <li><a href=" {{route('subgroup.create')}}">ثبت زیر گروه جدید</a></li>
                     </ul>
                 </li>
@@ -122,9 +138,11 @@
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <form action="{{route('logout')}}" class="logOutForm" id="logout-form"  method="POST" >
+                            <form action="{{route('logout')}}" class="logOutForm" id="logout-form" method="POST">
                                 @csrf
-                                <button class="btn btn-danger logoutBtn" type="submit"><i class="material-icons"></i> خروج</button>
+                                <button class="btn btn-danger logoutBtn" type="submit"><i class="material-icons"></i>
+                                    خروج
+                                </button>
                             </form>
                         </li>
                     </ul>
@@ -137,8 +155,9 @@
     <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation">
-               <div class="navbar-header floatRight">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                <div class="navbar-header floatRight">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i>
+                    </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-left">
                     <li>
