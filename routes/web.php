@@ -29,8 +29,6 @@ Route::middleware('auth')->group(function () {
     /**********************************************************ADMIN ROUTE*********************************************/
     Route::patch('/admin/change-password/{admin}', [AdminController::class, 'changePassword'])->name('admin.change-password');
 
-    Route::patch('/admin/update-role/{admin}', [AdminController::class, 'updateRoles'])->name('admin.update-role');
-
     Route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
 
     Route::get('/admin/activate/{id}/{value}', [AdminController::class, 'activate'])->name('admin.activate');

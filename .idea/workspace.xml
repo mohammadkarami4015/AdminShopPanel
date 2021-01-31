@@ -22,10 +22,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6db0e4d4-1ffd-41c0-a232-6e21e930a3e5" name="Default" comment="fix print page">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Role.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Role.php" afterDir="false" />
-    </list>
+    <list default="true" id="6db0e4d4-1ffd-41c0-a232-6e21e930a3e5" name="Default" comment="fix print page" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,6 +41,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="role" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -162,7 +164,7 @@
     <property name="ToolWindowEvent Log.ShowToolbar" value="false" />
     <property name="ToolWindowFavorites.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Requests/Shop" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.jscs" value="true" />
@@ -181,11 +183,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views" />
       <recent name="$PROJECT_DIR$/app/Http/Requests/Shop" />
       <recent name="$PROJECT_DIR$/resources/views/shops/shop" />
       <recent name="$PROJECT_DIR$/resources/views/subgroup" />
       <recent name="$PROJECT_DIR$/resources/views/group" />
-      <recent name="$PROJECT_DIR$/resources/views/city" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\xamp\htdocs\Project\app\Http\Controllers" />

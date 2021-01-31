@@ -74,14 +74,6 @@ class AdminController
         return back();
     }
 
-    public function updateRoles(Admin $admin, AdminUpdateRoleRequest $request)
-    {
-        $admin->roles()->sync($request->get('role_id'));
-
-        flash('عملیات با موفقیت انجام شد!');
-        return back();
-    }
-
     public function activate($id, $value)
     {
         $admin = Admin::query()->findOrFail($id);
