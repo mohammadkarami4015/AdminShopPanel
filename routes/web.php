@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('/admin/update-role/{admin}', [AdminController::class, 'updateRoles'])->name('admin.update-role');
 
+    Route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
+
     Route::get('/admin/activate/{id}/{value}', [AdminController::class, 'activate'])->name('admin.activate');
 
     Route::resource('admin', 'AdminController');
@@ -53,7 +55,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('subgroup', 'SubgroupController');
 
- /**********************************************************ROLE ROUTE*********************************************/
+   /**********************************************************ROLE ROUTE*********************************************/
     Route::get('/role-search', [RoleController::class, 'search'])->name('role.search');
 
     Route::resource('role', 'RoleController');

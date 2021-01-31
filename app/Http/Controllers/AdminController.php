@@ -7,6 +7,7 @@ use App\Http\Requests\AdminRequest;
 use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\AdminUpdateRoleRequest;
 use App\Role;
+use Illuminate\Http\Request;
 
 class AdminController
 {
@@ -85,6 +86,13 @@ class AdminController
     {
         $admin = Admin::query()->findOrFail($id);
         $admin->update(['status' => $value]);
+    }
+
+    public function search(Request $request)
+    {
+        $admins = Admin::search($request->get('data'));
+
+        return view('admin.searchResult', compact('admins'));
     }
 
 }
